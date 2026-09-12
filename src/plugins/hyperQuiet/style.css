@@ -1,0 +1,95 @@
+.hyper-quiet {
+    color: var(--text-default, #eee);
+   
+}
+
+.hyper-quiet h2 {
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 12px;
+   
+}
+
+.hyper-quiet p {
+    margin: 12px 0;
+    line-height: 1.6;
+   
+}
+
+.hyper-quiet > input {
+    width: 100%;
+    padding: 12px;
+    color: inherit;
+    background: var(--background-base-low, #222);
+    border: 1px solid #7776;
+    border-radius: 7px;
+   
+}
+
+.hyper-quiet-list {
+    max-height: 240px;
+    overflow: auto;
+    margin: 12px 0;
+    border: 1px solid #7774;
+    border-radius: 7px;
+   
+}
+
+.hyper-quiet-list label {
+    display: flex;
+    gap: 12px;
+    padding: 12px;
+    align-items: center;
+    border-bottom: 1px solid #7773;
+   
+}
+
+.hyper-quiet small {
+    display: block;
+    opacity: .75;
+    font-size: 12px;
+    line-height: 1.6;
+   
+}
+
+.hyper-quiet input[type="checkbox"] {
+    accent-color: #fc7045;
+    width: 17px;
+    height: 17px;
+    flex-shrink: 0;
+   
+}
+
+.hyper-quiet-confirm {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+   
+}
+
+.hyper-quiet-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 15px 0;
+   
+}
+
+.hyper-quiet button {
+    background: #fc7045;
+    color: #21140f;
+    padding: 10px 15px;
+    border: 0;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+   
+}
+
+.hyper-quiet button:disabled {
+    opacity: .4;
+    cursor: default;
+   
+}
+
+
