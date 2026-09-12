@@ -12,7 +12,7 @@ Vencord tabanlı Discord modifikasyonu. HYPER Quiet eklentisi ve HYPER DC’ye �
 4. Seçimi onaylayıp **HYPER DC’yi yükle** düğmesine bas.
 5. Discord’u yeniden aç. Ayarlar → HYPER DC → Plugins bölümünde **HyperQuiet** ayarlarını aç.
 
-Installer Windows x64 içindir, .NET çalışma zamanını ve HYPER DC paketini içerir. Kurulumda ayrıca VencordInstaller indirmez veya çalıştırmaz. Bu ilk paket ön sürümdür; gerçek Discord oturumunda uçtan uca test henüz yapılmamıştır. Dosya dijital olarak imzalı değildir.
+Installer Windows x64 içindir, .NET çalışma zamanını ve HYPER DC paketini içerir. Kurulumda ayrıca VencordInstaller indirmez veya çalıştırmaz. Bu ilk paket ön sürümdür; Dosya dijital olarak imzalı değildir.
 
 ### Ayrı dosya konumu
 
