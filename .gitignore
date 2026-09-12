@@ -23,3 +23,8 @@ src/userplugins
 
 ExtensionCache/
 /settings
+
+release/
+installer/bin/
+installer/obj/
+installer/payload.zip
