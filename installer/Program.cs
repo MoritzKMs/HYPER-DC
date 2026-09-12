@@ -44,7 +44,7 @@ internal sealed class InstallerForm : Form
         AddLabel(side, "H", 25, 22, 170, 160, 105, Color.FromArgb(27, 23, 20), FontStyle.Bold | FontStyle.Italic);
         AddLabel(side, "HYPER\nDC.", 30, 211, 210, 155, 36, Color.FromArgb(27, 23, 20), FontStyle.Bold);
         AddLabel(side, "DISCORD.\nSENİN AYARINDA.", 33, 374, 190, 55, 12, Color.FromArgb(43, 28, 21), FontStyle.Bold);
-        AddLabel(side, "INSTALLER / 0.1.0\nWINDOWS x64 · ÖN SÜRÜM", 33, 518, 205, 45, 9, Color.FromArgb(77, 43, 26));
+        AddLabel(side, "INSTALLER / 0.2.0\nWINDOWS x64 · ÖN SÜRÜM", 33, 518, 205, 45, 9, Color.FromArgb(77, 43, 26));
         AddLabel(this, "KURULUM MERKEZİ", 283, 30, 450, 25, 9, Color.FromArgb(161, 156, 146));
         AddLabel(this, "Buradan başlıyoruz.", 280, 68, 535, 55, 27, ForeColor, FontStyle.Bold);
         AddLabel(this, "Discord sürümünü seç. HYPER DC paketi bu kurulum\ndosyasına dahildir; indirme beklemezsin.", 284, 127, 520, 48, 11, Color.FromArgb(169, 164, 155));
