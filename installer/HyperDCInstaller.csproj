@@ -1,0 +1,6 @@
+<Project Sdk="Microsoft.NET.Sdk">
+<PropertyGroup>
+<OutputType>WinExe</OutputType><TargetFramework>net9.0-windows</TargetFramework><UseWindowsForms>true</UseWindowsForms><ImplicitUsings>enable</ImplicitUsings><Nullable>enable</Nullable><ApplicationIcon>assets/hyperdc.ico</ApplicationIcon><AssemblyName>HyperDCInstaller</AssemblyName><Product>HYPER DC Installer</Product><Title>HYPER DC Installer</Title><Description>HYPER DC Windows installer</Description><Company>HYPER DC</Company><Version>0.1.0</Version><Copyright>HYPER DC contributors; GPL-3.0-or-later</Copyright><PublishSingleFile>true</PublishSingleFile><SelfContained>true</SelfContained><IncludeNativeLibrariesForSelfExtract>true</IncludeNativeLibrariesForSelfExtract><DebugType>none</DebugType>
+</PropertyGroup>
+<ItemGroup><EmbeddedResource Include="payload.zip"/><EmbeddedResource Include="assets/hyperdc.ico"/><EmbeddedResource Include="assets/hyperdc.png"/></ItemGroup>
+</Project>
