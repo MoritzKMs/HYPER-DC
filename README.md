@@ -4,6 +4,18 @@ Vencord tabanlı Discord modifikasyonu. HYPER Quiet eklentisi ve HYPER DC’ye �
 
 [Web sitesi](https://moritzkms.github.io/HYPER-DC/) · [İndirmeler](https://github.com/MoritzKMs/HYPER-DC/releases) · [Orijinal Vencord](https://github.com/Vendicated/Vencord)
 
+[Katkıda bulunma](CONTRIBUTING.md) · [Topluluk kuralları](CODE_OF_CONDUCT.md) · [Lisans hakkında](LISANS.md)
+
+## HYPER Deck
+
+Ses kanalındayken sohbet kutusundaki dalga simgesinden veya eklenti ayarlarından açılır. MP3 seçimi, frekans görselleştiricisi, oynat/duraklat, konum ve ses ayarı, tekrar ve yerel dinleme içerir. Dosya en fazla 100 MB olabilir; bir sunucuya yüklenmez.
+
+**Ses kanalına aktarım için VB-CABLE / VoiceMeeter gibi kurulu bir sanal ses aygıtı gerekir.** Eklenti sürücü kurmaz. Burada `CABLE Input`, Discord’un giriş aygıtında `CABLE Output` seçilir. Discord çıkışı fiziksel kulaklık olarak kalmalıdır. İsteğe bağlı olarak fiziksel mikrofon da müzikle karıştırılır.
+
+Aktarım tiki açılınca müzik sanal aygıta yönlendirilir. Karşı tarafın duyduğu ayrıca kontrol edilmelidir. Gürültü bastırma müziği kesebilir; bas-konuş ayarında tuşa basılması gerekir. Panel kapanınca, kanal veya aygıt değişince ve kendini susturunca aktarım kapanır; otomatik yeniden açılmaz. Sanal aygıt yoksa yerel oynatıcı kullanılabilir.
+
+HyperDeck, 0.2.0 ön sürümüyle gelir. Gerçek Discord ses oturumunda henüz doğrulanmadı.
+
 ## Windows kurulumu
 
 1. Releases bölümünden **HyperDCInstaller.exe** dosyasını indir.
@@ -12,7 +24,7 @@ Vencord tabanlı Discord modifikasyonu. HYPER Quiet eklentisi ve HYPER DC’ye �
 4. Seçimi onaylayıp **HYPER DC’yi yükle** düğmesine bas.
 5. Discord’u yeniden aç. Ayarlar → HYPER DC → Plugins bölümünde **HyperQuiet** ayarlarını aç.
 
-Installer Windows x64 içindir, .NET çalışma zamanını ve HYPER DC paketini içerir. Kurulumda ayrıca VencordInstaller indirmez veya çalıştırmaz. Bu ilk paket ön sürümdür; Dosya dijital olarak imzalı değildir.
+Installer Windows x64 içindir, .NET çalışma zamanını ve HYPER DC paketini içerir. Kurulumda ayrıca VencordInstaller indirmez veya çalıştırmaz. Bu ilk paket ön sürümdür; gerçek Discord oturumunda uçtan uca test henüz yapılmamıştır. Dosya dijital olarak imzalı değildir.
 
 ### Ayrı dosya konumu
 
@@ -51,7 +63,7 @@ Gereksinimler: Node.js 22+ (test komutu için Node.js 24+), pnpm, Python 3, Wind
 
 ```powershell
 pnpm install --frozen-lockfile
-$env:VENCORD_HASH = "hyperdc-0.1.0"
+$env:VENCORD_HASH = "hyperdc-0.2.0"
 node scripts/build/build.mjs --standalone --disable-updater
 node node_modules/typescript/bin/tsc --noEmit
 node tests/hyperQuiet.test.mjs

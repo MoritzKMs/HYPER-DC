@@ -1,21 +1,22 @@
-# Code of Conduct
+# HYPER DC topluluk kuralları
 
-Our community is welcoming to everyone, regardless of their characteristics.
+Herkesin kendini rahatça ifade edebildiği, açık ve saygılı bir topluluk hedefliyoruz. Bu kurallar issue, pull request ve proje tartışmalarında geçerlidir.
 
-As such, we expect you to treat everyone with respect and contribute to an open and welcoming community.
+## Beklediğimiz davranışlar
 
-DO
-- have empathy and be nice to others
-- be respectful of differing opinions, even if you disagree
-- give and accept constructive criticism
+- İnsanlara saygılı ve anlayışlı davran.
+- Farklı görüşleri dinle; eleştirini kişiye değil konuya yönelt.
+- Yapıcı geri bildirim ver ve gelen geri bildirimi değerlendir.
+- Hata bildirimlerine yeniden üretme adımları ve gerekli teknik bilgileri ekle.
 
-DON'T
-- use offensive or derogatory language
-- troll or spam
-- personally attack or harass others
+## Kabul edilmeyen davranışlar
 
-Repetitive violations of these guidelines might get your access to the repository restricted.
+- Hakaret, ayrımcılık, tehdit veya taciz.
+- Kişisel saldırılar, hedef gösterme ve özel bilgileri izinsiz paylaşma.
+- Spam, kasıtlı kışkırtma ve tartışmaları sürekli sabote etme.
 
-If you feel like a user is violating these guidelines or feel treated unfairly, please refrain from vigilantism
-and instead report the issue to a moderator! The best way is joining our [official Discord community](https://vencord.dev/discord)
-and opening a modmail ticket.
+## İhlaller
+
+Bir sorun yaşarsan tartışmayı büyütmek yerine GitHub’ın bildirim araçlarını kullan veya proje yöneticisine bildir. Herkese açık bir bildirime özel bilgi ekleme.
+
+Yöneticiler ihlalin kapsamına göre içeriği kaldırabilir, tartışmayı kilitleyebilir veya tekrar eden ihlallerde repoya erişimi kısıtlayabilir.
