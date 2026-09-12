@@ -1,0 +1,99 @@
+.hyper-deck {
+    display: grid;
+    gap: 14px;
+    padding: 20px;
+    color: #eee;
+    background: #111317;
+    border-radius: 16px;
+   
+}
+
+.hyper-deck-kicker {
+    color: #ff9a58;
+    font-size: 12px;
+    letter-spacing: 2px;
+   
+}
+
+.hyper-deck-title {
+    overflow-wrap: anywhere;
+   
+}
+
+.hyper-deck canvas {
+    width: 100%;
+    height: 140px;
+    background: #191c22;
+    border-radius: 10px;
+   
+}
+
+.hyper-deck label {
+    display: grid;
+    gap: 8px;
+   
+}
+
+.hyper-deck input[type="range"] {
+    width: 100%;
+    accent-color: #ff914d;
+   
+}
+
+.hyper-deck input[type="checkbox"] {
+    accent-color: #ff914d;
+   
+}
+
+.hyper-deck button, .hyper-deck select, .hyper-deck-file {
+    padding: 10px 14px;
+    border: 1px solid #454951;
+    border-radius: 8px;
+    background: #23262c;
+    color: #fff;
+   
+}
+
+.hyper-deck button {
+    cursor: pointer;
+   
+}
+
+.hyper-deck button:disabled {
+    opacity: .5;
+    cursor: default;
+   
+}
+
+.hyper-deck-row {
+    display: flex;
+    gap: 14px;
+    align-items: center;
+    flex-wrap: wrap;
+   
+}
+
+.hyper-deck-row label, .hyper-deck .hyper-deck-send {
+    display: flex;
+    align-items: center;
+   
+}
+
+.hyper-deck .hyper-deck-send {
+    padding: 14px;
+    border: 1px solid #ff914d;
+    border-radius: 8px;
+   
+}
+
+.hyper-deck p, .hyper-deck details {
+    font-size: 14px;
+    line-height: 1.5;
+   
+}
+
+.hyper-deck :focus-visible {
+    outline: 2px solid #ffae76;
+    outline-offset: 3px;
+   
+}
