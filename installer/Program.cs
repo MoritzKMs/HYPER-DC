@@ -26,7 +26,7 @@ internal record DiscordTarget(string Name, string Path)
 internal sealed class InstallerForm : Form
 {
     readonly Color Orange = Color.FromArgb(252, 112, 69);
-    readonly ComboBox targets = new() { DropDownStyle = ComboBoxStyle.DropDownList, FlatStyle = FlatStyle.Flat, Font = new Font("Segoe UI", 12), BackColor = Color.FromArgb(38, 36, 33), ForeColor = Color.White };
+    readonly ListBox targets = new() { BorderStyle = BorderStyle.FixedSingle, IntegralHeight = false, Font = new Font("Segoe UI", 12), BackColor = Color.FromArgb(38, 36, 33), ForeColor = Color.White };
     readonly Label path = new() { AutoEllipsis = true, ForeColor = Color.FromArgb(161, 156, 146), Font = new Font("Segoe UI", 9) };
     readonly Label status = new() { ForeColor = Color.FromArgb(225, 215, 197), Font = new Font("Segoe UI", 10), AutoEllipsis = false };
     readonly CheckBox consent = new() { Text = "Seçili Discord kurulumuna HYPER DC yükle.", AutoSize = false, ForeColor = Color.FromArgb(219, 215, 204), Font = new Font("Segoe UI", 10) };
@@ -115,5 +115,6 @@ internal sealed class InstallerForm : Form
         finally { working = false; UpdateButtons(); }
     }
 }
+
 
 
