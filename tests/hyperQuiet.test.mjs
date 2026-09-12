@@ -1,0 +1,15 @@
+import assert from 'node:assert/strict';
+import { buildPatch, mergeBackup, restorePatch } from '../src/plugins/hyperQuiet/core.ts';
+const all={mode:2,everyone:true,roles:true,events:true,highlights:true,mobile:false,channels:true};
+const muted=buildPatch(all,['a','b']);
+assert.equal(muted.muted,true); assert.equal(muted.mobile_push,false); assert.equal(muted.channel_overrides.a.message_notifications,2);
+const mentions=buildPatch({...all,mode:1,channels:false},['a']);
+assert.equal(mentions.muted,false); assert.equal(mentions.message_notifications,1); assert.equal('channel_overrides' in mentions,false);
+const original={muted:false,message_notifications:0,channel_overrides:{a:{muted:false,message_notifications:0}}};
+const repeated={muted:true,message_notifications:2,channel_overrides:{a:{muted:true,message_notifications:2},b:{muted:false,message_notifications:1}}};
+const merged=mergeBackup(original,repeated);
+assert.equal(merged.muted,false); assert.deepEqual(merged.channel_overrides.a,original.channel_overrides.a); assert.deepEqual(merged.channel_overrides.b,repeated.channel_overrides.b);
+const restored=restorePatch(merged,new Set(['a']));
+assert.deepEqual(Object.keys(restored.channel_overrides),['a']); assert.equal(Object.keys(merged.channel_overrides).length,2);
+const withoutChannels=mergeBackup({muted:false},original); assert.deepEqual(withoutChannels.channel_overrides,original.channel_overrides);
+console.log('PASS: mute and mentions modes, channel opt-out, original backup preservation, newly encountered channels, deleted-channel restore filtering, immutable snapshots');
