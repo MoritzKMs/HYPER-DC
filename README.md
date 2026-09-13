@@ -6,16 +6,6 @@ Vencord tabanlı Discord modifikasyonu. HYPER Quiet eklentisi ve HYPER DC’ye �
 
 [Katkıda bulunma](CONTRIBUTING.md) · [Topluluk kuralları](CODE_OF_CONDUCT.md) · [Lisans hakkında](LISANS.md)
 
-## HYPER Deck
-
-Ses kanalındayken sohbet kutusundaki dalga simgesinden veya eklenti ayarlarından açılır. MP3 seçimi, frekans görselleştiricisi, oynat/duraklat, konum ve ses ayarı, tekrar ve yerel dinleme içerir. Dosya en fazla 100 MB olabilir; bir sunucuya yüklenmez.
-
-**Ses kanalına aktarım için VB-CABLE / VoiceMeeter gibi kurulu bir sanal ses aygıtı gerekir.** Eklenti sürücü kurmaz. Burada `CABLE Input`, Discord’un giriş aygıtında `CABLE Output` seçilir. Discord çıkışı fiziksel kulaklık olarak kalmalıdır. İsteğe bağlı olarak fiziksel mikrofon da müzikle karıştırılır.
-
-Aktarım tiki açılınca müzik sanal aygıta yönlendirilir. Karşı tarafın duyduğu ayrıca kontrol edilmelidir. Gürültü bastırma müziği kesebilir; bas-konuş ayarında tuşa basılması gerekir. Panel kapanınca, kanal veya aygıt değişince ve kendini susturunca aktarım kapanır; otomatik yeniden açılmaz. Sanal aygıt yoksa yerel oynatıcı kullanılabilir.
-
-HyperDeck, 0.2.0 ön sürümüyle gelir. Gerçek Discord ses oturumunda henüz doğrulanmadı.
-
 ## Windows kurulumu
 
 1. Releases bölümünden **HyperDCInstaller.exe** dosyasını indir.
@@ -38,24 +28,6 @@ HYPER DC, mevcut Vencord klasörünü kullanmaz:
 Discord’un `resources/app.asar` dosyası HYPER DC’ye bağlanır; orijinali `resources/_app.asar` olarak korunur. Başka bir mod kurulumu veya yabancı yedek varsa installer üzerine yazmaz; önce mevcut modun kendi kaldırma işlemini kullan. Vencord kullanıcı verileri taşınmaz veya silinmez.
 
 Kaldırmak için installer’dan aynı Discord sürümünü seçip **HYPER DC’yi kaldır** düğmesine bas. Orijinal Discord dosyası geri yüklenir; HYPER DC ayarları korunur.
-
-## HYPER Quiet
-
-Sunucuların bildirim ayarlarını topluca yönetir. Etkinleştiğinde otomatik olarak sunucuları susturmaz; işlem yalnızca **Ayarları uygula** düğmesiyle başlar.
-
-- Sunucu adına göre arama ve hariç tutma listesi.
-- Tamamen susturma veya yalnızca bahsetmeler modu.
-- `@everyone` / `@here`, rol bahsetmeleri, etkinlikler ve öne çıkanlar için seçenekler.
-- Mobil push bildirimlerini açma veya kapatma.
-- Mevcut kanal bildirim istisnalarını da aynı moda alma seçeneği.
-- Hesaba özel yerel yedek, geri alma, ilerleme durumu ve durdurma.
-- İstekler sırayla gönderilir; ilk hatada işlem durur ve kalan yedekler korunur.
-
-**Hariç tutulan sunucuların mevcut ayarları korunur.** Daha önce susturulmuş bir sunucuyu hariç tutmak onu otomatik açmaz; gerekirse önce yedekten geri al veya Discord bildirim ayarlarından aç. Yalnızca bahsetmeler modunda rol / herkes bahsetmelerini istiyorsan ilgili bastırma seçeneklerini kapat.
-
-Bildirim değişiklikleri Discord hesabına uygulanır ve diğer cihazlara da yansıyabilir. DM bildirimleri değişmez. Eklentiyi devre dışı bırakmak sunucu ayarlarını geri almaz; **Yedekten geri al** kullan. Geri alma, değiştirilen alanları ilk yedeğe döndürür; bu alanlarda sonradan yaptığın elle değişikliklerin üzerine yazabilir. Yedekler yerel veriler temizlenirse kaybolur.
-
-Yeni katılınan sunucular için otomatik işlem yapılmaz; gerektiğinde listeyi yeniden açıp uygula.
 
 ## Kaynaktan derleme
 
