@@ -9,7 +9,7 @@ namespace HyperDCInstaller;
 internal static class InstallEngine
 {
     public const string Marker = "HYPER_DC_INSTALLER_V1";
-    public const string Version = "0.3.0";
+    public const string Version = "0.4.0";
     public static readonly string DataRoot = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "HyperDC");
     public static string ResourcePath(string app) => Path.Combine(Path.GetFullPath(app), "resources");
     public static void CheckPath(string path)
@@ -46,13 +46,14 @@ internal static class InstallEngine
         writer.Write(header); writer.Write(new byte[aligned - header.Length]); writer.Write(index); writer.Write(package);
         return output.ToArray();
     }
-    public static string ExtractPayload()
+    public static string ExtractPayload(string? destinationRoot = null)
     {
-        CheckPath(DataRoot);
+        var dataRoot = destinationRoot ?? DataRoot;
+        CheckPath(dataRoot);
         using var input = Assembly.GetExecutingAssembly().GetManifestResourceStream("HyperDCInstaller.payload.zip") ?? throw new IOException("Kurulum paketi bulunamadı.");
         using var memory = new MemoryStream(); input.CopyTo(memory); var bytes = memory.ToArray();
         var hash = Convert.ToHexString(SHA256.HashData(bytes)).ToLowerInvariant();
-        var target = Path.Combine(DataRoot, "builds", Version + "-" + hash[..12]);
+        var target = Path.Combine(dataRoot, "builds", Version + "-" + hash[..12]);
         CheckPath(target);
         Directory.CreateDirectory(target);
         using var archive = new ZipArchive(new MemoryStream(bytes));
@@ -71,7 +72,17 @@ internal static class InstallEngine
             if (!File.Exists(destination) || !File.ReadAllBytes(destination).SequenceEqual(fileBytes)) File.WriteAllBytes(destination, fileBytes);
         }
         if (!File.Exists(Path.Combine(target, "patcher.js")) || !File.Exists(Path.Combine(target, "renderer.js"))) throw new IOException("Paket eksik.");
-        return Path.Combine(target, "patcher.js");
+        var loader = Path.Combine(dataRoot, "bootstrap.cjs");
+        CheckPath(loader); CheckPath(loader + ".tmp");
+        using var loaderStream = Assembly.GetExecutingAssembly().GetManifestResourceStream("HyperDCInstaller.bootstrap.cjs") ?? throw new IOException("Başlangıç dosyası bulunamadı.");
+        using var reader = new StreamReader(loaderStream);
+        File.WriteAllText(loader + ".tmp", reader.ReadToEnd());
+        File.Move(loader + ".tmp", loader, true);
+        var stateFile = Path.Combine(dataRoot, "update-state.json");
+        CheckPath(stateFile); CheckPath(stateFile + ".tmp");
+        File.WriteAllText(stateFile + ".tmp", JsonSerializer.Serialize(new { current = Path.GetFileName(target), previous = (string?)null, pending = false, attempted = false }));
+        File.Move(stateFile + ".tmp", stateFile, true);
+        return loader;
     }
     public static void Install(string app, string patcher, string data, Action? beforeCommit = null)
     {
