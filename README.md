@@ -4,7 +4,7 @@ Vencord tabanlı Discord modifikasyonu. HYPER Quiet eklentisi ve HYPER DC’ye �
 
 [Web sitesi](https://moritzkms.github.io/HYPER-DC/) · [İndirmeler](https://github.com/MoritzKMs/HYPER-DC/releases) · [Orijinal Vencord](https://github.com/Vendicated/Vencord)
 
-[Katkıda bulunma](CONTRIBUTING.md) · [Topluluk kuralları](CODE_OF_CONDUCT.md) · [Lisans hakkında](LISANS.md)
+[Vencord Katkıcıları](CONTRIBUTING.md) · [Topluluk kuralları](CODE_OF_CONDUCT.md) · [Lisans hakkında](LISANS.md)
 
 ## Windows kurulumu
 
