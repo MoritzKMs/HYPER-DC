@@ -10,6 +10,7 @@ import { Link } from "@components/Link";
 import { AddonCard } from "@components/settings/AddonCard";
 import { UserThemeHeader } from "@main/themes";
 import { openInviteModal } from "@utils/discord";
+import { hyperTranslate } from "@utils/hyperLanguage";
 import { showToast } from "@webpack/common";
 
 interface ThemeCardProps {
@@ -36,7 +37,7 @@ export function ThemeCard({ theme, enabled, onChange, onDelete }: ThemeCardProps
             }
             footer={
                 <Flex flexDirection="row" gap="0.2em">
-                    {!!theme.website && <Link href={theme.website}>Website</Link>}
+                    {!!theme.website && <Link href={theme.website}>{hyperTranslate("Website")}</Link>}
                     {!!(theme.website && theme.invite) && " • "}
                     {!!theme.invite && (
                         <Link
@@ -46,8 +47,7 @@ export function ThemeCard({ theme, enabled, onChange, onDelete }: ThemeCardProps
                                 theme.invite != null && openInviteModal(theme.invite).catch(() => showToast("Invalid or expired invite"));
                             }}
                         >
-                            Discord Server
-                        </Link>
+                            {hyperTranslate("Discord Server")}</Link>
                     )}
                 </Flex>
             }

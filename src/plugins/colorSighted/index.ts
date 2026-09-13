@@ -17,11 +17,12 @@
 */
 
 import { Devs } from "@utils/constants";
+import { hyperTranslate } from "@utils/hyperLanguage";
 import definePlugin from "@utils/types";
 
 export default definePlugin({
     name: "ColorSighted",
-    description: "Removes the colorblind-friendly icons from statuses, just like 2015-2017 Discord",
+    description: hyperTranslate("Removes the colorblind-friendly icons from statuses, just like 2015-2017 Discord"),
     authors: [Devs.lewisakura],
     tags: ["Appearance", "Accessibility"],
     patches: [

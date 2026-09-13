@@ -5,6 +5,7 @@
  */
 
 import { Devs } from "@utils/constants";
+import { hyperTranslate } from "@utils/hyperLanguage";
 import definePlugin from "@utils/types";
 import { Channel, Message, User } from "@vencord/discord-types";
 import { findByCodeLazy } from "@webpack";
@@ -32,7 +33,7 @@ const createMessageRecord = findByCodeLazy(".createFromServer(", ".isBlockedForM
 
 export default definePlugin({
     name: "ValidReply",
-    description: 'Fixes "Message could not be loaded" upon hovering over the reply',
+    description: hyperTranslate("Fixes \"Message could not be loaded\" upon hovering over the reply"),
     tags: ["Chat", "Utility"],
     authors: [Devs.newwares],
     patches: [

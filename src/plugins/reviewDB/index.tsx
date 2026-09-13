@@ -24,6 +24,7 @@ import { OpenExternalIcon } from "@components/Icons";
 import { Paragraph } from "@components/Paragraph";
 import { Span } from "@components/Span";
 import { Devs } from "@utils/constants";
+import { hyperTranslate } from "@utils/hyperLanguage";
 import { classes } from "@utils/misc";
 import { useAwaiter } from "@utils/react";
 import definePlugin from "@utils/types";
@@ -47,7 +48,7 @@ const guildPopoutPatch: NavContextMenuPatchCallback = (children, { guild }: { gu
     if (!guild) return;
     children.push(
         <Menu.MenuItem
-            label="View Reviews"
+            label={hyperTranslate("View Reviews")}
             id="vc-rdb-server-reviews"
             icon={OpenExternalIcon}
             leadingAccessory={{ type: "icon", icon: OpenExternalIcon }}
@@ -60,7 +61,7 @@ const userContextPatch: NavContextMenuPatchCallback = (children, { user }: { use
     if (!user) return;
     children.push(
         <Menu.MenuItem
-            label="View Reviews"
+            label={hyperTranslate("View Reviews")}
             id="vc-rdb-user-reviews"
             icon={OpenExternalIcon}
             leadingAccessory={{ type: "icon", icon: OpenExternalIcon }}
@@ -71,7 +72,7 @@ const userContextPatch: NavContextMenuPatchCallback = (children, { user }: { use
 
 export default definePlugin({
     name: "ReviewDB",
-    description: "Review other users (Adds a new settings to profiles)",
+    description: hyperTranslate("Review other users (Adds a new settings to profiles)"),
     tags: ["Friends", "Servers"],
     authors: [Devs.mantikafasi, Devs.Ven],
 
@@ -125,14 +126,14 @@ export default definePlugin({
                     if (lastReviewId && lastReviewId < user.lastReviewID) {
                         s.lastReviewId = user.lastReviewID;
                         if (user.lastReviewID !== 0)
-                            showToast("You have new reviews on your profile!");
+                            showToast(hyperTranslate("You have new reviews on your profile!"));
                     }
                 }
 
                 const { notification } = user;
                 if (notification) {
                     const props = notification.type === NotificationType.Ban ? {
-                        cancelText: "Appeal",
+                        cancelText: hyperTranslate("Appeal"),
                         confirmText: "Ok",
                         onCancel: async () =>
                             VencordNative.native.openExternal(
@@ -180,7 +181,7 @@ export default definePlugin({
                             onClick={() => !reviewData?.hasOptedOut && openReviewsModal(user.id, user.username, ReviewType.User)}
                         >
                             <div className={classes(ProfileCardOverlayClasses.overlay, ProfileCardContainerClasses.innerContainer, ProfileCardClasses.card)}>
-                                <Paragraph size={isSideBar ? "sm" : "xs"} weight="medium">User Reviews</Paragraph>
+                                <Paragraph size={isSideBar ? "sm" : "xs"} weight="medium">{hyperTranslate("User Reviews")}</Paragraph>
                                 {!!reviewData?.reviewCount
                                     ? (
                                         <div className={ProfileCardContainerClasses.icons}>
@@ -210,7 +211,7 @@ export default definePlugin({
                                                 })}
                                         </div>
                                     )
-                                    : <Paragraph size={isSideBar ? "sm" : "xs"}>{reviewData?.hasOptedOut ? "User opted out" : "No reviews yet"}</Paragraph>
+                                    : <Paragraph size={isSideBar ? "sm" : "xs"}>{reviewData?.hasOptedOut ? hyperTranslate("User opted out") : hyperTranslate("No reviews yet")}</Paragraph>
                                 }
                             </div>
                         </Clickable>

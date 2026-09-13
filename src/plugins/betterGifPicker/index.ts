@@ -5,11 +5,12 @@
  */
 
 import { Devs } from "@utils/constants";
+import { hyperTranslate } from "@utils/hyperLanguage";
 import definePlugin from "@utils/types";
 
 export default definePlugin({
     name: "BetterGifPicker",
-    description: "Makes the gif picker open the favourite category by default",
+    description: hyperTranslate("Makes the gif picker open the favourite category by default"),
     authors: [Devs.Samwich],
     tags: ["Emotes", "Customisation"],
     patches: [

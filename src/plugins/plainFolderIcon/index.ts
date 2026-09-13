@@ -19,11 +19,12 @@
 import "./style.css";
 
 import { Devs } from "@utils/constants";
+import { hyperTranslate } from "@utils/hyperLanguage";
 import definePlugin from "@utils/types";
 
 export default definePlugin({
     name: "PlainFolderIcon",
-    description: "Dont show the small guild icons in folders",
+    description: hyperTranslate("Dont show the small guild icons in folders"),
     tags: ["Appearance", "Customisation"],
     authors: [Devs.botato],
 

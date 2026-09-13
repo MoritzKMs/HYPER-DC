@@ -19,6 +19,7 @@
 import { findGroupChildrenByChildId, NavContextMenuPatchCallback } from "@api/ContextMenu";
 import { ImageInvisible, ImageVisible } from "@components/Icons";
 import { Devs } from "@utils/constants";
+import { hyperTranslate } from "@utils/hyperLanguage";
 import definePlugin from "@utils/types";
 import { Channel, Message } from "@vencord/discord-types";
 import { Constants, Menu, PermissionsBits, PermissionStore, RestAPI, UserStore } from "@webpack/common";
@@ -46,7 +47,7 @@ const messageContextMenuPatch: NavContextMenuPatchCallback = (
         <Menu.MenuItem
             id="unsuppress-embeds"
             key="unsuppress-embeds"
-            label={isEmbedSuppressed ? "Unsuppress Embeds" : "Suppress Embeds"}
+            label={isEmbedSuppressed ? hyperTranslate("Unsuppress Embeds") : hyperTranslate("Suppress Embeds")}
             color={isEmbedSuppressed ? undefined : "danger"}
             icon={isEmbedSuppressed ? ImageVisible : ImageInvisible}
             leadingAccessory={{ type: "icon", icon: isEmbedSuppressed ? ImageVisible : ImageInvisible }}
@@ -63,7 +64,7 @@ const messageContextMenuPatch: NavContextMenuPatchCallback = (
 export default definePlugin({
     name: "UnsuppressEmbeds",
     authors: [Devs.rad, Devs.HypedDomi],
-    description: "Allows you to unsuppress embeds in messages",
+    description: hyperTranslate("Allows you to unsuppress embeds in messages"),
     tags: ["Chat", "Utility"],
     contextMenus: {
         "message": messageContextMenuPatch

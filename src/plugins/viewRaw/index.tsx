@@ -27,6 +27,7 @@ import { Margins } from "@components/margins";
 import { Devs } from "@utils/constants";
 import { copyWithToast, getCurrentGuild, getIntlMessage } from "@utils/discord";
 import { isTruthy } from "@utils/guards";
+import { hyperTranslate } from "@utils/hyperLanguage";
 import definePlugin, { IconComponent, OptionType } from "@utils/types";
 import { Message } from "@vencord/discord-types";
 import { ChannelStore, GuildRoleStore, Menu, Modal, openModal, UserProfileStore } from "@webpack/common";
@@ -94,9 +95,9 @@ function openViewRawModal(json: string, type: string, msgContent?: string) {
             >
                 {!!msgContent && (
                     <>
-                        <HeadingSecondary>Message Content</HeadingSecondary>
+                        <HeadingSecondary>{hyperTranslate("Message Content")}</HeadingSecondary>
                         <CodeBlock className="vc-viewRaw-codeBlock" content={msgContent} lang="" />
-                        <HeadingSecondary className={Margins.top16}>Message Data</HeadingSecondary>
+                        <HeadingSecondary className={Margins.top16}>{hyperTranslate("Message Data")}</HeadingSecondary>
                     </>
                 )}
                 <CodeBlock className="vc-viewRaw-codeBlock" content={json} lang="json" />
@@ -114,15 +115,15 @@ function openViewRawModalMessage(msg: Message) {
 
 const settings = definePluginSettings({
     clickMethod: {
-        description: "Change the button to view the raw content/data of any message.",
+        description: hyperTranslate("Change the button to view the raw content/data of any message."),
         type: OptionType.SELECT,
         options: [
-            { label: "Left Click to view the raw content.", value: "Left", default: true },
-            { label: "Right click to view the raw content.", value: "Right" }
+            { label: hyperTranslate("Left Click to view the raw content."), value: "Left", default: true },
+            { label: hyperTranslate("Right click to view the raw content."), value: "Right" }
         ]
     },
     messageContextMenu: {
-        description: "Show in message context menu",
+        description: hyperTranslate("Show in message context menu"),
         type: OptionType.BOOLEAN,
         default: false
     }
@@ -148,7 +149,7 @@ function MakeContextCallback(name: "Guild" | "Role" | "User" | "Channel" | "Mess
         (devContainer ?? children).splice(-1, 0,
             <Menu.MenuItem
                 id={id}
-                label="View Raw"
+                label={hyperTranslate("View Raw")}
                 action={action}
                 icon={CopyRawIcon}
                 leadingAccessory={{ type: "icon", icon: CopyRawIcon }}
@@ -167,7 +168,7 @@ const devContextCallback: NavContextMenuPatchCallback = (children, { id }: { id:
     children.push(
         <Menu.MenuItem
             id={"vc-view-role-raw"}
-            label="View Raw"
+            label={hyperTranslate("View Raw")}
             action={() => openViewRawModal(JSON.stringify(role, null, 4), "Role")}
             icon={CopyRawIcon}
             leadingAccessory={{ type: "icon", icon: CopyRawIcon }}
@@ -177,7 +178,7 @@ const devContextCallback: NavContextMenuPatchCallback = (children, { id }: { id:
 
 export default definePlugin({
     name: "ViewRaw",
-    description: "Copy and view the raw content/data of any message, channel or guild",
+    description: hyperTranslate("Copy and view the raw content/data of any message, channel or guild"),
     tags: ["Chat", "Developers"],
     authors: [Devs.KingFish, Devs.Ven, Devs.rad, Devs.ImLvna],
     settings,

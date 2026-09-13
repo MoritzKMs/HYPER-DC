@@ -21,6 +21,7 @@ import { definePluginSettings } from "@api/Settings";
 import ErrorBoundary from "@components/ErrorBoundary";
 import NoBlockedMessagesPlugin from "@plugins/noBlockedMessages";
 import { Devs } from "@utils/constants";
+import { hyperTranslate } from "@utils/hyperLanguage";
 import { sleep } from "@utils/misc";
 import { Queue } from "@utils/Queue";
 import { useForceUpdater } from "@utils/react";
@@ -120,7 +121,7 @@ function ReactionUsers({ message, users }: { message: Message, users: User[]; })
 
 const settings = definePluginSettings({
     clickableAvatars: {
-        description: "While this is enabled, clicking a reacting user's avatar will open their profile instead of adding the reaction",
+        description: hyperTranslate("While this is enabled, clicking a reacting user's avatar will open their profile instead of adding the reaction"),
         type: OptionType.BOOLEAN,
         default: true,
         restartNeeded: true
@@ -129,7 +130,7 @@ const settings = definePluginSettings({
 
 export default definePlugin({
     name: "WhoReacted",
-    description: "Renders the avatars of users who reacted to a message",
+    description: hyperTranslate("Renders the avatars of users who reacted to a message"),
     tags: ["Reactions", "Chat", "Appearance"],
     authors: [Devs.Ven, Devs.KannaDev, Devs.newwares, Devs.paige],
     settings,

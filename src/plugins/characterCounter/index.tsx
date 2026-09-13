@@ -10,6 +10,7 @@ import { definePluginSettings } from "@api/Settings";
 import ErrorBoundary from "@components/ErrorBoundary";
 import { Devs } from "@utils/constants";
 import { classNameFactory } from "@utils/css";
+import { hyperTranslate } from "@utils/hyperLanguage";
 import definePlugin, { OptionType } from "@utils/types";
 import { useEffect, UserStore, useState } from "@webpack/common";
 
@@ -18,7 +19,7 @@ const cl = classNameFactory("vc-charCounter-");
 const settings = definePluginSettings({
     colorEffects: {
         type: OptionType.BOOLEAN,
-        description: "Enable yellow/red colouring as you get closer to the character limit",
+        description: hyperTranslate("Enable yellow/red colouring as you get closer to the character limit"),
         default: true,
     }
 });
@@ -33,7 +34,7 @@ function getCounterColor(percentage: number) {
 
 export default definePlugin({
     name: "CharacterCounter",
-    description: "Adds a character counter to the chat input",
+    description: hyperTranslate("Adds a character counter to the chat input"),
     authors: [Devs.thororen, Devs.creations],
     tags: ["Utility"],
     settings,

@@ -12,6 +12,7 @@ import { Heading } from "@components/Heading";
 import { resolveError } from "@components/settings/tabs/plugins/components/Common";
 import { debounce } from "@shared/debounce";
 import { classNameFactory } from "@utils/css";
+import { hyperTranslate } from "@utils/hyperLanguage";
 import { ActivityType } from "@vencord/discord-types/enums";
 import { Select, Text, TextInput, useState } from "@webpack/common";
 
@@ -120,7 +121,7 @@ function SingleSetting<T>({ settingsKey, label, disabled, isValid, transform }: 
             <Heading tag="h5">{label}</Heading>
             <TextInput
                 type="text"
-                placeholder={"Enter a value"}
+                placeholder={hyperTranslate("Enter a value")}
                 value={state}
                 onChange={handleChange}
                 disabled={disabled}
@@ -135,7 +136,7 @@ function SelectSetting<T>({ settingsKey, label, options, disabled }: SelectOptio
         <div className={cl("single", { disabled })}>
             <Heading tag="h5">{label}</Heading>
             <Select
-                placeholder={"Select an option"}
+                placeholder={hyperTranslate("Select an option")}
                 options={options}
                 maxVisibleItems={5}
                 closeOnSelect={true}
@@ -158,50 +159,50 @@ export function RPCSettings() {
         <div className={cl("root")}>
             <SelectSetting
                 settingsKey="type"
-                label="Activity Type"
+                label={hyperTranslate("Activity Type")}
                 options={[
                     {
-                        label: "Playing",
+                        label: hyperTranslate("Playing"),
                         value: ActivityType.PLAYING,
                         default: true
                     },
                     {
-                        label: "Streaming",
+                        label: hyperTranslate("Streaming"),
                         value: ActivityType.STREAMING
                     },
                     {
-                        label: "Listening",
+                        label: hyperTranslate("Listening"),
                         value: ActivityType.LISTENING
                     },
                     {
-                        label: "Watching",
+                        label: hyperTranslate("Watching"),
                         value: ActivityType.WATCHING
                     },
                     {
-                        label: "Competing",
+                        label: hyperTranslate("Competing"),
                         value: ActivityType.COMPETING
                     }
                 ]}
             />
 
             <PairSetting data={[
-                { settingsKey: "appID", label: "Application ID", isValid: isAppIdValid },
-                { settingsKey: "appName", label: "Application Name", isValid: makeValidator(128, true) },
+                { settingsKey: "appID", label: hyperTranslate("Application ID"), isValid: isAppIdValid },
+                { settingsKey: "appName", label: hyperTranslate("Application Name"), isValid: makeValidator(128, true) },
             ]} />
 
             <PairSetting data={[
-                { settingsKey: "details", label: "Detail (line 1)", isValid: maxLength128 },
-                { settingsKey: "detailsURL", label: "Detail URL", isValid: isUrlValid },
+                { settingsKey: "details", label: hyperTranslate("Detail (line 1)"), isValid: maxLength128 },
+                { settingsKey: "detailsURL", label: hyperTranslate("Detail URL"), isValid: isUrlValid },
             ]} />
 
             <PairSetting data={[
-                { settingsKey: "state", label: "State (line 2)", isValid: maxLength128 },
-                { settingsKey: "stateURL", label: "State URL", isValid: isUrlValid },
+                { settingsKey: "state", label: hyperTranslate("State (line 2)"), isValid: maxLength128 },
+                { settingsKey: "stateURL", label: hyperTranslate("State URL"), isValid: isUrlValid },
             ]} />
 
             <SingleSetting
                 settingsKey="streamLink"
-                label="Stream Link (Twitch or YouTube, only if activity type is Streaming)"
+                label={hyperTranslate("Stream Link (Twitch or YouTube, only if activity type is Streaming)")}
                 disabled={s.type !== ActivityType.STREAMING}
                 isValid={isStreamLinkValid}
             />
@@ -209,14 +210,14 @@ export function RPCSettings() {
             <PairSetting data={[
                 {
                     settingsKey: "partySize",
-                    label: "Party Size",
+                    label: hyperTranslate("Party Size"),
                     transform: parseNumber,
                     isValid: isNumberValid,
                     disabled: s.type !== ActivityType.PLAYING,
                 },
                 {
                     settingsKey: "partyMaxSize",
-                    label: "Maximum Party Size",
+                    label: hyperTranslate("Maximum Party Size"),
                     transform: parseNumber,
                     isValid: isNumberValid,
                     disabled: s.type !== ActivityType.PLAYING,
@@ -226,49 +227,49 @@ export function RPCSettings() {
             <Divider />
 
             <PairSetting data={[
-                { settingsKey: "imageBig", label: "Large Image URL/Key", isValid: isImageKeyValid },
-                { settingsKey: "imageBigTooltip", label: "Large Image Text", isValid: maxLength128 },
+                { settingsKey: "imageBig", label: hyperTranslate("Large Image URL/Key"), isValid: isImageKeyValid },
+                { settingsKey: "imageBigTooltip", label: hyperTranslate("Large Image Text"), isValid: maxLength128 },
             ]} />
-            <SingleSetting settingsKey="imageBigURL" label="Large Image clickable URL" isValid={isUrlValid} />
+            <SingleSetting settingsKey="imageBigURL" label={hyperTranslate("Large Image clickable URL")} isValid={isUrlValid} />
 
             <PairSetting data={[
-                { settingsKey: "imageSmall", label: "Small Image URL/Key", isValid: isImageKeyValid },
-                { settingsKey: "imageSmallTooltip", label: "Small Image Text", isValid: maxLength128 },
+                { settingsKey: "imageSmall", label: hyperTranslate("Small Image URL/Key"), isValid: isImageKeyValid },
+                { settingsKey: "imageSmallTooltip", label: hyperTranslate("Small Image Text"), isValid: maxLength128 },
             ]} />
-            <SingleSetting settingsKey="imageSmallURL" label="Small Image clickable URL" isValid={isUrlValid} />
+            <SingleSetting settingsKey="imageSmallURL" label={hyperTranslate("Small Image clickable URL")} isValid={isUrlValid} />
 
             <Divider />
 
             <PairSetting data={[
-                { settingsKey: "buttonOneText", label: "Button1 Text", isValid: makeValidator(31) },
-                { settingsKey: "buttonOneURL", label: "Button1 URL", isValid: isUrlValid },
+                { settingsKey: "buttonOneText", label: hyperTranslate("Button1 Text"), isValid: makeValidator(31) },
+                { settingsKey: "buttonOneURL", label: hyperTranslate("Button1 URL"), isValid: isUrlValid },
             ]} />
             <PairSetting data={[
-                { settingsKey: "buttonTwoText", label: "Button2 Text", isValid: makeValidator(31) },
-                { settingsKey: "buttonTwoURL", label: "Button2 URL", isValid: isUrlValid },
+                { settingsKey: "buttonTwoText", label: hyperTranslate("Button2 Text"), isValid: makeValidator(31) },
+                { settingsKey: "buttonTwoURL", label: hyperTranslate("Button2 URL"), isValid: isUrlValid },
             ]} />
 
             <Divider />
 
             <SelectSetting
                 settingsKey="timestampMode"
-                label="Timestamp Mode"
+                label={hyperTranslate("Timestamp Mode")}
                 options={[
                     {
-                        label: "None",
+                        label: hyperTranslate("None"),
                         value: TimestampMode.NONE,
                         default: true
                     },
                     {
-                        label: "Since discord open",
+                        label: hyperTranslate("Since discord open"),
                         value: TimestampMode.NOW
                     },
                     {
-                        label: "Same as your current time (not reset after 24h)",
+                        label: hyperTranslate("Same as your current time (not reset after 24h)"),
                         value: TimestampMode.TIME
                     },
                     {
-                        label: "Custom",
+                        label: hyperTranslate("Custom"),
                         value: TimestampMode.CUSTOM
                     }
                 ]}
@@ -277,14 +278,14 @@ export function RPCSettings() {
             <PairSetting data={[
                 {
                     settingsKey: "startTime",
-                    label: "Start Timestamp (in milliseconds)",
+                    label: hyperTranslate("Start Timestamp (in milliseconds)"),
                     transform: parseNumber,
                     isValid: isNumberValid,
                     disabled: s.timestampMode !== TimestampMode.CUSTOM,
                 },
                 {
                     settingsKey: "endTime",
-                    label: "End Timestamp (in milliseconds)",
+                    label: hyperTranslate("End Timestamp (in milliseconds)"),
                     transform: parseNumber,
                     isValid: isNumberValid,
                     disabled: s.timestampMode !== TimestampMode.CUSTOM,

@@ -24,6 +24,7 @@ import { Flex } from "@components/Flex";
 import { PlusIcon } from "@components/Icons";
 import { Devs } from "@utils/constants";
 import { getGuildAcronym, hasGuildFeature } from "@utils/discord";
+import { hyperTranslate } from "@utils/hyperLanguage";
 import { Logger } from "@utils/Logger";
 import definePlugin from "@utils/types";
 import { Guild, GuildSticker } from "@vencord/discord-types";
@@ -234,7 +235,7 @@ function CloneModal({ data }: { data: Sticker | Emoji; }) {
 
     return (
         <>
-            <Forms.FormTitle>Custom Name</Forms.FormTitle>
+            <Forms.FormTitle>{hyperTranslate("Custom Name")}</Forms.FormTitle>
             <CheckedTextInput
                 initialValue={name}
                 onChange={v => {
@@ -348,7 +349,7 @@ function buildMenuItem(type: "Emoji" | "Sticker", fetchData: () => Promisable<Om
                                         height={24}
                                         width={24}
                                     />
-                                    <BaseText tag="h3" size="md" weight="medium">Clone {data.name}</BaseText>
+                                    <BaseText tag="h3" size="md" weight="medium">{hyperTranslate("Clone") + " "}{data.name}</BaseText>
                                 </Flex>
                             }
                         >
@@ -416,7 +417,7 @@ const expressionPickerPatch: NavContextMenuPatchCallback = (children, props: { t
 migratePluginSettings("ExpressionCloner", "EmoteCloner");
 export default definePlugin({
     name: "ExpressionCloner",
-    description: "Allows you to clone Emotes & Stickers to your own server (right click them)",
+    description: hyperTranslate("Allows you to clone Emotes & Stickers to your own server (right click them)"),
     tags: ["Emotes", "Servers"],
     searchTerms: ["StickerCloner", "EmoteCloner", "EmojiCloner"],
     authors: [Devs.Ven, Devs.Nuckyz],

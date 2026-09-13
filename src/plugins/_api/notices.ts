@@ -17,11 +17,12 @@
 */
 
 import { Devs } from "@utils/constants";
+import { hyperTranslate } from "@utils/hyperLanguage";
 import definePlugin from "@utils/types";
 
 export default definePlugin({
     name: "NoticesAPI",
-    description: "Fixes notices being automatically dismissed",
+    description: hyperTranslate("Fixes notices being automatically dismissed"),
     authors: [Devs.Ven],
     required: true,
     patches: [

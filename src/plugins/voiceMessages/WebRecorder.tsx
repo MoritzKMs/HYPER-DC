@@ -16,6 +16,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+import { hyperTranslate } from "@utils/hyperLanguage";
 import { Button, MediaEngineStore, useState } from "@webpack/common";
 
 import type { VoiceRecorder } from ".";
@@ -71,8 +72,7 @@ export const VoiceRecorderWeb: VoiceRecorder = ({ setAudioBlob, onRecordingChang
     return (
         <>
             <Button onClick={toggleRecording}>
-                {recording ? "Stop" : "Start"} recording
-            </Button>
+                {recording ? hyperTranslate("Stop") : hyperTranslate("Start")} {hyperTranslate("recording")}</Button>
 
             <Button
                 disabled={!recording}
@@ -82,8 +82,7 @@ export const VoiceRecorderWeb: VoiceRecorder = ({ setAudioBlob, onRecordingChang
                     else recorder?.pause();
                 }}
             >
-                {paused ? "Resume" : "Pause"} recording
-            </Button>
+                {paused ? hyperTranslate("Resume") : hyperTranslate("Pause")} {hyperTranslate("recording")}</Button>
         </>
     );
 };

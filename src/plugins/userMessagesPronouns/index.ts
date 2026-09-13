@@ -18,6 +18,7 @@
 
 import { migratePluginSettings } from "@api/Settings";
 import { Devs } from "@utils/constants";
+import { hyperTranslate } from "@utils/hyperLanguage";
 import definePlugin from "@utils/types";
 
 import { CompactPronounsChatComponentWrapper, PronounsChatComponentWrapper } from "./PronounsChatComponent";
@@ -27,7 +28,7 @@ migratePluginSettings("UserMessagesPronouns", "PronounDB");
 export default definePlugin({
     name: "UserMessagesPronouns",
     authors: [Devs.Tyman, Devs.TheKodeToad, Devs.Ven, Devs.Elvyra],
-    description: "Adds pronouns to chat user messages",
+    description: hyperTranslate("Adds pronouns to chat user messages"),
     tags: ["Chat", "Appearance"],
     settings,
 

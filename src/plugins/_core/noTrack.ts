@@ -18,6 +18,7 @@
 
 import { definePluginSettings } from "@api/Settings";
 import { Devs } from "@utils/constants";
+import { hyperTranslate } from "@utils/hyperLanguage";
 import { Logger } from "@utils/Logger";
 import definePlugin, { OptionType, StartAt } from "@utils/types";
 import { WebpackRequire } from "@vencord/discord-types/webpack";
@@ -26,7 +27,7 @@ import { Flux, FluxDispatcher } from "@webpack/common";
 const settings = definePluginSettings({
     disableAnalytics: {
         type: OptionType.BOOLEAN,
-        description: "Disable Discord's tracking (analytics/'science')",
+        description: hyperTranslate("Disable Discord's tracking (analytics/'science')"),
         default: true,
         restartNeeded: true
     }
@@ -34,7 +35,7 @@ const settings = definePluginSettings({
 
 export default definePlugin({
     name: "NoTrack",
-    description: "Disable Discord's tracking (analytics/'science'), metrics and Sentry crash reporting",
+    description: hyperTranslate("Disable Discord's tracking (analytics/'science'), metrics and Sentry crash reporting"),
     authors: [Devs.Cyn, Devs.Ven, Devs.Nuckyz, Devs.Arrow],
     required: true,
 
@@ -160,12 +161,12 @@ export default definePlugin({
                     ok: false,
                     status: 500,
                     body: {
-                        message: "Analytics tracking is disabled by NoTrack",
+                        message: hyperTranslate("Analytics tracking is disabled by NoTrack"),
                         code: 0
                     },
                     headers: {},
                     text: JSON.stringify({
-                        message: "Analytics tracking is disabled by NoTrack",
+                        message: hyperTranslate("Analytics tracking is disabled by NoTrack"),
                         code: 0
                     })
                 };

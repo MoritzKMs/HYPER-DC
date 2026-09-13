@@ -26,6 +26,7 @@ import ErrorBoundary from "@components/ErrorBoundary";
 import { DeleteIcon, EyeIcon } from "@components/Icons";
 import { Devs, SUPPORT_CATEGORY_ID, VENBOT_USER_ID } from "@utils/constants";
 import { getIntlMessage } from "@utils/discord";
+import { hyperTranslate } from "@utils/hyperLanguage";
 import { Logger } from "@utils/Logger";
 import { classes } from "@utils/misc";
 import definePlugin, { OptionType } from "@utils/types";
@@ -57,66 +58,66 @@ const MessageClasses = findCssClassesLazy("edited", "communicationDisabled", "is
 const settings = definePluginSettings({
     deleteStyle: {
         type: OptionType.SELECT,
-        description: "The style of deleted messages",
+        description: hyperTranslate("The style of deleted messages"),
         default: "text",
         options: [
-            { label: "Red text", value: "text", default: true },
-            { label: "Red overlay", value: "overlay" }
+            { label: hyperTranslate("Red text"), value: "text", default: true },
+            { label: hyperTranslate("Red overlay"), value: "overlay" }
         ],
         onChange: () => addDeleteStyle()
     },
     logDeletes: {
         type: OptionType.BOOLEAN,
-        description: "Whether to log deleted messages",
+        description: hyperTranslate("Whether to log deleted messages"),
         default: true,
     },
     collapseDeleted: {
         type: OptionType.BOOLEAN,
-        description: "Whether to collapse deleted messages, similar to blocked messages",
+        description: hyperTranslate("Whether to collapse deleted messages, similar to blocked messages"),
         default: false,
         restartNeeded: true,
     },
     logEdits: {
         type: OptionType.BOOLEAN,
-        description: "Whether to log edited messages",
+        description: hyperTranslate("Whether to log edited messages"),
         default: true,
     },
     logDeletedAttachments: {
         type: OptionType.BOOLEAN,
-        description: "Whether to log deleted attachments",
+        description: hyperTranslate("Whether to log deleted attachments"),
         default: true,
         restartNeeded: true,
     },
     inlineEdits: {
         type: OptionType.BOOLEAN,
-        description: "Whether to display edit history as part of message content",
+        description: hyperTranslate("Whether to display edit history as part of message content"),
         default: true
     },
     ignoreBots: {
         type: OptionType.BOOLEAN,
-        description: "Whether to ignore messages by bots",
+        description: hyperTranslate("Whether to ignore messages by bots"),
         default: true
     },
     ignoreSelf: {
         type: OptionType.BOOLEAN,
-        description: "Whether to ignore messages by yourself",
+        description: hyperTranslate("Whether to ignore messages by yourself"),
         default: false
     },
     ignoreUsers: {
         type: OptionType.STRING,
-        description: "Comma-separated list of user IDs to ignore",
+        description: hyperTranslate("Comma-separated list of user IDs to ignore"),
         default: "",
         multiline: true
     },
     ignoreChannels: {
         type: OptionType.STRING,
-        description: "Comma-separated list of channel IDs to ignore",
+        description: hyperTranslate("Comma-separated list of channel IDs to ignore"),
         default: "",
         multiline: true
     },
     ignoreGuilds: {
         type: OptionType.STRING,
-        description: "Comma-separated list of guild IDs to ignore",
+        description: hyperTranslate("Comma-separated list of guild IDs to ignore"),
         default: "",
         multiline: true
     },
@@ -182,7 +183,7 @@ const patchMessageContextMenu: NavContextMenuPatchCallback = (children, props) =
             <Menu.MenuItem
                 id={TOGGLE_DELETE_STYLE_ID}
                 key={TOGGLE_DELETE_STYLE_ID}
-                label="Toggle Deleted Highlight"
+                label={hyperTranslate("Toggle Deleted Highlight")}
                 leadingAccessory={{ type: "icon", icon: EyeIcon }}
                 action={() => domElement.classList.toggle("messagelogger-deleted")}
             />
@@ -193,7 +194,7 @@ const patchMessageContextMenu: NavContextMenuPatchCallback = (children, props) =
         <Menu.MenuItem
             id={REMOVE_HISTORY_ID}
             key={REMOVE_HISTORY_ID}
-            label="Remove Message History"
+            label={hyperTranslate("Remove Message History")}
             leadingAccessory={{ type: "icon", icon: DeleteIcon }}
             color="danger"
             action={() => {
@@ -211,7 +212,7 @@ const patchChannelContextMenu: NavContextMenuPatchCallback = (children, { channe
     group.push(
         <Menu.MenuItem
             id="vc-ml-clear-channel"
-            label="Clear Message Log"
+            label={hyperTranslate("Clear Message Log")}
             color="danger"
             action={() => {
                 messages.forEach(msg => {
@@ -236,7 +237,7 @@ export function parseEditContent(content: string, message: Message) {
 
 export default definePlugin({
     name: "MessageLogger",
-    description: "Temporarily logs deleted and edited messages.",
+    description: hyperTranslate("Temporarily logs deleted and edited messages."),
     tags: ["Chat", "Utility"],
     authors: [Devs.rushii, Devs.Ven, Devs.AutumnVN, Devs.Nickyux, Devs.Kyuuhachi, Devs.sadan],
     dependencies: ["MessageUpdaterAPI"],

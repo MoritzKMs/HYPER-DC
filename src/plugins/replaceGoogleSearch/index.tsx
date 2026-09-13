@@ -8,6 +8,7 @@ import { findGroupChildrenByChildId, NavContextMenuPatchCallback } from "@api/Co
 import { definePluginSettings } from "@api/Settings";
 import { SearchIcon } from "@components/Icons";
 import { Devs } from "@utils/constants";
+import { hyperTranslate } from "@utils/hyperLanguage";
 import definePlugin, { OptionType } from "@utils/types";
 import { Menu } from "@webpack/common";
 
@@ -32,22 +33,22 @@ const enum ReplacementEngineValue {
 
 const settings = definePluginSettings({
     customEngineName: {
-        description: "Name of the custom search engine",
+        description: hyperTranslate("Name of the custom search engine"),
         type: OptionType.STRING,
         placeholder: "Google"
     },
     customEngineURL: {
-        displayName: "Custom Engine URL",
-        description: "The URL of your Engine",
+        displayName: hyperTranslate("Custom Engine URL"),
+        description: hyperTranslate("The URL of your Engine"),
         type: OptionType.STRING,
         placeholder: "https://google.com/search?q="
     },
     replacementEngine: {
-        description: "Replace with a specific search engine instead of adding a menu",
+        description: hyperTranslate("Replace with a specific search engine instead of adding a menu"),
         type: OptionType.SELECT,
         options: [
-            { label: "Off", value: ReplacementEngineValue.OFF, default: true },
-            { label: "Custom Engine", value: ReplacementEngineValue.CUSTOM },
+            { label: hyperTranslate("Off"), value: ReplacementEngineValue.OFF, default: true },
+            { label: hyperTranslate("Custom Engine"), value: ReplacementEngineValue.CUSTOM },
             ...Object.keys(DefaultEngines).map(engine => ({ label: engine, value: engine }))
         ]
     }
@@ -86,7 +87,7 @@ function makeSearchItem(src: string) {
 
     return (
         <Menu.MenuItem
-            label="Search Text"
+            label={hyperTranslate("Search Text")}
             key="search-text"
             id="vc-search-text"
             leadingAccessory={{ type: "icon", icon: SearchIcon }}
@@ -120,7 +121,7 @@ const messageContextMenuPatch: NavContextMenuPatchCallback = (children, _props) 
 
 export default definePlugin({
     name: "ReplaceGoogleSearch",
-    description: "Replaces the Google search with different Engine(s)",
+    description: hyperTranslate("Replaces the Google search with different Engine(s)"),
     tags: ["Utility", "Customisation"],
     authors: [Devs.Moxxie, Devs.Ethan],
 

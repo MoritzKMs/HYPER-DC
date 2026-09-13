@@ -10,20 +10,21 @@ import { Flex } from "@components/Flex";
 import { Margins } from "@components/margins";
 import { Paragraph } from "@components/Paragraph";
 import { Devs } from "@utils/constants";
+import { hyperTranslate } from "@utils/hyperLanguage";
 import { Logger } from "@utils/Logger";
 import definePlugin, { OptionType } from "@utils/types";
 
 const settings = definePluginSettings({
     originalImagesInChat: {
         type: OptionType.BOOLEAN,
-        description: "Also load the original image in Chat. WARNING: Read the caveats above",
+        description: hyperTranslate("Also load the original image in Chat. WARNING: Read the caveats above"),
         default: false,
     }
 });
 
 export default definePlugin({
     name: "FixImagesQuality",
-    description: "Improves quality of images by loading them at their original resolution",
+    description: hyperTranslate("Improves quality of images by loading them at their original resolution"),
     tags: ["Media", "Appearance"],
     authors: [Devs.Nuckyz, Devs.Ven],
     settings,
@@ -42,18 +43,18 @@ export default definePlugin({
         return (
             <Card variant="normal">
                 <Flex flexDirection="column" gap="4px">
-                    <Paragraph size="md" weight="semibold">The default behaviour is the following:</Paragraph>
+                    <Paragraph size="md" weight="semibold">{hyperTranslate("The default behaviour is the following:")}</Paragraph>
                     <Paragraph>
                         <ul>
-                            <li>&mdash; In chat, optimised but full resolution images will be loaded.</li>
-                            <li>&mdash; In the image modal, the original image will be loaded.</li>
+                            <li>{hyperTranslate("&mdash; In chat, optimised but full resolution images will be loaded.")}</li>
+                            <li>{hyperTranslate("&mdash; In the image modal, the original image will be loaded.")}</li>
                         </ul>
                     </Paragraph>
-                    <Paragraph size="md" weight="semibold" className={Margins.top8}>You can also enable original image in chat, but beware of the following caveats:</Paragraph>
+                    <Paragraph size="md" weight="semibold" className={Margins.top8}>{hyperTranslate("You can also enable original image in chat, but beware of the following caveats:")}</Paragraph>
                     <Paragraph>
                         <ul>
-                            <li>&mdash; Animated images (GIF, WebP, etc.) in chat will always animate, regardless of if the App is focused.</li>
-                            <li>&mdash; May cause lag.</li>
+                            <li>{hyperTranslate("&mdash; Animated images (GIF, WebP, etc.) in chat will always animate, regardless of if the App is focused.")}</li>
+                            <li>{hyperTranslate("&mdash; May cause lag.")}</li>
                         </ul>
                     </Paragraph>
                 </Flex>

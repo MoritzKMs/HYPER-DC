@@ -11,6 +11,7 @@ import { copyToClipboard } from "@utils/clipboard";
 import { Devs } from "@utils/constants";
 import { getCurrentChannel, getCurrentGuild, getIntlMessage, openImageModal } from "@utils/discord";
 import { isTruthy } from "@utils/guards";
+import { hyperTranslate } from "@utils/hyperLanguage";
 import { classes } from "@utils/misc";
 import definePlugin, { OptionType } from "@utils/types";
 import { Guild, Role } from "@vencord/discord-types";
@@ -56,7 +57,7 @@ function RoleMembersIcon() {
 const settings = definePluginSettings({
     roleIconFileFormat: {
         type: OptionType.SELECT,
-        description: "File format to use when viewing role icons",
+        description: hyperTranslate("File format to use when viewing role icons"),
         options: [
             {
                 label: "png",
@@ -84,7 +85,7 @@ export function buildExtraRoleContextMenuItems(role: Role, guild: Guild, popoutR
             <Menu.MenuItem
                 key="vc-edit-role"
                 id="vc-edit-role"
-                label="Edit Role"
+                label={hyperTranslate("Edit Role")}
                 action={async () => {
                     await GuildSettingsActions.open(guild.id, "ROLES");
                     GuildSettingsActions.selectRole(role.id);
@@ -97,7 +98,7 @@ export function buildExtraRoleContextMenuItems(role: Role, guild: Guild, popoutR
             <Menu.MenuItem
                 key="vc-copy-role-color"
                 id="vc-copy-role-color"
-                label="Copy Role Color"
+                label={hyperTranslate("Copy Role Color")}
                 action={() => copyToClipboard(role.colorString!)}
                 icon={AppearanceIcon}
                 leadingAccessory={{ type: "icon", icon: AppearanceIcon }}
@@ -110,7 +111,7 @@ export function buildExtraRoleContextMenuItems(role: Role, guild: Guild, popoutR
             <Menu.MenuItem
                 key="vc-view-role-icon"
                 id="vc-view-role-icon"
-                label="View Role Icon"
+                label={hyperTranslate("View Role Icon")}
                 action={() => {
                     openImageModal({
                         url: `${location.protocol}//${window.GLOBAL_ENV.CDN_HOST}/role-icons/${role.id}/${role.icon}.${settings.store.roleIconFileFormat}`,
@@ -126,7 +127,7 @@ export function buildExtraRoleContextMenuItems(role: Role, guild: Guild, popoutR
             <Menu.MenuItem
                 key="vc-view-role-members"
                 id="vc-view-role-members"
-                label="View Role Members"
+                label={hyperTranslate("View Role Members")}
                 render={() => (
                     <Popout
                         position="right"
@@ -149,7 +150,7 @@ export function buildExtraRoleContextMenuItems(role: Role, guild: Guild, popoutR
                                 role="menuitem"
                                 {...popoutProps}
                             >
-                                <div className={MenuItemClasses.label}>View Role Members</div>
+                                <div className={MenuItemClasses.label}>{hyperTranslate("View Role Members")}</div>
                                 {/* FIXME: update to new icon style */}
                                 <div className={MenuItemClasses.iconContainer}>
                                     <RoleMembersIcon />
@@ -180,7 +181,7 @@ export function openRoleContextMenu(event: React.MouseEvent<HTMLElement>, { guil
             <Menu.Menu
                 navId="vc-better-role-context-member-list"
                 onClose={ContextMenuApi.closeContextMenu}
-                aria-label="Role Actions"
+                aria-label={hyperTranslate("Role Actions")}
             >
                 {before}
                 {after}
@@ -199,7 +200,7 @@ export function openRoleContextMenu(event: React.MouseEvent<HTMLElement>, { guil
 
 export default definePlugin({
     name: "BetterRoleContext",
-    description: "Adds options to copy role color / edit role / view role icon when right clicking roles in the user profile or in the member list",
+    description: hyperTranslate("Adds options to copy role color / edit role / view role icon when right clicking roles in the user profile or in the member list"),
     tags: ["Roles", "Appearance"],
     authors: [Devs.Ven, Devs.goodbee, Devs.nightmaresan],
     dependencies: ["UserSettingsAPI"],

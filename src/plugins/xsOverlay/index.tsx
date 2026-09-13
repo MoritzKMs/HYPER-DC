@@ -6,6 +6,7 @@
 
 import { definePluginSettings } from "@api/Settings";
 import { Devs } from "@utils/constants";
+import { hyperTranslate } from "@utils/hyperLanguage";
 import { Logger } from "@utils/Logger";
 import definePlugin, { makeRange, OptionType, PluginNative, ReporterTestable } from "@utils/types";
 import type { Channel, Embed, GuildMember, MessageAttachment, User } from "@vencord/discord-types";
@@ -95,7 +96,7 @@ const logger = new Logger("XSOverlay");
 const settings = definePluginSettings({
     webSocketPort: {
         type: OptionType.NUMBER,
-        description: "Websocket port",
+        description: hyperTranslate("Websocket port"),
         default: 42070,
         async onChange() {
             await start();
@@ -103,72 +104,72 @@ const settings = definePluginSettings({
     },
     preferUDP: {
         type: OptionType.BOOLEAN,
-        displayName: "Prefer UDP",
-        description: "Enable if you use an older build of XSOverlay unable to connect through websockets. This setting is ignored on web.",
+        displayName: hyperTranslate("Prefer UDP"),
+        description: hyperTranslate("Enable if you use an older build of XSOverlay unable to connect through websockets. This setting is ignored on web."),
         default: false,
         disabled: () => IS_WEB
     },
     botNotifications: {
         type: OptionType.BOOLEAN,
-        description: "Allow bot notifications",
+        description: hyperTranslate("Allow bot notifications"),
         default: false
     },
     serverNotifications: {
         type: OptionType.BOOLEAN,
-        description: "Allow server notifications",
+        description: hyperTranslate("Allow server notifications"),
         default: true
     },
     dmNotifications: {
         type: OptionType.BOOLEAN,
-        displayName: "DM Notifications",
-        description: "Allow Direct Message notifications",
+        displayName: hyperTranslate("DM Notifications"),
+        description: hyperTranslate("Allow Direct Message notifications"),
         default: true
     },
     groupDmNotifications: {
         type: OptionType.BOOLEAN,
-        displayName: "Group DM Notifications",
-        description: "Allow Group DM notifications",
+        displayName: hyperTranslate("Group DM Notifications"),
+        description: hyperTranslate("Allow Group DM notifications"),
         default: true
     },
     callNotifications: {
         type: OptionType.BOOLEAN,
-        description: "Allow call notifications",
+        description: hyperTranslate("Allow call notifications"),
         default: true
     },
     pingColor: {
         type: OptionType.STRING,
-        description: "User mention color",
+        description: hyperTranslate("User mention color"),
         default: "#7289da"
     },
     channelPingColor: {
         type: OptionType.STRING,
-        description: "Channel mention color",
+        description: hyperTranslate("Channel mention color"),
         default: "#8a2be2"
     },
     soundPath: {
         type: OptionType.STRING,
-        description: "Notification sound (default/warning/error)",
+        description: hyperTranslate("Notification sound (default/warning/error)"),
         default: "default"
     },
     timeout: {
         type: OptionType.NUMBER,
-        description: "Notification duration (secs)",
+        description: hyperTranslate("Notification duration (secs)"),
         default: 3,
     },
     lengthBasedTimeout: {
         type: OptionType.BOOLEAN,
-        description: "Extend duration with message length",
+        description: hyperTranslate("Extend duration with message length"),
         default: true
     },
     opacity: {
         type: OptionType.SLIDER,
-        description: "Notif opacity",
+        description: hyperTranslate("Notif opacity"),
         default: 1,
         markers: makeRange(0, 1, 0.1)
     },
     volume: {
         type: OptionType.SLIDER,
-        description: "Volume",
+        description: hyperTranslate("Volume"),
         default: 0.2,
         markers: makeRange(0, 1, 0.1)
     },
@@ -190,7 +191,7 @@ const Native = VencordNative.pluginHelpers.XSOverlay as PluginNative<typeof impo
 
 export default definePlugin({
     name: "XSOverlay",
-    description: "Forwards discord notifications to XSOverlay, for easy viewing in VR",
+    description: hyperTranslate("Forwards discord notifications to XSOverlay, for easy viewing in VR"),
     tags: ["Notifications"],
     authors: [Devs.Nyako],
     searchTerms: ["vr", "notify"],
@@ -311,8 +312,7 @@ export default definePlugin({
     settingsAboutComponent: () => (
         <>
             <Button onClick={() => sendOtherNotif("This is a test notification! explode", "Hello from Vendor!")}>
-                Send test notification
-            </Button>
+                {hyperTranslate("Send test notification")}</Button>
         </>
     )
 });

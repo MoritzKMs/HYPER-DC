@@ -23,6 +23,7 @@ import { addMemberListDecorator, removeMemberListDecorator } from "@api/MemberLi
 import { addMessageDecoration, removeMessageDecoration } from "@api/MessageDecorations";
 import { definePluginSettings } from "@api/Settings";
 import { Devs } from "@utils/constants";
+import { hyperTranslate } from "@utils/hyperLanguage";
 import definePlugin, { OptionType } from "@utils/types";
 import { ClientStatusMap, DiscordPlatform, OnlineStatus, User } from "@vencord/discord-types";
 import { filters, findStoreLazy, mapMangledModuleLazy } from "@webpack";
@@ -59,17 +60,17 @@ const badge: ProfileBadge = {
 
 const indicatorLocations = {
     list: {
-        description: "In the member list",
+        description: hyperTranslate("In the member list"),
         onEnable: () => addMemberListDecorator("platform-indicator", ({ user }) => renderPlatformIndicators(user, true)),
         onDisable: () => removeMemberListDecorator("platform-indicator")
     },
     badges: {
-        description: "In user profiles, as badges",
+        description: hyperTranslate("In user profiles, as badges"),
         onEnable: () => addProfileBadge(badge),
         onDisable: () => removeProfileBadge(badge)
     },
     messages: {
-        description: "Inside messages",
+        description: hyperTranslate("Inside messages"),
         onEnable: () => addMessageDecoration("platform-indicator", props => renderPlatformIndicators(props.message?.author, false)),
         onDisable: () => removeMessageDecoration("platform-indicator")
     }
@@ -97,7 +98,7 @@ const settings = definePluginSettings({
     ),
     colorMobileIndicator: {
         type: OptionType.BOOLEAN,
-        description: "Whether to make the mobile indicator match the color of the user status.",
+        description: hyperTranslate("Whether to make the mobile indicator match the color of the user status."),
         default: true,
         restartNeeded: true
     }
@@ -219,7 +220,7 @@ function OtherUserPlatformIndicators({ user, small = false }: { user: User; smal
 
 export default definePlugin({
     name: "PlatformIndicators",
-    description: "Adds platform indicators (Desktop, Mobile, Web...) to users",
+    description: hyperTranslate("Adds platform indicators (Desktop, Mobile, Web...) to users"),
     tags: ["Appearance"],
     authors: [Devs.kemo, Devs.TheSun, Devs.Nuckyz, Devs.Ven],
     dependencies: ["MessageDecorationsAPI", "MemberListDecoratorsAPI"],

@@ -21,6 +21,8 @@ globalThis.AudioContext = class {
     destination = new Node();
     createAnalyser() { return new Node(); }
     createGain() { return new Node(); }
+    createBiquadFilter() { return Object.assign(new Node(), { frequency: { value: 0 } }); }
+    createDynamicsCompressor() { return Object.assign(new Node(), Object.fromEntries(["threshold", "knee", "ratio", "attack", "release"].map(k => [k, { value: 0 }]))); }
     createMediaStreamDestination() { return Object.assign(new Node(), { stream: stream() }); }
     createMediaElementSource() { return new Node(); }
     createMediaStreamSource() { return new Node(); }
@@ -38,7 +40,9 @@ Object.defineProperty(globalThis, 'navigator', { configurable: true, value: { me
     enumerateDevices: async () => devices,
     getUserMedia: () => getMic()
 } } });
-const { DeckAudio } = await import('../src/plugins/hyperDeck/audio.ts');
+const { build } = await import('esbuild');
+const audioBundle = await build({ entryPoints: ['src/plugins/hyperDeck/audio.ts'], bundle: true, format: 'esm', platform: 'browser', write: false });
+const { DeckAudio } = await import('data:text/javascript;base64,' + Buffer.from(audioBundle.outputFiles[0].text).toString('base64'));
 
 test('sending is off initially and refuses disconnected or physical outputs', async () => {
     const d = new DeckAudio();

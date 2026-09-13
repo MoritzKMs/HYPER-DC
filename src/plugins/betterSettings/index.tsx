@@ -10,6 +10,7 @@ import { buildPluginMenuEntries, buildThemeMenuEntries } from "@plugins/vencordT
 import { Devs } from "@utils/constants";
 import { classNameFactory } from "@utils/css";
 import { getIntlMessage } from "@utils/discord";
+import { hyperTranslate } from "@utils/hyperLanguage";
 import { Logger } from "@utils/Logger";
 import definePlugin, { OptionType } from "@utils/types";
 import { findCssClassesLazy } from "@webpack";
@@ -23,19 +24,19 @@ const Classes = findCssClassesLazy("animating", "baseLayer", "bg", "layer", "lay
 
 const settings = definePluginSettings({
     disableFade: {
-        description: "Disable the crossfade animation",
+        description: hyperTranslate("Disable the crossfade animation"),
         type: OptionType.BOOLEAN,
         default: true,
         restartNeeded: true
     },
     organizeMenu: {
-        description: "Organizes the settings cog context menu into categories",
+        description: hyperTranslate("Organizes the settings cog context menu into categories"),
         type: OptionType.BOOLEAN,
         default: true,
         restartNeeded: true
     },
     eagerLoad: {
-        description: "Removes the loading delay when opening the menu for the first time",
+        description: hyperTranslate("Removes the loading delay when opening the menu for the first time"),
         type: OptionType.BOOLEAN,
         default: true,
         restartNeeded: true
@@ -77,7 +78,7 @@ function Layer({ mode, baseLayer = false, ...props }: LayerProps) {
 
 export default definePlugin({
     name: "BetterSettings",
-    description: "Enhances your settings-menu-opening experience",
+    description: hyperTranslate("Enhances your settings-menu-opening experience"),
     authors: [Devs.Kyuuhachi],
     tags: ["Appearance", "Customisation", "Organisation"],
     settings,

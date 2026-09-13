@@ -19,6 +19,7 @@
 import { definePluginSettings } from "@api/Settings";
 import { hash as h64 } from "@intrnl/xxhash64";
 import { Devs } from "@utils/constants";
+import { hyperTranslate } from "@utils/hyperLanguage";
 import definePlugin, { OptionType } from "@utils/types";
 import { useMemo } from "@webpack/common";
 
@@ -32,25 +33,25 @@ function calculateNameColorForUser(id?: string) {
 
 const settings = definePluginSettings({
     lightness: {
-        description: "Lightness, in %. Change if the colors are too light or too dark",
+        description: hyperTranslate("Lightness, in %. Change if the colors are too light or too dark"),
         type: OptionType.NUMBER,
         default: 70,
     },
     memberListColors: {
-        description: "Replace role colors in the member list",
+        description: hyperTranslate("Replace role colors in the member list"),
         restartNeeded: true,
         type: OptionType.BOOLEAN,
         default: true
     },
     applyColorOnlyToUsersWithoutColor: {
-        description: "Apply colors only to users who don't have a predefined color",
+        description: hyperTranslate("Apply colors only to users who don't have a predefined color"),
         restartNeeded: false,
         type: OptionType.BOOLEAN,
         default: false
     },
     applyColorOnlyInDms: {
-        displayName: "Apply Color Only In DMs",
-        description: "Apply colors only in direct messages; do not apply colors in servers.",
+        displayName: hyperTranslate("Apply Color Only In DMs"),
+        description: hyperTranslate("Apply colors only in direct messages; do not apply colors in servers."),
         restartNeeded: false,
         type: OptionType.BOOLEAN,
         default: false
@@ -59,7 +60,7 @@ const settings = definePluginSettings({
 
 export default definePlugin({
     name: "IrcColors",
-    description: "Makes username colors in chat unique, like in IRC clients",
+    description: hyperTranslate("Makes username colors in chat unique, like in IRC clients"),
     tags: ["Appearance", "Customisation"],
     authors: [Devs.Grzesiek11, Devs.jamesbt365],
     settings,

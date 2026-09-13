@@ -22,6 +22,7 @@ import { ApplicationCommandInputType, ApplicationCommandOptionType, findOption, 
 import { migratePluginSettings } from "@api/Settings";
 import { Devs } from "@utils/constants";
 import { sendMessage } from "@utils/discord";
+import { hyperTranslate } from "@utils/hyperLanguage";
 import definePlugin from "@utils/types";
 import { FluxDispatcher, MessageActions, PendingReplyStore } from "@webpack/common";
 
@@ -62,7 +63,7 @@ export function registerTagCommand(tag: Tag) {
             })),
             {
                 name: "ephemeral",
-                description: "Whether the response should only be visible to you",
+                description: hyperTranslate("Whether the response should only be visible to you"),
                 type: ApplicationCommandOptionType.BOOLEAN,
                 required: false
             }
@@ -90,7 +91,7 @@ export function registerTagCommand(tag: Tag) {
 migratePluginSettings("CustomCommands", "MessageTags");
 export default definePlugin({
     name: "CustomCommands",
-    description: "Allows you to create custom slash commands / tags",
+    description: hyperTranslate("Allows you to create custom slash commands / tags"),
     searchTerms: ["MessageTags"],
     authors: [Devs.Ven, Devs.Luna,],
     tags: ["Commands", "Customisation", "Utility"],
@@ -107,28 +108,28 @@ export default definePlugin({
     commands: [
         {
             name: "tags",
-            description: "Manage all custom commands",
+            description: hyperTranslate("Manage all custom commands"),
             inputType: ApplicationCommandInputType.BUILT_IN,
             options: [
                 {
                     name: "create",
-                    description: "Create a new tag",
+                    description: hyperTranslate("Create a new tag"),
                     type: ApplicationCommandOptionType.SUB_COMMAND,
                 },
                 {
                     name: "list",
-                    description: "List all your tags",
+                    description: hyperTranslate("List all your tags"),
                     type: ApplicationCommandOptionType.SUB_COMMAND,
                     options: []
                 },
                 {
                     name: "delete",
-                    description: "Remove a tag by name",
+                    description: hyperTranslate("Remove a tag by name"),
                     type: ApplicationCommandOptionType.SUB_COMMAND,
                     options: [
                         {
                             name: "tag-name",
-                            description: "The name of the tag",
+                            description: hyperTranslate("The name of the tag"),
                             type: ApplicationCommandOptionType.STRING,
                             required: true
                         }

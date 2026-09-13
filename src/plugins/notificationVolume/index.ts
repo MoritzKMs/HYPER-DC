@@ -6,12 +6,13 @@
 
 import { definePluginSettings } from "@api/Settings";
 import { Devs } from "@utils/constants";
+import { hyperTranslate } from "@utils/hyperLanguage";
 import definePlugin, { OptionType } from "@utils/types";
 
 const settings = definePluginSettings({
     notificationVolume: {
         type: OptionType.SLIDER,
-        description: "Notification volume",
+        description: hyperTranslate("Notification volume"),
         markers: [0, 25, 50, 75, 100],
         default: 100,
         stickToMarkers: false
@@ -20,7 +21,7 @@ const settings = definePluginSettings({
 
 export default definePlugin({
     name: "NotificationVolume",
-    description: "Save your ears and set a separate volume for notifications and in-app sounds",
+    description: hyperTranslate("Save your ears and set a separate volume for notifications and in-app sounds"),
     tags: ["Notifications", "Voice"],
     authors: [Devs.philipbry],
     settings,

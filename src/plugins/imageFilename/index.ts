@@ -6,6 +6,7 @@
 
 import { definePluginSettings } from "@api/Settings";
 import { Devs } from "@utils/constants";
+import { hyperTranslate } from "@utils/hyperLanguage";
 import definePlugin, { OptionType } from "@utils/types";
 
 const ImageExtensionRe = /\.(png|jpg|jpeg|gif|webp|avif)$/i;
@@ -13,7 +14,7 @@ const GifHostRegex = /^(.+?\.)?(tenor|giphy|imgur)\.com$/i;
 
 const settings = definePluginSettings({
     showFullUrl: {
-        description: "Show the full URL of the image instead of just the file name. Always enabled for GIFs because they usually have no meaningful file name",
+        description: hyperTranslate("Show the full URL of the image instead of just the file name. Always enabled for GIFs because they usually have no meaningful file name"),
         type: OptionType.BOOLEAN,
         default: false,
     },
@@ -22,7 +23,7 @@ const settings = definePluginSettings({
 export default definePlugin({
     name: "ImageFilename",
     authors: [Devs.Ven],
-    description: "Display the file name of images & GIFs as a tooltip when hovering over them",
+    description: hyperTranslate("Display the file name of images & GIFs as a tooltip when hovering over them"),
     tags: ["Media", "Utility"],
     settings,
 

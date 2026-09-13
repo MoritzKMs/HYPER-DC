@@ -29,6 +29,7 @@ import { openPluginModal } from "@components/settings/tabs/plugins/PluginModal";
 import SettingsPlugin from "@plugins/_core/settings";
 import { gitRemote } from "@shared/vencordUserAgent";
 import { IS_WINDOWS } from "@utils/constants";
+import { hyperTranslate } from "@utils/hyperLanguage";
 import { Margins } from "@utils/margins";
 import { isPluginDev } from "@utils/misc";
 import { relaunch } from "@utils/native";
@@ -56,39 +57,39 @@ function Switches() {
     const Switches = [
         {
             key: "useQuickCss",
-            title: "Enable Custom CSS",
-            description: "Apply your configured QuickCSS"
+            title: hyperTranslate("Enable Custom CSS"),
+            description: hyperTranslate("Apply your configured QuickCSS")
         },
         !IS_WEB && (!IS_DISCORD_DESKTOP || !IS_WINDOWS ? {
             key: "frameless",
-            title: "Disable the window frame",
+            title: hyperTranslate("Disable the window frame"),
             restartRequired: true
         } : {
             key: "winNativeTitleBar",
-            title: "Use Windows' native title bar instead of Discord's custom one",
+            title: hyperTranslate("Use Windows' native title bar instead of Discord's custom one"),
             restartRequired: true
         }),
         !IS_WEB && {
             key: "transparent",
-            title: "Enable window transparency",
-            description: "A theme that supports transparency is required or this will do nothing. Stops the window from being resizable as a side effect",
+            title: hyperTranslate("Enable window transparency"),
+            description: hyperTranslate("A theme that supports transparency is required or this will do nothing. Stops the window from being resizable as a side effect"),
             restartRequired: true
         },
         IS_DISCORD_DESKTOP && {
             key: "disableMinSize",
-            title: "Disable minimum window size",
-            description: "Allows you to resize the window to any size, even smaller than Discord's minimum size",
+            title: hyperTranslate("Disable minimum window size"),
+            description: hyperTranslate("Allows you to resize the window to any size, even smaller than Discord's minimum size"),
             restartRequired: true
         },
         !IS_WEB && IS_WINDOWS && {
             key: "winCtrlQ",
-            title: "Register Ctrl+Q as shortcut to close Discord (Alternative to Alt+F4)",
+            title: hyperTranslate("Register Ctrl+Q as shortcut to close Discord (Alternative to Alt+F4)"),
             restartRequired: true
         },
         !IS_WEB && {
             key: "enableReactDevtools",
-            title: "Enable React Developer Tools",
-            description: "Mainly useful for plugin developers. Ignore this if you don't know what it is",
+            title: hyperTranslate("Enable React Developer Tools"),
+            description: hyperTranslate("Mainly useful for plugin developers. Ignore this if you don't know what it is"),
             restartRequired: true
         },
     ] satisfies Array<false | {
@@ -119,8 +120,8 @@ function Switches() {
                         openModal(props => (
                             <ConfirmModal
                                 {...props}
-                                title="Restart Required"
-                                subtitle="A restart is required to apply this change"
+                                title={hyperTranslate("Restart Required")}
+                                subtitle={hyperTranslate("A restart is required to apply this change")}
                                 confirmText="Restart now"
                                 cancelText="Later!"
                                 variant="primary"
@@ -147,9 +148,9 @@ function VencordSettings() {
             {isDonor(user?.id)
                 ? (
                     <SpecialCard
-                        title="Donations"
-                        subtitle="Thank you for donating!"
-                        description="You can manage your perks at any time by messaging @vending.machine."
+                        title={hyperTranslate("Donations")}
+                        subtitle={hyperTranslate("Thank you for donating!")}
+                        description={hyperTranslate("You can manage your perks at any time by messaging @vending.machine.")}
                         cardImage={VENNIE_DONATOR_IMAGE}
                         backgroundImage={DONOR_BACKGROUND_IMAGE}
                         backgroundColor="#ED87A9"
@@ -159,8 +160,8 @@ function VencordSettings() {
                 )
                 : (
                     <SpecialCard
-                        title="Support the Project"
-                        description="Please consider supporting the development of Vencord by donating!"
+                        title={hyperTranslate("Buy Vencord a coffee")}
+                        description={hyperTranslate("Please consider supporting the development of Vencord by donating!")}
                         cardImage={donateImage}
                         backgroundImage={DONOR_BACKGROUND_IMAGE}
                         backgroundColor="#c3a3ce"
@@ -172,9 +173,9 @@ function VencordSettings() {
 
             {isPluginDev(user?.id) && (
                 <SpecialCard
-                    title="Contributions"
-                    subtitle="Thank you for contributing!"
-                    description="Since you've contributed to Vencord you now have a cool new badge!"
+                    title={hyperTranslate("Contributions")}
+                    subtitle={hyperTranslate("Thank you for contributing!")}
+                    description={hyperTranslate("Since you've contributed to Vencord you now have a cool new badge!")}
                     cardImage={COZY_CONTRIB_IMAGE}
                     backgroundImage={CONTRIB_BACKGROUND_IMAGE}
                     backgroundColor="#EDCC87"
@@ -184,7 +185,7 @@ function VencordSettings() {
             )}
 
             <section>
-                <Forms.FormTitle tag="h5">Quick Actions</Forms.FormTitle>
+                <Forms.FormTitle tag="h5">{hyperTranslate("Quick Actions")}</Forms.FormTitle>
 
                 <QuickActionCard>
                     <QuickAction
@@ -222,12 +223,11 @@ function VencordSettings() {
             <Divider />
 
             <section className={Margins.top16}>
-                <Forms.FormTitle tag="h5">Settings</Forms.FormTitle>
+                <Forms.FormTitle tag="h5">{hyperTranslate("Settings")}</Forms.FormTitle>
                 <Forms.FormText className={Margins.bottom20} style={{ color: "var(--text-muted)" }}>
-                    Hint: You can change the position of this settings section in the{" "}
+                    {hyperTranslate("Hint: You can change the position of this settings section in the")}{" "}
                     <a onClick={() => openPluginModal(SettingsPlugin)}>
-                        settings of the Settings plugin
-                    </a>!
+                        {hyperTranslate("settings of the Settings plugin")}</a>!
                 </Forms.FormText>
 
                 <div className="vc-settings-switches">

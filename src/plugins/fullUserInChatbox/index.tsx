@@ -6,6 +6,7 @@
 
 import ErrorBoundary from "@components/ErrorBoundary";
 import { Devs } from "@utils/constants";
+import { hyperTranslate } from "@utils/hyperLanguage";
 import definePlugin from "@utils/types";
 import { findComponentByCodeLazy } from "@webpack";
 import { UserStore, useStateFromStores } from "@webpack/common";
@@ -22,7 +23,7 @@ interface UserMentionComponentProps {
 
 export default definePlugin({
     name: "FullUserInChatbox",
-    description: "Makes the user mention in the chatbox have more functionalities, like left/right clicking",
+    description: hyperTranslate("Makes the user mention in the chatbox have more functionalities, like left/right clicking"),
     tags: ["Shortcuts", "Utility"],
     authors: [Devs.sadan],
 

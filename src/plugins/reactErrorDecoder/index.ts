@@ -17,6 +17,7 @@
 */
 
 import { Devs } from "@utils/constants";
+import { hyperTranslate } from "@utils/hyperLanguage";
 import definePlugin from "@utils/types";
 import { React } from "@webpack/common";
 
@@ -24,7 +25,7 @@ let ERROR_CODES: Record<string, string> | undefined;
 
 export default definePlugin({
     name: "ReactErrorDecoder",
-    description: 'Replaces "Minified React Error" with the actual error.',
+    description: hyperTranslate("Replaces \"Minified React Error\" with the actual error."),
     tags: ["Developers"],
     authors: [Devs.Cyn, Devs.maisymoe],
     patches: [

@@ -28,6 +28,7 @@ import { Span } from "@components/Span";
 import { TooltipContainer } from "@components/TooltipContainer";
 import { Devs } from "@utils/constants";
 import { classNameFactory } from "@utils/css";
+import { hyperTranslate } from "@utils/hyperLanguage";
 import { Logger } from "@utils/Logger";
 import definePlugin, { OptionType } from "@utils/types";
 import { React, TextInput, useState } from "@webpack/common";
@@ -74,13 +75,13 @@ const settings = definePluginSettings({
                 <>
                     <TextReplaceTesting />
                     <TextReplace
-                        title="Simple Replacements"
-                        description="Simple find and replace rules. For example, find 'brb' and replace it with 'be right back'"
+                        title={hyperTranslate("Simple Replacements")}
+                        description={hyperTranslate("Simple find and replace rules. For example, find 'brb' and replace it with 'be right back'")}
                         rulesArray={stringRules}
                     />
                     <TextReplace
-                        title="Regex Replacements"
-                        description="More powerful replacements using Regular Expressions. This section is for advanced users. If you don't understand it, just ignore it"
+                        title={hyperTranslate("Regex Replacements")}
+                        description={hyperTranslate("More powerful replacements using Regular Expressions. This section is for advanced users. If you don't understand it, just ignore it")}
                         rulesArray={regexRules}
                         isRegex
                     />
@@ -91,12 +92,12 @@ const settings = definePluginSettings({
     stringRules: {
         type: OptionType.CUSTOM,
         default: makeEmptyRuleArray(),
-        description: "Rules for replacing text using string matching."
+        description: hyperTranslate("Rules for replacing text using string matching.")
     },
     regexRules: {
         type: OptionType.CUSTOM,
         default: makeEmptyRuleArray(),
-        description: "Rules for replacing text using regular expressions."
+        description: hyperTranslate("Rules for replacing text using regular expressions.")
     }
 });
 
@@ -240,7 +241,7 @@ function TextReplace({ title, description, rulesArray, isRegex = false }: TextRe
                 <Paragraph>{description}</Paragraph>
                 <div className={cl("search-input")}>
                     <TextInput
-                        placeholder="Search for a rule..."
+                        placeholder={hyperTranslate("Search for a rule...")}
                         value={searchQuery}
                         onChange={setSearchQuery}
                     />
@@ -248,7 +249,7 @@ function TextReplace({ title, description, rulesArray, isRegex = false }: TextRe
             </div>
             <Flex flexDirection="column" style={{ gap: "0.5em", paddingBottom: "1.25em" }}>
                 {!filteredRules.length && searchQuery && (
-                    <Paragraph>No rules match your search criteria.</Paragraph>
+                    <Paragraph>{hyperTranslate("No rules match your search criteria.")}</Paragraph>
                 )}
                 {filteredRules.map(({ rule, index }) =>
                     <div
@@ -268,26 +269,26 @@ function TextReplace({ title, description, rulesArray, isRegex = false }: TextRe
                                 <>
                                     <div className={cl("input-grid")}>
                                         <TextRow
-                                            label="Name"
-                                            description="An optional name to help you identify this rule."
+                                            label={hyperTranslate("Name")}
+                                            description={hyperTranslate("An optional name to help you identify this rule.")}
                                             value={rule.name ?? ""}
                                             onChange={e => onChange(e, index, "name")}
                                         />
                                         <TextRow
-                                            label="Find"
+                                            label={hyperTranslate("Find")}
                                             description={isRegex ? "The regex pattern" : "The text to replace"}
                                             value={rule.find}
                                             onChange={e => onChange(e, index, "find")}
                                         />
                                         <TextRow
-                                            label="Replace"
-                                            description="The text to replace the found text with"
+                                            label={hyperTranslate("Replace")}
+                                            description={hyperTranslate("The text to replace the found text with")}
                                             value={rule.replace}
                                             onChange={e => onChange(e, index, "replace")}
                                         />
                                         <TextRow
-                                            label="Only if includes"
-                                            description="Optionally, only apply this rule if the message includes this text."
+                                            label={hyperTranslate("Only if includes")}
+                                            description={hyperTranslate("Optionally, only apply this rule if the message includes this text.")}
                                             value={rule.onlyIfIncludes}
                                             onChange={e => onChange(e, index, "onlyIfIncludes")}
                                         />
@@ -298,8 +299,7 @@ function TextReplace({ title, description, rulesArray, isRegex = false }: TextRe
                                         variant="dangerPrimary"
                                         onClick={() => onClickRemove(index)}
                                     >
-                                        Delete Rule
-                                    </Button>
+                                        {hyperTranslate("Delete Rule")}</Button>
                                 </>
                             )}
                         >
@@ -334,8 +334,7 @@ function TextReplace({ title, description, rulesArray, isRegex = false }: TextRe
                     }}
                     disabled={rulesArray.length > 0 && isEmptyRule(rulesArray[rulesArray.length - 1])}
                 >
-                    Add Rule
-                </Button>
+                    {hyperTranslate("Add Rule")}</Button>
             </Flex>
         </>
     );
@@ -346,10 +345,10 @@ function TextReplaceTesting() {
 
     return (
         <div>
-            <HeadingSecondary>Rule Tester</HeadingSecondary>
+            <HeadingSecondary>{hyperTranslate("Rule Tester")}</HeadingSecondary>
             <Flex flexDirection="column" gap={6}>
-                <TextInput placeholder="Type a message to test rules on" onChange={setValue} />
-                <TextInput placeholder="Message with rules applied" editable={false} value={applyRules(value)} style={{ opacity: 0.7 }} />
+                <TextInput placeholder={hyperTranslate("Type a message to test rules on")} onChange={setValue} />
+                <TextInput placeholder={hyperTranslate("Message with rules applied")} editable={false} value={applyRules(value)} style={{ opacity: 0.7 }} />
             </Flex>
         </div>
     );
@@ -386,7 +385,7 @@ function applyRules(content: string): string {
 const TEXT_REPLACE_RULES_CHANNEL_ID = "1102784112584040479";
 export default definePlugin({
     name: "TextReplace",
-    description: "Replace text in your messages. You can find pre-made rules in the #textreplace-rules channel in Vencord's Server",
+    description: hyperTranslate("Replace text in your messages. You can find pre-made rules in the #textreplace-rules channel in Vencord's Server"),
     tags: ["Chat", "Customisation", "Utility"],
     authors: [Devs.AutumnVN, Devs.TheKodeToad],
 

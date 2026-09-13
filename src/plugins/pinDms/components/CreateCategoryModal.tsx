@@ -7,6 +7,7 @@
 import { DEFAULT_COLOR, SWATCHES } from "@plugins/pinDms/constants";
 import { categoryLen, createCategory, getCategory } from "@plugins/pinDms/data";
 import { classNameFactory } from "@utils/css";
+import { hyperTranslate } from "@utils/hyperLanguage";
 import { RenderModalProps } from "@vencord/discord-types";
 import { extractAndLoadChunksLazy, findComponentByCodeLazy } from "@webpack";
 import { ColorPicker, Forms, Modal,openModalLazy, TextInput, Toasts, useMemo, useState } from "@webpack/common";
@@ -89,14 +90,14 @@ export function NewCategoryModal({ categoryId, modalProps, initialChannelId }: P
                 }}
             >
                 <section>
-                    <Forms.FormTitle>Name</Forms.FormTitle>
+                    <Forms.FormTitle>{hyperTranslate("Name")}</Forms.FormTitle>
                     <TextInput
                         value={name}
                         onChange={e => setName(e)}
                     />
                 </section>
                 <section>
-                    <Forms.FormTitle>Color</Forms.FormTitle>
+                    <Forms.FormTitle>{hyperTranslate("Color")}</Forms.FormTitle>
                     <ColorPickerWithSwatches
                         className={cl("color-picker")}
                         key={category.id}

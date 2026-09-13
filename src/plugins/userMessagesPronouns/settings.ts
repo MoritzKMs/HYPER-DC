@@ -17,6 +17,7 @@
 */
 
 import { definePluginSettings } from "@api/Settings";
+import { hyperTranslate } from "@utils/hyperLanguage";
 import { OptionType } from "@utils/types";
 
 export const enum PronounsFormat {
@@ -27,22 +28,22 @@ export const enum PronounsFormat {
 export const settings = definePluginSettings({
     pronounsFormat: {
         type: OptionType.SELECT,
-        description: "The format for pronouns to appear in chat",
+        description: hyperTranslate("The format for pronouns to appear in chat"),
         options: [
             {
-                label: "Lowercase",
+                label: hyperTranslate("Lowercase"),
                 value: PronounsFormat.Lowercase,
                 default: true
             },
             {
-                label: "Capitalized",
+                label: hyperTranslate("Capitalized"),
                 value: PronounsFormat.Capitalized
             }
         ]
     },
     showSelf: {
         type: OptionType.BOOLEAN,
-        description: "Enable or disable showing pronouns for yourself",
+        description: hyperTranslate("Enable or disable showing pronouns for yourself"),
         default: true
     }
 });

@@ -9,6 +9,7 @@ import "./styles.css";
 import { definePluginSettings } from "@api/Settings";
 import ErrorBoundary from "@components/ErrorBoundary";
 import { Devs } from "@utils/constants";
+import { hyperTranslate } from "@utils/hyperLanguage";
 import definePlugin, { OptionType } from "@utils/types";
 import { Channel, Message, User } from "@vencord/discord-types";
 import { RelationshipStore, StreamerModeStore } from "@webpack/common";
@@ -25,37 +26,37 @@ interface UsernameProps {
 const settings = definePluginSettings({
     mode: {
         type: OptionType.SELECT,
-        description: "How to display usernames and nicks",
+        description: hyperTranslate("How to display usernames and nicks"),
         options: [
-            { label: "Username then nickname", value: "user-nick", default: true },
-            { label: "Nickname then username", value: "nick-user" },
-            { label: "Username only", value: "user" },
+            { label: hyperTranslate("Username then nickname"), value: "user-nick", default: true },
+            { label: hyperTranslate("Nickname then username"), value: "nick-user" },
+            { label: hyperTranslate("Username only"), value: "user" },
         ],
     },
     friendNicknames: {
         type: OptionType.SELECT,
-        description: "How to prioritise friend nicknames over server nicknames",
+        description: hyperTranslate("How to prioritise friend nicknames over server nicknames"),
         options: [
-            { label: "Show friend nicknames only in direct messages", value: "dms", default: true },
-            { label: "Prefer friend nicknames over server nicknames", value: "always" },
-            { label: "Prefer server nicknames over friend nicknames", value: "fallback" }
+            { label: hyperTranslate("Show friend nicknames only in direct messages"), value: "dms", default: true },
+            { label: hyperTranslate("Prefer friend nicknames over server nicknames"), value: "always" },
+            { label: hyperTranslate("Prefer server nicknames over friend nicknames"), value: "fallback" }
         ]
     },
     displayNames: {
         type: OptionType.BOOLEAN,
-        description: "Use display names in place of usernames",
+        description: hyperTranslate("Use display names in place of usernames"),
         default: false
     },
     inReplies: {
         type: OptionType.BOOLEAN,
         default: false,
-        description: "Also apply functionality to reply previews",
+        description: hyperTranslate("Also apply functionality to reply previews"),
     },
 });
 
 export default definePlugin({
     name: "ShowMeYourName",
-    description: "Display usernames next to nicks, or no nicks at all",
+    description: hyperTranslate("Display usernames next to nicks, or no nicks at all"),
     tags: ["Appearance", "Customisation"],
     authors: [Devs.Rini, Devs.TheKodeToad, Devs.rae],
     patches: [

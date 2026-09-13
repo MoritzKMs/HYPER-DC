@@ -17,12 +17,13 @@
 */
 
 import { Devs } from "@utils/constants";
+import { hyperTranslate } from "@utils/hyperLanguage";
 import definePlugin from "@utils/types";
 
 export default definePlugin({
     name: "CommandsAPI",
     authors: [Devs.Arjix],
-    description: "Api required by anything that uses commands",
+    description: hyperTranslate("Api required by anything that uses commands"),
     patches: [
         // obtain BUILT_IN_COMMANDS instance
         {

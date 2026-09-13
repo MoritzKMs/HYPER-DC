@@ -8,6 +8,7 @@ import * as DataStore from "@api/DataStore";
 import { definePluginSettings } from "@api/Settings";
 import { Devs } from "@utils/constants";
 import { hasGuildFeature } from "@utils/discord";
+import { hyperTranslate } from "@utils/hyperLanguage";
 import definePlugin, { OptionType } from "@utils/types";
 import { findByPropsLazy } from "@webpack";
 import { ChannelStore, GuildStore } from "@webpack/common";
@@ -17,7 +18,7 @@ const SummaryStore = findByPropsLazy("allSummaries", "findSummary");
 const settings = definePluginSettings({
     summaryExpiryThresholdDays: {
         type: OptionType.SLIDER,
-        description: "The time in days before a summary is removed. Note that only up to 50 summaries are kept per channel",
+        description: hyperTranslate("The time in days before a summary is removed. Note that only up to 50 summaries are kept per channel"),
         markers: [1, 3, 5, 7, 10, 15, 20, 25, 30],
         stickToMarkers: false,
         default: 3,
@@ -65,7 +66,7 @@ function createChannelSummaryFromServer(s: Summary, channelId: string): ChannelS
 
 export default definePlugin({
     name: "Summaries",
-    description: "Enables Discord's experimental Summaries feature on every server, displaying AI generated summaries of conversations",
+    description: hyperTranslate("Enables Discord's experimental Summaries feature on every server, displaying AI generated summaries of conversations"),
     tags: ["Chat", "Fun"],
     authors: [Devs.mantikafasi],
     settings,

@@ -19,6 +19,7 @@
 import { definePluginSettings } from "@api/Settings";
 import ErrorBoundary from "@components/ErrorBoundary";
 import { Devs } from "@utils/constants";
+import { hyperTranslate } from "@utils/hyperLanguage";
 import { Logger } from "@utils/Logger";
 import definePlugin, { makeRange, OptionType } from "@utils/types";
 import { findByCodeLazy } from "@webpack";
@@ -30,42 +31,42 @@ const settings = definePluginSettings({
     chatMentions: {
         type: OptionType.BOOLEAN,
         default: true,
-        description: "Show role colors in chat mentions (including in the message box)",
+        description: hyperTranslate("Show role colors in chat mentions (including in the message box)"),
         restartNeeded: true
     },
     memberList: {
         type: OptionType.BOOLEAN,
         default: true,
-        description: "Show role colors in member list role headers",
+        description: hyperTranslate("Show role colors in member list role headers"),
         restartNeeded: true
     },
     voiceUsers: {
         type: OptionType.BOOLEAN,
         default: true,
-        description: "Show role colors in the voice chat user list",
+        description: hyperTranslate("Show role colors in the voice chat user list"),
         restartNeeded: true
     },
     reactorsList: {
         type: OptionType.BOOLEAN,
         default: true,
-        description: "Show role colors in the reactors list",
+        description: hyperTranslate("Show role colors in the reactors list"),
         restartNeeded: true
     },
     pollResults: {
         type: OptionType.BOOLEAN,
         default: true,
-        description: "Show role colors in the poll results",
+        description: hyperTranslate("Show role colors in the poll results"),
         restartNeeded: true
     },
     colorChatMessages: {
         type: OptionType.BOOLEAN,
         default: false,
-        description: "Color chat messages based on the author's role color",
+        description: hyperTranslate("Color chat messages based on the author's role color"),
         restartNeeded: true,
     },
     messageSaturation: {
         type: OptionType.SLIDER,
-        description: "Intensity of message coloring.",
+        description: hyperTranslate("Intensity of message coloring."),
         markers: makeRange(0, 100, 10),
         default: 30
     }
@@ -74,7 +75,7 @@ const settings = definePluginSettings({
 export default definePlugin({
     name: "RoleColorEverywhere",
     authors: [Devs.KingFish, Devs.lewisakura, Devs.AutumnVN, Devs.Kyuuhachi, Devs.jamesbt365],
-    description: "Adds the top role color anywhere possible",
+    description: hyperTranslate("Adds the top role color anywhere possible"),
     tags: ["Roles", "Appearance"],
     settings,
 

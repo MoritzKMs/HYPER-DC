@@ -22,6 +22,7 @@ import { blockUser, deleteReview, deleteReviewVote, reportReview, unblockUser, v
 import { settings } from "@plugins/reviewDB/settings";
 import { canBlockReviewAuthor, canDeleteReview, canReportReview, cl, showToast } from "@plugins/reviewDB/utils";
 import { openUserProfile } from "@utils/discord";
+import { hyperTranslate } from "@utils/hyperLanguage";
 import { classes } from "@utils/misc";
 import { findCssClassesLazy } from "@webpack";
 import { ConfirmModal, IconUtils, openModal as openVencordModal, Parser, Timestamp, useEffect, useState } from "@webpack/common";
@@ -57,8 +58,8 @@ export default function ReviewComponent({ review, refetch, profileId }: { review
         openVencordModal(props => (
             <ConfirmModal
                 {...props}
-                title="Are you sure?"
-                subtitle="Do you really want to delete this review?"
+                title={hyperTranslate("Are you sure?")}
+                subtitle={hyperTranslate("Do you really want to delete this review?")}
                 confirmText="Delete"
                 cancelText="Nevermind"
                 onConfirm={async () => {
@@ -76,8 +77,8 @@ export default function ReviewComponent({ review, refetch, profileId }: { review
         openVencordModal(props => (
             <ConfirmModal
                 {...props}
-                title="Are you sure?"
-                subtitle="Do you really want to report this review?"
+                title={hyperTranslate("Are you sure?")}
+                subtitle={hyperTranslate("Do you really want to report this review?")}
                 confirmText="Report"
                 cancelText="Nevermind"
                 onConfirm={async () => {
@@ -99,8 +100,8 @@ export default function ReviewComponent({ review, refetch, profileId }: { review
         openVencordModal(props => (
             <ConfirmModal
                 {...props}
-                title="Are you sure?"
-                subtitle="Do you really want to block this user? They will be unable to leave further reviews on your profile. You can unblock users in the plugin settings."
+                title={hyperTranslate("Are you sure?")}
+                subtitle={hyperTranslate("Do you really want to block this user? They will be unable to leave further reviews on your profile. You can unblock users in the plugin settings.")}
                 confirmText="Block"
                 cancelText="Nevermind"
                 onConfirm={async () => {
@@ -117,7 +118,7 @@ export default function ReviewComponent({ review, refetch, profileId }: { review
         if (isVoting) return;
 
         if (review.sender.discordID === Auth.user?.discordID) {
-            return showToast("You cannot vote on your own review.");
+            return showToast(hyperTranslate("You cannot vote on your own review."));
         }
 
         setIsVoting(true);
@@ -204,15 +205,14 @@ export default function ReviewComponent({ review, refetch, profileId }: { review
                         className={classes(BotTagClasses.botTagVerified, BotTagClasses.botTagRegular, BotTagClasses.px, BotTagClasses.rem)}
                         style={{ marginLeft: "4px" }}>
                         <span className={BotTagClasses.botText}>
-                            System
-                        </span>
+                            {hyperTranslate("System")}</span>
                     </span>
                 )}
             </div>
             {isAuthorBlocked && (
                 <ReviewBadge
                     name="You have blocked this user"
-                    description="You have blocked this user"
+                    description={hyperTranslate("You have blocked this user")}
                     icon="/assets/aaee57e0090991557b66.svg"
                     type={0}
                     onClick={() => openBlockModal()}
@@ -232,7 +232,7 @@ export default function ReviewComponent({ review, refetch, profileId }: { review
                         <>
                             {Parser.parseGuildEventDescription(review.comment.substring(0, 200))}...
                             <br />
-                            <a onClick={() => setShowAll(true)}>Read more</a>
+                            <a onClick={() => setShowAll(true)}>{hyperTranslate("Read more")}</a>
                         </>
                     )
                     : Parser.parseGuildEventDescription(review.comment)}

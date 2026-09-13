@@ -5,12 +5,13 @@
  */
 
 import { Devs } from "@utils/constants";
+import { hyperTranslate } from "@utils/hyperLanguage";
 import definePlugin from "@utils/types";
 
 // The entire code of this plugin can be found in native.ts
 export default definePlugin({
     name: "YoutubeAdblock",
-    description: "Block ads in YouTube embeds and the WatchTogether activity via AdGuard",
+    description: hyperTranslate("Block ads in YouTube embeds and the WatchTogether activity via AdGuard"),
     tags: ["Media", "Utility"],
     authors: [Devs.ImLvna, Devs.Ven],
 });

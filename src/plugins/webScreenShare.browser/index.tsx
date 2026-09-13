@@ -12,6 +12,7 @@ import {
 } from "@components/index";
 import { Devs } from "@utils/constants";
 import { classNameFactory } from "@utils/css";
+import { hyperTranslate } from "@utils/hyperLanguage";
 import { Logger } from "@utils/Logger";
 import definePlugin, { OptionType } from "@utils/types";
 import { Checkbox, closeModal, Modal, openModal, Text, } from "@webpack/common";
@@ -144,15 +145,15 @@ function ModalComponent({ modalProps, submit, close, options }: {
                 size="lg"
                 actionBarInput={
                     <div className={cl("summary")}>
-                        <Text variant="text-md/semibold" color="text-strong" className={cl("source-or-preset-name")}>{liveSettings.contentHint === "motion" ? "Gaming" : liveSettings.contentHint === "detail" ? "Screenshare" : "Custom"}</Text>
+                        <Text variant="text-md/semibold" color="text-strong" className={cl("source-or-preset-name")}>{liveSettings.contentHint === "motion" ? hyperTranslate("Gaming") : liveSettings.contentHint === "detail" ? "Screenshare" : "Custom"}</Text>
                         <Text variant="text-xs/medium" color="text-muted" className={cl("summary-detail")}>
-                            <span>{liveSettings.contentHint === "motion" ? "Smoother video" : liveSettings.contentHint === "detail" ? "Cleaner text" : "User preset"}</span>
+                            <span>{liveSettings.contentHint === "motion" ? hyperTranslate("Smoother video") : liveSettings.contentHint === "detail" ? "Cleaner text" : "User preset"}</span>
                             <span className={cl("ellipsis")}>•</span>
                             <span>{liveSettings.resolution}p</span>
                             <span className={cl("ellipsis")}>•</span>
                             <span>{liveSettings.frameRate}fps</span>
                             {liveSettings.systemAudio ? <span className={cl("ellipsis")}>•</span> : ""}
-                            {liveSettings.systemAudio ? <span>Stream Muted</span> : ""}
+                            {liveSettings.systemAudio ? <span>{hyperTranslate("Stream Muted")}</span> : ""}
                         </Text>
                     </div>
                 }
@@ -168,7 +169,7 @@ function ModalComponent({ modalProps, submit, close, options }: {
                 <div>
                     <div className={cl("flex", "padding")}>
                         <section className={cl("quality-section")}>
-                            <Text tag="h2" variant="heading-md/semibold" color="text-strong">Resolution</Text>
+                            <Text tag="h2" variant="heading-md/semibold" color="text-strong">{hyperTranslate("Resolution")}</Text>
                             <OptionRadio
                                 options={StreamResolution}
                                 settings={liveSettings}
@@ -178,7 +179,7 @@ function ModalComponent({ modalProps, submit, close, options }: {
                         </section>
 
                         <section className={cl("quality-section")}>
-                            <Text tag="h2" variant="heading-md/semibold" color="text-strong">Frame Rate</Text>
+                            <Text tag="h2" variant="heading-md/semibold" color="text-strong">{hyperTranslate("Frame Rate")}</Text>
                             <OptionRadio
                                 options={StreamFps}
                                 settings={liveSettings}
@@ -188,7 +189,7 @@ function ModalComponent({ modalProps, submit, close, options }: {
                         </section>
                     </div>
                     <div>
-                        <Text tag="h2" variant="heading-md/semibold" color="text-strong">Stream Mode</Text>
+                        <Text tag="h2" variant="heading-md/semibold" color="text-strong">{hyperTranslate("Stream Mode")}</Text>
                         <div>
                             <OptionRadio
                                 options={StreamContentHint}
@@ -207,8 +208,8 @@ function ModalComponent({ modalProps, submit, close, options }: {
                             shape="box"
                             reverse={true}>
                             <div className={cl("control-content")}>
-                                <Text tag="h2" variant="heading-md/semibold" color="text-strong">Mute Stream Audio</Text>
-                                <Text variant="text-sm/normal" color="text-subtle">Prevents system audio from being included in your stream.</Text>
+                                <Text tag="h2" variant="heading-md/semibold" color="text-strong">{hyperTranslate("Mute Stream Audio")}</Text>
+                                <Text variant="text-sm/normal" color="text-subtle">{hyperTranslate("Prevents system audio from being included in your stream.")}</Text>
                             </div>
                         </Checkbox>
                     </div>
@@ -219,8 +220,8 @@ function ModalComponent({ modalProps, submit, close, options }: {
                             shape="box"
                             reverse={true}>
                             <div className={cl("control-content")}>
-                                <Text tag="h2" variant="heading-md/semibold" color="text-strong">Show Stream Previews</Text>
-                                <Text variant="text-sm/normal" color="text-subtle">Allows others to see a preview of your stream before they join.</Text>
+                                <Text tag="h2" variant="heading-md/semibold" color="text-strong">{hyperTranslate("Show Stream Previews")}</Text>
+                                <Text variant="text-sm/normal" color="text-subtle">{hyperTranslate("Allows others to see a preview of your stream before they join.")}</Text>
                             </div>
                         </Checkbox>
                     </div>
@@ -239,25 +240,25 @@ const StreamContentHint = ["motion", "detail", ""] as const;
 const settings = definePluginSettings({
     resolution: {
         type: OptionType.SELECT,
-        description: "Resolution",
+        description: hyperTranslate("Resolution"),
         hidden: true,
         options: StreamResolution.map(res => ({ label: res, value: res, default: res === "1080" }))
     },
     frameRate: {
         type: OptionType.SELECT,
-        description: "Frame Rate",
+        description: hyperTranslate("Frame Rate"),
         hidden: true,
         options: StreamFps.map(fps => ({ label: fps, value: fps, default: fps === "60" }))
     },
     contentHint: {
         type: OptionType.SELECT,
-        description: "Content Hint",
+        description: hyperTranslate("Content Hint"),
         hidden: true,
         options: StreamContentHint.map(hint => ({ label: hint, value: hint, default: hint === "motion" }))
     },
     systemAudio: {
         type: OptionType.BOOLEAN,
-        description: "Mute system audio",
+        description: hyperTranslate("Mute system audio"),
         hidden: true
     }
 });
@@ -267,7 +268,7 @@ const disableStreamPreviews = getUserSettingLazy<boolean>("voiceAndVideo", "disa
 export default definePlugin({
     name: "WebScreenShare",
     authors: [Devs.ThaUnknown],
-    description: "Adds a screenshare options menu. Allows for changing resolution, framerate, encoding hints, and system audio settings.",
+    description: hyperTranslate("Adds a screenshare options menu. Allows for changing resolution, framerate, encoding hints, and system audio settings."),
     tags: ["Voice", "Utility"],
     enabledByDefault: true,
     settings,

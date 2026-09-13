@@ -5,11 +5,12 @@
  */
 
 import { Devs } from "@utils/constants";
+import { hyperTranslate } from "@utils/hyperLanguage";
 import definePlugin from "@utils/types";
 
 export default definePlugin({
     name: "ChatInputButtonAPI",
-    description: "API to add buttons to the chat input",
+    description: hyperTranslate("API to add buttons to the chat input"),
     authors: [Devs.Ven],
 
     patches: [

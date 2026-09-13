@@ -11,6 +11,7 @@ import { Link } from "@components/Link";
 import { DevsById } from "@utils/constants";
 import { classNameFactory } from "@utils/css";
 import { fetchUserProfile } from "@utils/discord";
+import { hyperTranslate } from "@utils/hyperLanguage";
 import { classes, pluralise } from "@utils/misc";
 import { RenderModalProps, User } from "@vencord/discord-types";
 import { Forms, Modal, openModal, showToast, useEffect, useMemo, UserProfileStore, useStateFromStores } from "@webpack/common";
@@ -50,7 +51,7 @@ function ContributorModal({ user, modalProps }: { user: User; modalProps: Render
             .sort((a, b) => Number(a.required ?? false) - Number(b.required ?? false));
     }, [user.id, user.username]);
 
-    const ContributedHyperLink = <Link href="https://vencord.dev/source">contributed</Link>;
+    const ContributedHyperLink = <Link href="https://vencord.dev/source">{hyperTranslate("contributed")}</Link>;
 
     return (
         <Modal
@@ -84,13 +85,12 @@ function ContributorModal({ user, modalProps }: { user: User; modalProps: Render
                 plugins.length
                     ? (
                         <Forms.FormText>
-                            This person has {ContributedHyperLink} to {pluralise(plugins.length, "plugin")}!
+                            {hyperTranslate("This person has") + " "}{ContributedHyperLink} {hyperTranslate("to") + " "}{pluralise(plugins.length, "plugin")}!
                         </Forms.FormText>
                     )
                     : (
                         <Forms.FormText>
-                            This person has not made any plugins. They likely {ContributedHyperLink} to Vencord in other ways!
-                        </Forms.FormText>
+                            {hyperTranslate("This person has not made any plugins. They likely") + " "}{ContributedHyperLink} {hyperTranslate("to Vencord in other ways!")}</Forms.FormText>
                     )
             }
         >

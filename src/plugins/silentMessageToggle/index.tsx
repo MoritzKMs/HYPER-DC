@@ -20,6 +20,7 @@ import { ChatBarButton, ChatBarButtonFactory } from "@api/ChatButtons";
 import { addMessagePreSendListener, MessageSendListener, removeMessagePreSendListener } from "@api/MessageEvents";
 import { definePluginSettings } from "@api/Settings";
 import { Devs } from "@utils/constants";
+import { hyperTranslate } from "@utils/hyperLanguage";
 import definePlugin, { IconComponent, OptionType } from "@utils/types";
 import { React, useEffect, useState } from "@webpack/common";
 
@@ -28,7 +29,7 @@ let lastState = false;
 const settings = definePluginSettings({
     persistState: {
         type: OptionType.BOOLEAN,
-        description: "Whether to persist the state of the silent message toggle when changing channels",
+        description: hyperTranslate("Whether to persist the state of the silent message toggle when changing channels"),
         default: false,
         onChange(newValue: boolean) {
             if (newValue === false) lastState = false;
@@ -36,7 +37,7 @@ const settings = definePluginSettings({
     },
     autoDisable: {
         type: OptionType.BOOLEAN,
-        description: "Automatically disable the silent message toggle again after sending one",
+        description: hyperTranslate("Automatically disable the silent message toggle again after sending one"),
         default: true
     }
 });
@@ -92,7 +93,7 @@ const SilentMessageToggle: ChatBarButtonFactory = ({ isMainChat }) => {
 
     return (
         <ChatBarButton
-            tooltip={enabled ? "Disable Silent Message" : "Enable Silent Message"}
+            tooltip={enabled ? hyperTranslate("Disable Silent Message") : hyperTranslate("Enable Silent Message")}
             onClick={() => setEnabledValue(!enabled)}
         >
             {enabled ? <SilentMessageIcon /> : <SilentMessageDisabledIcon />}
@@ -103,7 +104,7 @@ const SilentMessageToggle: ChatBarButtonFactory = ({ isMainChat }) => {
 export default definePlugin({
     name: "SilentMessageToggle",
     authors: [Devs.Nuckyz, Devs.CatNoir],
-    description: "Adds a button to the chat bar to toggle sending a silent message.",
+    description: hyperTranslate("Adds a button to the chat bar to toggle sending a silent message."),
     tags: ["Chat", "Utility"],
     settings,
 

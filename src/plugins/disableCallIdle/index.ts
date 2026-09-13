@@ -17,11 +17,12 @@
 */
 
 import { Devs } from "@utils/constants";
+import { hyperTranslate } from "@utils/hyperLanguage";
 import definePlugin from "@utils/types";
 
 export default definePlugin({
     name: "DisableCallIdle",
-    description: "Disables automatically getting kicked from a DM voice call after 3 minutes and being moved to an AFK voice channel.",
+    description: hyperTranslate("Disables automatically getting kicked from a DM voice call after 3 minutes and being moved to an AFK voice channel."),
     tags: ["Voice", "Utility"],
     authors: [Devs.Nuckyz],
     patches: [

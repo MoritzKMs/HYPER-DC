@@ -10,6 +10,7 @@ import { Flex } from "@components/Flex";
 import { HeadingSecondary } from "@components/Heading";
 import { InfoIcon } from "@components/Icons";
 import { Paragraph } from "@components/Paragraph";
+import { hyperTranslate } from "@utils/hyperLanguage";
 import { RenderModalProps } from "@vencord/discord-types";
 import { Modal, openModal, TextArea, TextInput, useState } from "@webpack/common";
 
@@ -43,8 +44,8 @@ function CreateTagDialog({ initialValue, modalProps }: { initialValue: Tag; moda
     return (
         <Modal
             {...modalProps}
-            title={isEdit ? "Edit Tag" : "Create New Tag"}
-            subtitle={isEdit ? "Edit your custom command." : "Create a new tag which will be registered as a slash command."}
+            title={isEdit ? hyperTranslate("Edit Tag") : hyperTranslate("Create New Tag")}
+            subtitle={isEdit ? hyperTranslate("Edit your custom command.") : hyperTranslate("Create a new tag which will be registered as a slash command.")}
             actions={[
                 {
                     text: "Cancel",
@@ -70,18 +71,18 @@ function CreateTagDialog({ initialValue, modalProps }: { initialValue: Tag; moda
         >
             <Flex flexDirection="column" gap={12}>
                 <section>
-                    <HeadingSecondary>Name</HeadingSecondary>
-                    <TextInput value={name} onChange={setName} placeholder="greet" />
+                    <HeadingSecondary>{hyperTranslate("Name")}</HeadingSecondary>
+                    <TextInput value={name} onChange={setName} placeholder={hyperTranslate("greet")} />
                 </section>
 
                 <section>
-                    <HeadingSecondary>Response</HeadingSecondary>
+                    <HeadingSecondary>{hyperTranslate("Response")}</HeadingSecondary>
                     <TextArea value={message} onChange={setMessage} placeholder={EXAMPLE_RESPONSE} autosize />
                 </section>
 
                 {detectedArguments.length > 0 && (
                     <section>
-                        <HeadingSecondary>Detected Arguments</HeadingSecondary>
+                        <HeadingSecondary>{hyperTranslate("Detected Arguments")}</HeadingSecondary>
                         <Paragraph>
                             <ul>
                                 {detectedArguments.map(arg => (
@@ -98,24 +99,23 @@ function CreateTagDialog({ initialValue, modalProps }: { initialValue: Tag; moda
                     renderContent={() => (
                         <Flex flexDirection="column" gap={12}>
                             <Paragraph>
-                                Your response can include variables wrapped in double curly braces which will become command arguments, for example <InlineCode>{"Hello {{user}}"}</InlineCode>.
+                                {hyperTranslate("Your response can include variables wrapped in double curly braces which will become command arguments, for example") + " "}<InlineCode>{"Hello {{user}}"}</InlineCode>.
                             </Paragraph>
                             <Paragraph>
-                                You can specify arguments with default values by using an equals sign, for example <InlineCode>{"Hello {{user = pal}}"}</InlineCode>.
+                                {hyperTranslate("You can specify arguments with default values by using an equals sign, for example") + " "}<InlineCode>{"Hello {{user = pal}}"}</InlineCode>.
                             </Paragraph>
 
                             <section>
-                                <Paragraph><b>Example Command response:</b> <InlineCode>{EXAMPLE_RESPONSE}</InlineCode></Paragraph>
-                                <Paragraph><b>Example usage:</b> <InlineCode>{"/greet user:@Clyde"}</InlineCode></Paragraph>
-                                <Paragraph><b>Example output:</b> <InlineCode>{"Hello @Clyde! I am feeling great."}</InlineCode></Paragraph>
+                                <Paragraph><b>{hyperTranslate("Example Command response:")}</b> <InlineCode>{EXAMPLE_RESPONSE}</InlineCode></Paragraph>
+                                <Paragraph><b>{hyperTranslate("Example usage:")}</b> <InlineCode>{"/greet user:@Clyde"}</InlineCode></Paragraph>
+                                <Paragraph><b>{hyperTranslate("Example output:")}</b> <InlineCode>{"Hello @Clyde! I am feeling great."}</InlineCode></Paragraph>
                             </section>
                         </Flex>
                     )}
                 >
                     <Flex alignItems="center" gap={8}>
                         <InfoIcon color="var(--text-muted)" height={16} width={16} />
-                        View Arguments guide
-                    </Flex>
+                        {hyperTranslate("View Arguments guide")}</Flex>
                 </ExpandableSection>
             </Flex>
         </Modal>

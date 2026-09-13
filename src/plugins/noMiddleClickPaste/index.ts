@@ -5,6 +5,7 @@
  */
 
 import { Devs, IS_LINUX } from "@utils/constants";
+import { hyperTranslate } from "@utils/hyperLanguage";
 import definePlugin from "@utils/types";
 
 function preventMiddleClick(e: MouseEvent) {
@@ -15,7 +16,7 @@ function preventMiddleClick(e: MouseEvent) {
 
 export default definePlugin({
     name: "NoMiddleClickPaste",
-    description: "Disable Linux middle-click paste - Linux only",
+    description: hyperTranslate("Disable Linux middle-click paste - Linux only"),
     authors: [Devs.Darxoon],
     hidden: !IS_LINUX,
 

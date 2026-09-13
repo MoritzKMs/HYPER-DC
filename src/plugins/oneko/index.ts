@@ -17,11 +17,12 @@
 */
 
 import { Devs } from "@utils/constants";
+import { hyperTranslate } from "@utils/hyperLanguage";
 import definePlugin from "@utils/types";
 
 export default definePlugin({
     name: "oneko",
-    description: "cat follow mouse (real)",
+    description: hyperTranslate("cat follow mouse (real)"),
     tags: ["Fun", "Appearance"],
     // Listing adryd here because this literally just evals her script
     authors: [Devs.Ven, Devs.adryd],

@@ -18,6 +18,7 @@
 
 import { definePluginSettings } from "@api/Settings";
 import { Devs } from "@utils/constants";
+import { hyperTranslate } from "@utils/hyperLanguage";
 import definePlugin, { OptionType } from "@utils/types";
 import type { Message } from "@vencord/discord-types";
 import { ChannelStore, GuildMemberStore } from "@webpack/common";
@@ -25,35 +26,35 @@ import { ChannelStore, GuildMemberStore } from "@webpack/common";
 const settings = definePluginSettings({
     userList: {
         description:
-            "List of user ids to allow or exempt pings for (separated by commas or spaces)",
+            hyperTranslate("List of user ids to allow or exempt pings for (separated by commas or spaces)"),
         type: OptionType.STRING,
         default: "1234567890123445,1234567890123445",
         multiline: true
     },
     roleList: {
         description:
-            "List of role ids to allow or exempt pings for (separated by commas or spaces)",
+            hyperTranslate("List of role ids to allow or exempt pings for (separated by commas or spaces)"),
         type: OptionType.STRING,
         default: "1234567890123445,1234567890123445",
         multiline: true
     },
     shouldPingListed: {
-        description: "Behaviour",
+        description: hyperTranslate("Behaviour"),
         type: OptionType.SELECT,
         options: [
             {
-                label: "Do not ping the listed users / roles",
+                label: hyperTranslate("Do not ping the listed users / roles"),
                 value: false,
             },
             {
-                label: "Only ping the listed users / roles",
+                label: hyperTranslate("Only ping the listed users / roles"),
                 value: true,
                 default: true,
             },
         ],
     },
     inverseShiftReply: {
-        description: "Invert Discord's shift replying behaviour (enable to make shift reply mention user)",
+        description: hyperTranslate("Invert Discord's shift replying behaviour (enable to make shift reply mention user)"),
         type: OptionType.BOOLEAN,
         default: false,
     }
@@ -61,7 +62,7 @@ const settings = definePluginSettings({
 
 export default definePlugin({
     name: "NoReplyMention",
-    description: "Disables reply pings by default",
+    description: hyperTranslate("Disables reply pings by default"),
     tags: ["Chat", "Notifications"],
     authors: [Devs.DustyAngel47, Devs.rae, Devs.pylix, Devs.outfoxxed],
     settings,

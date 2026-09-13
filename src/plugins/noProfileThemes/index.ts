@@ -17,12 +17,13 @@
 */
 
 import { Devs } from "@utils/constants";
+import { hyperTranslate } from "@utils/hyperLanguage";
 import definePlugin from "@utils/types";
 import { UserStore } from "@webpack/common";
 
 export default definePlugin({
     name: "NoProfileThemes",
-    description: "Completely removes Nitro profile themes from everyone but yourself",
+    description: hyperTranslate("Completely removes Nitro profile themes from everyone but yourself"),
     tags: ["Appearance"],
     authors: [Devs.TheKodeToad],
     patches: [

@@ -20,6 +20,7 @@ import * as DataStore from "@api/DataStore";
 import { popNotice, showNotice } from "@api/Notices";
 import { showNotification } from "@api/Notifications";
 import { getUniqueUsername, openUserProfile } from "@utils/discord";
+import { hyperTranslate } from "@utils/hyperLanguage";
 import { FluxStore } from "@vencord/discord-types";
 import { ChannelType, RelationshipType } from "@vencord/discord-types/enums";
 import { findStoreLazy } from "@webpack";
@@ -115,7 +116,7 @@ export function notify(text: string, icon?: string, onClick?: () => void) {
         showNotice(text, "OK", () => popNotice());
 
     showNotification({
-        title: "Relationship Notifier",
+        title: hyperTranslate("Relationship Notifier"),
         body: text,
         icon,
         onClick

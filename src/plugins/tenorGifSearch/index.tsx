@@ -6,6 +6,7 @@
 
 import { Devs } from "@utils/constants";
 import { isNonNullish } from "@utils/guards";
+import { hyperTranslate } from "@utils/hyperLanguage";
 import definePlugin from "@utils/types";
 import { findStoreLazy } from "@webpack";
 import { FluxDispatcher, LocaleStore } from "@webpack/common";
@@ -139,7 +140,7 @@ async function fetchCategories(): Promise<TrendingCategories | null> {
 
 export default definePlugin({
     name: "TenorGifSearch",
-    description: "Restore Tenor GIF search",
+    description: hyperTranslate("Restore Tenor GIF search"),
     authors: [Devs.Lunascape],
 
     patches: [

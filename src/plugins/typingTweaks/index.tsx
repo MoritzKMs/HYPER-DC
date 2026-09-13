@@ -22,6 +22,7 @@ import { Devs } from "@utils/constants";
 import { classNameFactory } from "@utils/css";
 import { openUserProfile } from "@utils/discord";
 import { isNonNullish } from "@utils/guards";
+import { hyperTranslate } from "@utils/hyperLanguage";
 import { Logger } from "@utils/Logger";
 import definePlugin, { OptionType } from "@utils/types";
 import { Channel, User } from "@vencord/discord-types";
@@ -35,17 +36,17 @@ const settings = definePluginSettings({
     showAvatars: {
         type: OptionType.BOOLEAN,
         default: true,
-        description: "Show avatars in the typing indicator"
+        description: hyperTranslate("Show avatars in the typing indicator")
     },
     showRoleColors: {
         type: OptionType.BOOLEAN,
         default: true,
-        description: "Show role colors in the typing indicator"
+        description: hyperTranslate("Show role colors in the typing indicator")
     },
     alternativeFormatting: {
         type: OptionType.BOOLEAN,
         default: true,
-        description: "Show a more useful message when several users are typing"
+        description: hyperTranslate("Show a more useful message when several users are typing")
     }
 });
 
@@ -58,8 +59,7 @@ export const buildSeveralUsers = ErrorBoundary.wrap(function buildSeveralUsers({
                     {", "}
                 </React.Fragment>
             ))}
-            and {count} others are typing...
-        </>
+            {hyperTranslate("and") + " "}{count} {hyperTranslate("others are typing...")}</>
     );
 }, { noop: true });
 
@@ -97,7 +97,7 @@ const TypingUser = ErrorBoundary.wrap(function TypingUser({ user, guildId }: Typ
 
 export default definePlugin({
     name: "TypingTweaks",
-    description: "Show avatars and role colours in the typing indicator",
+    description: hyperTranslate("Show avatars and role colours in the typing indicator"),
     tags: ["Appearance", "Customisation"],
     authors: [Devs.zt, Devs.sadan],
     settings,

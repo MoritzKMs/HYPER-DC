@@ -9,6 +9,7 @@ import "./styles.css";
 import { definePluginSettings } from "@api/Settings";
 import ErrorBoundary from "@components/ErrorBoundary";
 import { Devs } from "@utils/constants";
+import { hyperTranslate } from "@utils/hyperLanguage";
 import { classes } from "@utils/misc";
 import definePlugin, { OptionType, StartAt } from "@utils/types";
 import { Channel } from "@vencord/discord-types";
@@ -40,22 +41,22 @@ export const enum PinOrder {
 export const settings = definePluginSettings({
     pinOrder: {
         type: OptionType.SELECT,
-        description: "Which order should pinned DMs be displayed in?",
+        description: hyperTranslate("Which order should pinned DMs be displayed in?"),
         options: [
-            { label: "Most recent message", value: PinOrder.LastMessage, default: true },
-            { label: "Custom (right click channels to reorder)", value: PinOrder.Custom }
+            { label: hyperTranslate("Most recent message"), value: PinOrder.LastMessage, default: true },
+            { label: hyperTranslate("Custom (right click channels to reorder)"), value: PinOrder.Custom }
         ]
     },
     canCollapseDmSection: {
         type: OptionType.BOOLEAN,
-        displayName: "Can Collapse DM Section",
-        description: "Allow uncategorised DMs section to be collapsable",
+        displayName: hyperTranslate("Can Collapse DM Section"),
+        description: hyperTranslate("Allow uncategorised DMs section to be collapsable"),
         default: false
     },
     dmSectionCollapsed: {
         type: OptionType.BOOLEAN,
-        displayName: "DM Section Collapsed",
-        description: "Collapse DM section",
+        displayName: hyperTranslate("DM Section Collapsed"),
+        description: hyperTranslate("Collapse DM section"),
         default: false,
         hidden: true
     },
@@ -67,7 +68,7 @@ export const settings = definePluginSettings({
 
 export default definePlugin({
     name: "PinDMs",
-    description: "Allows you to pin private channels to the top of your DM list. To pin/unpin or re-order pins, right click DMs",
+    description: hyperTranslate("Allows you to pin private channels to the top of your DM list. To pin/unpin or re-order pins, right click DMs"),
     tags: ["Friends", "Organisation"],
     authors: [Devs.Ven, Devs.Aria],
     settings,
@@ -270,11 +271,11 @@ export default definePlugin({
                             navId="vc-pindms-header-menu"
                             onClose={() => FluxDispatcher.dispatch({ type: "CONTEXT_MENU_CLOSE" })}
                             color="danger"
-                            aria-label="Pin DMs Category Menu"
+                            aria-label={hyperTranslate("Pin DMs Category Menu")}
                         >
                             <Menu.MenuItem
                                 id="vc-pindms-edit-category"
-                                label="Edit Category"
+                                label={hyperTranslate("Edit Category")}
                                 action={() => openCategoryModal(category.id, null)}
                             />
 
@@ -284,14 +285,14 @@ export default definePlugin({
                                         {
                                             canMoveCategoryInDirection(category.id, -1) && <Menu.MenuItem
                                                 id="vc-pindms-move-category-up"
-                                                label="Move Up"
+                                                label={hyperTranslate("Move Up")}
                                                 action={() => moveCategory(category.id, -1)}
                                             />
                                         }
                                         {
                                             canMoveCategoryInDirection(category.id, 1) && <Menu.MenuItem
                                                 id="vc-pindms-move-category-down"
-                                                label="Move Down"
+                                                label={hyperTranslate("Move Down")}
                                                 action={() => moveCategory(category.id, 1)}
                                             />
                                         }
@@ -304,7 +305,7 @@ export default definePlugin({
                             <Menu.MenuItem
                                 id="vc-pindms-delete-category"
                                 color="danger"
-                                label="Delete Category"
+                                label={hyperTranslate("Delete Category")}
                                 action={() => removeCategory(category.id)}
                             />
 

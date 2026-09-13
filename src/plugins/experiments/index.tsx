@@ -22,6 +22,7 @@ import { ErrorCard } from "@components/ErrorCard";
 import { Flex } from "@components/Flex";
 import { Paragraph } from "@components/Paragraph";
 import { Devs, IS_MAC } from "@utils/constants";
+import { hyperTranslate } from "@utils/hyperLanguage";
 import { Margins } from "@utils/margins";
 import definePlugin from "@utils/types";
 import { findByPropsLazy } from "@webpack";
@@ -34,7 +35,7 @@ const altKey = IS_MAC ? "opt" : "alt";
 
 export default definePlugin({
     name: "Experiments",
-    description: "Enable Access to Experiments & other dev-only features in Discord!",
+    description: hyperTranslate("Enable Access to Experiments & other dev-only features in Discord!"),
     tags: ["Developers", "Utility"],
     authors: [
         Devs.Megu,
@@ -121,7 +122,7 @@ export default definePlugin({
     settingsAboutComponent: () => {
         return (
             <Paragraph size="md">
-                Tip: You can open Discord's DevTools via {" "}
+                {hyperTranslate("Tip: You can open Discord's DevTools via") + " "}{" "}
                 <div className={KbdStyles.combo} style={{ display: "inline-flex" }}>
                     <kbd className={KbdStyles.key}>{modKey}</kbd>{" "}
                     <kbd className={KbdStyles.key}>{altKey}</kbd>{" "}
@@ -134,20 +135,16 @@ export default definePlugin({
     WarningCard: ErrorBoundary.wrap(() => (
         <ErrorCard id="vc-experiments-warning-card" className={Margins.bottom16}>
             <Flex flexDirection="column" gap={8}>
-                <BaseText tag="h2" weight="bold" size="lg">Hold on!!</BaseText>
+                <BaseText tag="h2" weight="bold" size="lg">{hyperTranslate("Hold on!!")}</BaseText>
 
                 <Paragraph>
-                    Experiments are unreleased Discord features. They might not work, or even break your client or get your account disabled.
-                </Paragraph>
+                    {hyperTranslate("Experiments are unreleased Discord features. They might not work, or even break your client or get your account disabled.")}</Paragraph>
 
                 <Paragraph>
-                    Only use experiments if you know what you're doing. Vencord is not responsible for any damage caused by enabling experiments.
-
-                    If you don't know what an experiment does, ignore it. Do not ask us what experiments do either, we probably don't know.
-                </Paragraph>
+                    {hyperTranslate("Only use experiments if you know what you're doing. Vencord is not responsible for any damage caused by enabling experiments. If you don't know what an experiment does, ignore it. Do not ask us what experiments do either, we probably don't know.")}</Paragraph>
 
                 <Paragraph>
-                    <b>You cannot use server-side features like checking the "Send to Client" box.</b>
+                    <b>{hyperTranslate("You cannot use server-side features like checking the \"Send to Client\" box.")}</b>
                 </Paragraph>
             </Flex>
         </ErrorCard>

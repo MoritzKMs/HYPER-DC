@@ -18,6 +18,7 @@
 
 import { definePluginSettings } from "@api/Settings";
 import { Devs, IS_MAC } from "@utils/constants";
+import { hyperTranslate } from "@utils/hyperLanguage";
 import definePlugin, { OptionType } from "@utils/types";
 import { SettingsRouter } from "@webpack/common";
 
@@ -25,13 +26,13 @@ import { SettingsRouter } from "@webpack/common";
 const settings = definePluginSettings({
     showNavigationButtons: {
         type: OptionType.BOOLEAN,
-        description: "Show the back/forward navigation buttons in the title bar.",
+        description: hyperTranslate("Show the back/forward navigation buttons in the title bar."),
         default: true,
         restartNeeded: true
     },
     overrideCommonKeybinds: {
         type: OptionType.BOOLEAN,
-        description: "Allows discord to override the most common tab navigation keybinds (ctrl+t, ctrl+shift+t, ctrl+tab, ctrl+shift+tab, ctrl+n). Only works in a few select browsers that allow website keybinds to take priority over native ones.",
+        description: hyperTranslate("Allows discord to override the most common tab navigation keybinds (ctrl+t, ctrl+shift+t, ctrl+tab, ctrl+shift+tab, ctrl+n). Only works in a few select browsers that allow website keybinds to take priority over native ones."),
         default: IS_VESKTOP,
         restartNeeded: true,
     }
@@ -39,7 +40,7 @@ const settings = definePluginSettings({
 
 export default definePlugin({
     name: "WebKeybinds",
-    description: "Re-adds keybinds missing in the web version of Discord. Only works fully on Vesktop/Legcord, not inside your browser",
+    description: hyperTranslate("Re-adds keybinds missing in the web version of Discord. Only works fully on Vesktop/Legcord, not inside your browser"),
     tags: ["Shortcuts"],
     authors: [Devs.Ven, Devs.Davri],
     enabledByDefault: true,

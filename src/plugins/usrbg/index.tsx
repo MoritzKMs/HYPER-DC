@@ -19,6 +19,7 @@
 import { definePluginSettings } from "@api/Settings";
 import { LinkButton } from "@components/Button";
 import { Devs } from "@utils/constants";
+import { hyperTranslate } from "@utils/hyperLanguage";
 import definePlugin, { OptionType } from "@utils/types";
 
 const API_URL = "https://usrbg.is-hardly.online/users";
@@ -32,15 +33,15 @@ interface UsrbgApiReturn {
 
 const settings = definePluginSettings({
     nitroFirst: {
-        description: "Banner to use if both Nitro and USRBG banners are present",
+        description: hyperTranslate("Banner to use if both Nitro and USRBG banners are present"),
         type: OptionType.SELECT,
         options: [
-            { label: "Nitro banner", value: true, default: true },
-            { label: "USRBG banner", value: false },
+            { label: hyperTranslate("Nitro banner"), value: true, default: true },
+            { label: hyperTranslate("USRBG banner"), value: false },
         ]
     },
     voiceBackground: {
-        description: "Use USRBG banners as voice chat backgrounds",
+        description: hyperTranslate("Use USRBG banners as voice chat backgrounds"),
         type: OptionType.BOOLEAN,
         default: true,
         restartNeeded: true
@@ -49,7 +50,7 @@ const settings = definePluginSettings({
 
 export default definePlugin({
     name: "USRBG",
-    description: "Displays user banners from USRBG, allowing anyone to get a banner without Nitro",
+    description: hyperTranslate("Displays user banners from USRBG, allowing anyone to get a banner without Nitro"),
     tags: ["Appearance", "Customisation"],
     authors: [Devs.AutumnVN, Devs.katlyn, Devs.pylix, Devs.TheKodeToad],
     settings,
@@ -87,8 +88,7 @@ export default definePlugin({
     settingsAboutComponent: () => {
         return (
             <LinkButton href="https://github.com/AutumnVN/usrbg#how-to-request-your-own-usrbg-banner" variant="primary">
-                Get your own USRBG banner
-            </LinkButton>
+                {hyperTranslate("Get your own USRBG banner")}</LinkButton>
         );
     },
 

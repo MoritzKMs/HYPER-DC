@@ -23,6 +23,7 @@ import ErrorBoundary from "@components/ErrorBoundary";
 import { TooltipContainer } from "@components/TooltipContainer";
 import { Devs } from "@utils/constants";
 import { classNameFactory } from "@utils/css";
+import { hyperTranslate } from "@utils/hyperLanguage";
 import definePlugin, { OptionType } from "@utils/types";
 import { User } from "@vencord/discord-types";
 import { DateUtils, RelationshipStore, Text } from "@webpack/common";
@@ -43,7 +44,7 @@ function getSince(user: User) {
 const settings = definePluginSettings({
     showDates: {
         type: OptionType.BOOLEAN,
-        description: "Show dates on friend requests",
+        description: hyperTranslate("Show dates on friend requests"),
         default: false,
         restartNeeded: true
     }
@@ -52,7 +53,7 @@ const settings = definePluginSettings({
 export default definePlugin({
     name: "SortFriendRequests",
     authors: [Devs.Megu],
-    description: "Sorts friend requests by date of receipt",
+    description: hyperTranslate("Sorts friend requests by date of receipt"),
     tags: ["Friends", "Organisation"],
     settings,
 

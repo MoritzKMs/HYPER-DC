@@ -8,6 +8,7 @@ import { Auth } from "@plugins/reviewDB/auth";
 import { ReviewDBUser } from "@plugins/reviewDB/entities";
 import { fetchBlocks, unblockUser } from "@plugins/reviewDB/reviewDbApi";
 import { cl } from "@plugins/reviewDB/utils";
+import { hyperTranslate } from "@utils/hyperLanguage";
 import { Logger } from "@utils/Logger";
 import { useAwaiter } from "@utils/react";
 import { Forms, Modal,openModal, Tooltip, useState } from "@webpack/common";
@@ -64,9 +65,9 @@ function BlockedUsersList() {
     if (pending)
         return null;
     if (error)
-        return <Forms.FormText>Failed to fetch blocks: ${String(error)}</Forms.FormText>;
+        return <Forms.FormText>{hyperTranslate("Failed to fetch blocks: $")}{String(error)}</Forms.FormText>;
     if (!blocks.length)
-        return <Forms.FormText>No blocked users.</Forms.FormText>;
+        return <Forms.FormText>{hyperTranslate("No blocked users.")}</Forms.FormText>;
 
     return (
         <>
@@ -86,10 +87,10 @@ export function openBlockModal() {
     openModal(modalProps => (
         <Modal
             {...modalProps}
-            title="Blocked Users"
+            title={hyperTranslate("Blocked Users")}
         >
             <div className={cl("block-modal")}>
-                {Auth.token ? <BlockedUsersList /> : <Forms.FormText>You are not logged into ReviewDB!</Forms.FormText>}
+                {Auth.token ? <BlockedUsersList /> : <Forms.FormText>{hyperTranslate("You are not logged into ReviewDB!")}</Forms.FormText>}
             </div>
         </Modal>
     ));

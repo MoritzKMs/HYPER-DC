@@ -39,27 +39,30 @@ internal sealed class InstallerForm : Form
         BackColor = Color.FromArgb(20, 20, 20); ForeColor = Color.FromArgb(242, 238, 231); AutoScaleMode = AutoScaleMode.Dpi;
         using var iconStream = Assembly.GetExecutingAssembly().GetManifestResourceStream("HyperDCInstaller.assets.hyperdc.ico");
         if (iconStream != null) Icon = new Icon(iconStream);
-        var side = new Panel { Location = Point.Empty, Size = new Size(245, 585), BackColor = Orange };
-        Controls.Add(side);
-        AddLabel(side, "H", 25, 22, 170, 160, 105, Color.FromArgb(27, 23, 20), FontStyle.Bold | FontStyle.Italic);
-        AddLabel(side, "HYPER\nDC.", 30, 211, 210, 155, 36, Color.FromArgb(27, 23, 20), FontStyle.Bold);
-        AddLabel(side, "DISCORD.\nSENİN AYARINDA.", 33, 374, 190, 55, 12, Color.FromArgb(43, 28, 21), FontStyle.Bold);
-        AddLabel(side, "INSTALLER / 0.2.0\nWINDOWS x64 · ÖN SÜRÜM", 33, 518, 205, 45, 9, Color.FromArgb(77, 43, 26));
-        AddLabel(this, "KURULUM MERKEZİ", 283, 30, 450, 25, 9, Color.FromArgb(161, 156, 146));
-        AddLabel(this, "Buradan başlıyoruz.", 280, 68, 535, 55, 27, ForeColor, FontStyle.Bold);
-        AddLabel(this, "Discord sürümünü seç. HYPER DC paketi bu kurulum\ndosyasına dahildir; indirme beklemezsin.", 284, 127, 520, 48, 11, Color.FromArgb(169, 164, 155));
-        AddLabel(this, "DISCORD KURULUMU", 285, 198, 350, 24, 9, Color.FromArgb(169, 164, 155));
-        targets.DrawMode = DrawMode.OwnerDrawFixed; targets.ItemHeight = 27; targets.DrawItem += (_, e) => { e.DrawBackground(); if (e.Index >= 0) { using var brush = new SolidBrush(Color.FromArgb(235, 227, 210)); e.Graphics.DrawString(targets.Items[e.Index]?.ToString() ?? "", targets.Font, brush, e.Bounds); } }; targets.SetBounds(285, 229, 360, 36); Controls.Add(targets);
-        StyleButton(refresh, "Yenile", new Rectangle(661, 228, 130, 34), false); refresh.Click += (_, _) => Scan();
-        path.SetBounds(285, 274, 506, 33); Controls.Add(path);
-        StyleButton(browse, "Klasör seç…", new Rectangle(285, 312, 145, 33), false); browse.Click += (_, _) => Browse();
-        AddLabel(this, "HYPER DC dosyaları: %AppData%\\HyperDC", 285, 353, 505, 23, 9, Color.FromArgb(169, 164, 155));
-        consent.SetBounds(285, 389, 515, 30); Controls.Add(consent);
-        StyleButton(install, "HYPER DC’yi yükle", new Rectangle(285, 431, 242, 46), true); install.Click += async (_, _) => await Execute(false);
-        StyleButton(remove, "HYPER DC’yi kaldır", new Rectangle(540, 431, 251, 46), false); remove.Click += async (_, _) => await Execute(true);
-        status.SetBounds(285, 491, 507, 54); Controls.Add(status);
-        var license = new LinkLabel { Text = "Vencord tabanlı · GPL-3.0-or-later", LinkColor = Color.FromArgb(153, 146, 134), Location = new Point(285, 557), Size = new Size(470, 21), Font = new Font("Segoe UI", 8) };
-        license.LinkClicked += (_, _) => Process.Start(new ProcessStartInfo("https://github.com/MoritzKMs/HYPER-DC/blob/main/LICENSE") { UseShellExecute = true }); Controls.Add(license);
+        ClientSize = new Size(700, 560);
+        BackColor = Color.FromArgb(246, 246, 246); ForeColor = Color.FromArgb(32, 32, 32);
+        var header = new Panel { Dock = DockStyle.Top, Height = 92, BackColor = Color.White };
+        Controls.Add(header);
+        using var logoStream = Assembly.GetExecutingAssembly().GetManifestResourceStream("HyperDCInstaller.assets.hyperdc.png");
+        if (logoStream != null) header.Controls.Add(new PictureBox { Image = new Bitmap(logoStream), SizeMode = PictureBoxSizeMode.Zoom, Bounds = new Rectangle(24, 19, 52, 52) });
+        AddLabel(header, "HyperDC Kurulumu", 92, 19, 560, 32, 18, ForeColor, FontStyle.Bold);
+        AddLabel(header, "Sürüm 0.3.0 · Windows x64", 94, 55, 520, 22, 9, Color.DimGray);
+        AddLabel(this, "Discord kurulumunu seçin", 24, 114, 620, 28, 12, ForeColor, FontStyle.Bold);
+        AddLabel(this, "Devam etmeden önce Discord’u sistem tepsisinden de kapatın.", 24, 146, 644, 26, 10, Color.DimGray);
+        targets.BackColor = Color.White; targets.ForeColor = ForeColor;
+        targets.Font = new Font("Segoe UI", 10); targets.SetBounds(24, 184, 520, 88); Controls.Add(targets);
+        StyleButton(refresh, "Yenile", new Rectangle(558, 184, 118, 34), false); refresh.Click += (_, _) => Scan();
+        StyleButton(browse, "Klasör seç…", new Rectangle(558, 230, 118, 34), false); browse.Click += (_, _) => Browse();
+        path.ForeColor = Color.DimGray; path.SetBounds(24, 281, 652, 40); Controls.Add(path);
+        AddLabel(this, "Program dosyaları: %AppData%\\HyperDC", 24, 330, 652, 24, 9, Color.DimGray);
+        consent.Text = "Seçili Discord kurulumuna HyperDC yükle."; consent.ForeColor = ForeColor;
+        consent.SetBounds(24, 364, 652, 28); Controls.Add(consent);
+        status.ForeColor = ForeColor; status.SetBounds(24, 410, 652, 48); Controls.Add(status);
+        var divider = new Panel { Bounds = new Rectangle(0, 480, 700, 1), BackColor = Color.LightGray }; Controls.Add(divider);
+        var license = new LinkLabel { Text = "Lisans ve kaynak kodu", LinkColor = Color.DimGray, Location = new Point(24, 509), Size = new Size(180, 24), Font = new Font("Segoe UI", 9) };
+        license.LinkClicked += (_, _) => Process.Start(new ProcessStartInfo("https://github.com/MoritzKMs/HYPER-DC") { UseShellExecute = true }); Controls.Add(license);
+        StyleButton(remove, "Kaldır", new Rectangle(412, 500, 120, 36), false); remove.Click += async (_, _) => await Execute(true);
+        StyleButton(install, "Yükle", new Rectangle(546, 500, 130, 36), true); install.Click += async (_, _) => await Execute(false);
         targets.SelectedIndexChanged += (_, _) => { path.Text = (targets.SelectedItem as DiscordTarget)?.Path ?? ""; UpdateButtons(); };
         consent.CheckedChanged += (_, _) => UpdateButtons();
         FormClosing += (_, e) => { if (working) e.Cancel = true; };
@@ -69,9 +72,9 @@ internal sealed class InstallerForm : Form
     void AddLabel(Control parent, string text, int x, int y, int w, int h, float size, Color color, FontStyle style = FontStyle.Regular) => parent.Controls.Add(new Label { Text = text, Location = new Point(x, y), Size = new Size(w, h), Font = new Font("Segoe UI", size, style), ForeColor = color, BackColor = Color.Transparent });
     void StyleButton(Button button, string text, Rectangle bounds, bool primary)
     {
-        button.Text = text; button.Bounds = bounds; button.FlatStyle = FlatStyle.Flat; button.FlatAppearance.BorderColor = Color.FromArgb(70, 64, 56);
-        button.BackColor = primary ? Orange : Color.FromArgb(32, 31, 28); button.ForeColor = primary ? Color.FromArgb(30, 21, 15) : ForeColor;
-        button.Font = new Font("Segoe UI", 10, FontStyle.Bold); button.Cursor = Cursors.Hand; Controls.Add(button);
+        button.Text = text; button.Bounds = bounds; button.FlatStyle = FlatStyle.Flat; button.FlatAppearance.BorderColor = primary ? Orange : Color.Silver;
+        button.BackColor = primary ? Orange : Color.White; button.ForeColor = primary ? Color.FromArgb(30, 21, 15) : ForeColor;
+        button.Font = new Font("Segoe UI", 10, FontStyle.Regular); button.Cursor = Cursors.Hand; Controls.Add(button);
     }
     void UpdateButtons()
     {

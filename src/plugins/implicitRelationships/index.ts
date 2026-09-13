@@ -18,6 +18,7 @@
 
 import { definePluginSettings } from "@api/Settings";
 import { Devs } from "@utils/constants";
+import { hyperTranslate } from "@utils/hyperLanguage";
 import { Logger } from "@utils/Logger";
 import definePlugin, { OptionType } from "@utils/types";
 import { Constants, FluxDispatcher, GuildStore, RelationshipStore, SnowflakeUtils, UserAffinitiesStore, UserStore } from "@webpack/common";
@@ -27,7 +28,7 @@ const settings = definePluginSettings(
         sortByAffinity: {
             type: OptionType.BOOLEAN,
             default: true,
-            description: "Whether to sort implicit relationships by their affinity to you.",
+            description: hyperTranslate("Whether to sort implicit relationships by their affinity to you."),
             restartNeeded: true
         },
     }
@@ -35,7 +36,7 @@ const settings = definePluginSettings(
 
 export default definePlugin({
     name: "ImplicitRelationships",
-    description: "Shows your implicit relationships in the Friends tab.",
+    description: hyperTranslate("Shows your implicit relationships in the Friends tab."),
     tags: ["Friends", "Servers"],
     authors: [Devs.Dolfies],
     settings,

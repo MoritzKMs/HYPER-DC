@@ -7,6 +7,7 @@
 import { ChatBarButton } from "@api/ChatButtons";
 import { UploadIcon } from "@components/Icons";
 import { Devs } from "@utils/constants";
+import { hyperTranslate } from "@utils/hyperLanguage";
 import { pluralise } from "@utils/misc";
 import definePlugin from "@utils/types";
 import { Message } from "@vencord/discord-types";
@@ -39,7 +40,7 @@ async function addAttachments(channelId: string, messageId: string, existingAtta
     if (files.length + existingAttachmentCount > 10) {
         const remaining = 10 - existingAttachmentCount;
         if (remaining <= 0) {
-            showToast("You cannot add more attachments to this message.", Toasts.Type.FAILURE);
+            showToast(hyperTranslate("You cannot add more attachments to this message."), Toasts.Type.FAILURE);
             return;
         }
 
@@ -47,7 +48,7 @@ async function addAttachments(channelId: string, messageId: string, existingAtta
         return;
     }
 
-    showToast("Uploading, this can take a while...", Toasts.Type.CLOCK);
+    showToast(hyperTranslate("Uploading, this can take a while..."), Toasts.Type.CLOCK);
 
     const { body: { attachments } } = await RestAPI.post({
         url: `/channels/${channelId}/attachments`,
@@ -113,7 +114,7 @@ function handlePaste(e: ClipboardEvent) {
 
 export default definePlugin({
     name: "AddAttachments",
-    description: "Allows you to add new attachments while editing messages",
+    description: hyperTranslate("Allows you to add new attachments while editing messages"),
     authors: [Devs.Lumap],
 
     start() {
@@ -132,7 +133,7 @@ export default definePlugin({
             if (!channel.isPrivate() && !PermissionStore.can(PermissionsBits.SEND_MESSAGES, channel)) return null;
 
             return {
-                label: "Add Attachments",
+                label: hyperTranslate("Add Attachments"),
                 icon: UploadIcon,
                 message: msg,
                 channel: ChannelStore.getChannel(msg.channel_id),
@@ -151,7 +152,7 @@ export default definePlugin({
 
             return (
                 <ChatBarButton
-                    tooltip="Add Attachments"
+                    tooltip={hyperTranslate("Add Attachments")}
                     onClick={() => chooseAttachments(msg.channel_id, msg.id, msg.attachments.length)}
                 >
                     <UploadIcon height={18} width={18} />

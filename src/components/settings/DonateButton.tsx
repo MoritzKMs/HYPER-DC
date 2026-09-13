@@ -17,6 +17,7 @@
 */
 
 import { Heart } from "@components/Heart";
+import { hyperTranslate } from "@utils/hyperLanguage";
 import { ButtonProps } from "@vencord/discord-types";
 import { Button } from "@webpack/common";
 
@@ -34,7 +35,6 @@ export default function DonateButton({
             className="vc-donate-button"
         >
             <Heart />
-            Donate
-        </Button>
+            {hyperTranslate("Donate")}</Button>
     );
 }

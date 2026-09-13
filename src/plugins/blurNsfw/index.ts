@@ -20,6 +20,7 @@ import { definePluginSettings } from "@api/Settings";
 import { managedStyleRootNode } from "@api/Styles";
 import { Devs } from "@utils/constants";
 import { createAndAppendStyle } from "@utils/css";
+import { hyperTranslate } from "@utils/hyperLanguage";
 import definePlugin, { OptionType } from "@utils/types";
 
 let style: HTMLStyleElement;
@@ -27,7 +28,7 @@ let style: HTMLStyleElement;
 const settings = definePluginSettings({
     blurAmount: {
         type: OptionType.NUMBER,
-        description: "Blur Amount (in pixels)",
+        description: hyperTranslate("Blur Amount (in pixels)"),
         default: 10,
         onChange: setCss
     }
@@ -49,7 +50,7 @@ function setCss() {
 
 export default definePlugin({
     name: "BlurNSFW",
-    description: "Blur attachments in NSFW channels until hovered",
+    description: hyperTranslate("Blur attachments in NSFW channels until hovered"),
     tags: ["Privacy", "Appearance"],
     authors: [Devs.Ven],
     settings,

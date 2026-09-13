@@ -6,11 +6,12 @@
 
 import { definePluginSettings } from "@api/Settings";
 import { Devs } from "@utils/constants";
+import { hyperTranslate } from "@utils/hyperLanguage";
 import definePlugin, { OptionType } from "@utils/types";
 
 const settings = definePluginSettings({
     reactionCount: {
-        description: "Number of reactions (0-42)",
+        description: hyperTranslate("Number of reactions (0-42)"),
         type: OptionType.NUMBER,
         default: 5
     },
@@ -18,7 +19,7 @@ const settings = definePluginSettings({
 
 export default definePlugin({
     name: "MoreQuickReactions",
-    description: "Increases the number of reactions available in the Quick React hover menu",
+    description: hyperTranslate("Increases the number of reactions available in the Quick React hover menu"),
     authors: [Devs.iamme],
     tags: ["Emotes", "Reactions", "Customisation", "Shortcuts"],
     settings,

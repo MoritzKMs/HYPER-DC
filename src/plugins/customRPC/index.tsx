@@ -24,6 +24,7 @@ import { Flex } from "@components/Flex";
 import { Link } from "@components/Link";
 import { Devs } from "@utils/constants";
 import { isTruthy } from "@utils/guards";
+import { hyperTranslate } from "@utils/hyperLanguage";
 import { Margins } from "@utils/margins";
 import { classes } from "@utils/misc";
 import { useAwaiter } from "@utils/react";
@@ -212,7 +213,7 @@ export async function setRpc(disable?: boolean) {
 
 export default definePlugin({
     name: "CustomRPC",
-    description: "Add a fully customisable Rich Presence (Game status) to your Discord profile",
+    description: hyperTranslate("Add a fully customisable Rich Presence (Game status) to your Discord profile"),
     tags: ["Activity", "Customisation"],
     authors: [Devs.captain, Devs.AutumnVN, Devs.nin0dev],
     dependencies: ["UserSettingsAPI"],
@@ -246,36 +247,29 @@ export default definePlugin({
                         className={classes(Margins.top16, Margins.bottom16)}
                         style={{ padding: "1em" }}
                     >
-                        <Forms.FormTitle>Notice</Forms.FormTitle>
-                        <Forms.FormText>Activity Sharing isn't enabled, people won't be able to see your custom rich presence!</Forms.FormText>
+                        <Forms.FormTitle>{hyperTranslate("Notice")}</Forms.FormTitle>
+                        <Forms.FormText>{hyperTranslate("Activity Sharing isn't enabled, people won't be able to see your custom rich presence!")}</Forms.FormText>
 
                         <Button
                             color={Button.Colors.TRANSPARENT}
                             className={Margins.top8}
                             onClick={() => ShowCurrentGame.updateSetting(true)}
                         >
-                            Enable
-                        </Button>
+                            {hyperTranslate("Enable")}</Button>
                     </ErrorCard>
                 )}
 
                 <Flex flexDirection="column" gap=".5em" className={Margins.top16}>
                     <Forms.FormText>
-                        Go to the <Link href="https://discord.com/developers/applications">Discord Developer Portal</Link> to create an application and
-                        get the application ID.
-                    </Forms.FormText>
+                        {hyperTranslate("Go to the") + " "}<Link href="https://discord.com/developers/applications">{hyperTranslate("Discord Developer Portal")}</Link> {hyperTranslate("to create an application and get the application ID.")}</Forms.FormText>
                     <Forms.FormText>
-                        Upload images in the Rich Presence tab to get the image keys.
-                    </Forms.FormText>
+                        {hyperTranslate("Upload images in the Rich Presence tab to get the image keys.")}</Forms.FormText>
                     <Forms.FormText>
-                        If you want to use an image link, download your image and reupload the image to <Link href="https://imgur.com">Imgur</Link> and get the image link by right-clicking the image and selecting "Copy image address".
-                    </Forms.FormText>
+                        {hyperTranslate("If you want to use an image link, download your image and reupload the image to") + " "}<Link href="https://imgur.com">{hyperTranslate("Imgur")}</Link> {hyperTranslate("and get the image link by right-clicking the image and selecting \"Copy image address\".")}</Forms.FormText>
                     <Forms.FormText>
-                        You can't see your own buttons on your profile, but everyone else can see it fine.
-                    </Forms.FormText>
+                        {hyperTranslate("You can't see your own buttons on your profile, but everyone else can see it fine.")}</Forms.FormText>
                     <Forms.FormText>
-                        Some weird unicode text ("fonts" 𝖑𝖎𝖐𝖊 𝖙𝖍𝖎𝖘) may cause the rich presence to not show up, try using normal letters instead.
-                    </Forms.FormText>
+                        {hyperTranslate("Some weird unicode text (\"fonts\" 𝖑𝖎𝖐𝖊 𝖙𝖍𝖎𝖘) may cause the rich presence to not show up, try using normal letters instead.")}</Forms.FormText>
                 </Flex>
 
                 <Divider className={Margins.top8} />

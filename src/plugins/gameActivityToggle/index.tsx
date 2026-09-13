@@ -22,6 +22,7 @@ import { getUserSettingLazy } from "@api/UserSettings";
 import ErrorBoundary from "@components/ErrorBoundary";
 import VencordToolboxPlugin from "@plugins/vencordToolbox";
 import { Devs } from "@utils/constants";
+import { hyperTranslate } from "@utils/hyperLanguage";
 import definePlugin, { OptionType } from "@utils/types";
 import { FluxStore } from "@vencord/discord-types";
 import { findByPropsLazy, findComponentByCodeLazy, findStoreLazy } from "@webpack";
@@ -49,15 +50,15 @@ const ShowCurrentGame = getUserSettingLazy<boolean>("status", "showCurrentGame")
 const settings = definePluginSettings({
     oldIcon: {
         type: OptionType.BOOLEAN,
-        description: "Use the old icon style before Discord icon redesign",
+        description: hyperTranslate("Use the old icon style before Discord icon redesign"),
         default: false
     },
     location: {
         type: OptionType.SELECT,
-        description: "Where to show the game activity toggle button",
+        description: hyperTranslate("Where to show the game activity toggle button"),
         options: [
-            { label: "Next to Mute/Deafen", value: "PANEL", default: true },
-            { label: "Vencord Toolbox", value: "TOOLBOX" }
+            { label: hyperTranslate("Next to Mute/Deafen"), value: "PANEL", default: true },
+            { label: hyperTranslate("Vencord Toolbox"), value: "TOOLBOX" }
         ],
         get hidden() {
             return !isPluginEnabled(VencordToolboxPlugin.name);
@@ -133,7 +134,7 @@ function GameActivityToggleButton(props: { nameplate?: any; }) {
                 <Menu.Menu navId="vc-gameActivityToggle-menu" onClose={closePopout}>
                     <Menu.MenuCheckboxItem
                         id="vc-toggle-spotify"
-                        label="Share Spotify Activity"
+                        label={hyperTranslate("Share Spotify Activity")}
                         checked={shareSpotifyActivity}
                         action={async () => {
                             ConnectedAccountActions.setShowActivity(spotifyAccount.type, spotifyAccount.id, !shareSpotifyActivity);
@@ -156,7 +157,7 @@ function GameActivityToggleButton(props: { nameplate?: any; }) {
 
 export default definePlugin({
     name: "GameActivityToggle",
-    description: "Adds a button next to the mic and deafen button to toggle game activity. Right click it to toggle Spotify activity.",
+    description: hyperTranslate("Adds a button next to the mic and deafen button to toggle game activity. Right click it to toggle Spotify activity."),
     tags: ["Activity", "Shortcuts"],
     authors: [Devs.Nuckyz, Devs.RuukuLada],
     dependencies: ["UserSettingsAPI"],
@@ -183,7 +184,7 @@ export default definePlugin({
         return (
             <Menu.MenuCheckboxItem
                 id="game-activity-toggle-toolbox"
-                label="Enable Game Activity"
+                label={hyperTranslate("Enable Game Activity")}
                 checked={showCurrentGame}
                 action={() => ShowCurrentGame.updateSetting(old => !old)}
             />

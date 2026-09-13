@@ -5,12 +5,13 @@
  */
 
 import { Devs } from "@utils/constants";
+import { hyperTranslate } from "@utils/hyperLanguage";
 import definePlugin from "@utils/types";
 import { setColorPicker, setCreateScroller, setRoleMemberPopout } from "@webpack/common";
 
 export default definePlugin({
     name: "ConcatenatedComponentExtractor",
-    description: "Extract components that have been concatenated by the bundler",
+    description: hyperTranslate("Extract components that have been concatenated by the bundler"),
     authors: [Devs.sadan],
 
     required: true,

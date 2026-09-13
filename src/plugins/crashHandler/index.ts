@@ -20,6 +20,7 @@ import { DataStore } from "@api/index";
 import { showNotification } from "@api/Notifications";
 import { definePluginSettings } from "@api/Settings";
 import { Devs } from "@utils/constants";
+import { hyperTranslate } from "@utils/hyperLanguage";
 import { Logger } from "@utils/Logger";
 import definePlugin, { OptionType } from "@utils/types";
 import { maybePromptToUpdate } from "@utils/updater";
@@ -43,12 +44,12 @@ const { ModalStack, DraftManager } = proxyLazyWebpack(() => {
 const settings = definePluginSettings({
     attemptToPreventCrashes: {
         type: OptionType.BOOLEAN,
-        description: "Whether to attempt to prevent Discord crashes.",
+        description: hyperTranslate("Whether to attempt to prevent Discord crashes."),
         default: true
     },
     attemptToNavigateToHome: {
         type: OptionType.BOOLEAN,
-        description: "Whether to attempt to navigate to the home when preventing Discord crashes.",
+        description: hyperTranslate("Whether to attempt to navigate to the home when preventing Discord crashes."),
         default: false
     }
 });
@@ -59,7 +60,7 @@ let shouldAttemptRecover = true;
 
 export default definePlugin({
     name: "CrashHandler",
-    description: "Utility plugin for handling and possibly recovering from crashes without a restart",
+    description: hyperTranslate("Utility plugin for handling and possibly recovering from crashes without a restart"),
     authors: [Devs.Nuckyz],
     tags: ["Utility", "Developers"],
     enabledByDefault: true,
@@ -99,8 +100,8 @@ export default definePlugin({
                     try {
                         showNotification({
                             color: "#eed202",
-                            title: "Discord has crashed!",
-                            body: "Awn :( Discord has crashed two times rapidly, not attempting to recover.",
+                            title: hyperTranslate("Discord has crashed!"),
+                            body: hyperTranslate("Awn :( Discord has crashed two times rapidly, not attempting to recover."),
                             noPersist: true
                         });
                     } catch { }
@@ -134,8 +135,8 @@ export default definePlugin({
         try {
             showNotification({
                 color: "#eed202",
-                title: "Discord has crashed!",
-                body: "Attempting to recover...",
+                title: hyperTranslate("Discord has crashed!"),
+                body: hyperTranslate("Attempting to recover..."),
                 noPersist: true
             });
         } catch { }

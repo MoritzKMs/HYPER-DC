@@ -8,6 +8,7 @@ import { Card } from "@components/Card";
 import { ErrorCard } from "@components/ErrorCard";
 import { Flex } from "@components/Flex";
 import { Link } from "@components/Link";
+import { hyperTranslate } from "@utils/hyperLanguage";
 import { Margins } from "@utils/margins";
 import { classes } from "@utils/misc";
 import { relaunch } from "@utils/native";
@@ -60,8 +61,7 @@ export function Newer(props: CommonProps) {
     return (
         <>
             <Forms.FormText className={Margins.bottom8}>
-                Your local copy has more recent commits. Please stash or reset them.
-            </Forms.FormText>
+                {hyperTranslate("Your local copy has more recent commits. Please stash or reset them.")}</Forms.FormText>
             <Changes {...props} updates={changes} />
         </>
     );
@@ -78,14 +78,14 @@ export function Updatable(props: CommonProps) {
         <>
             {!updates && updateError ? (
                 <>
-                    <Forms.FormText>Failed to check updates. Check the console for more info</Forms.FormText>
+                    <Forms.FormText>{hyperTranslate("Failed to check updates. Check the console for more info")}</Forms.FormText>
                     <ErrorCard style={{ padding: "1em" }}>
                         <p>{updateError.stderr || updateError.stdout || "An unknown error occurred"}</p>
                     </ErrorCard>
                 </>
             ) : (
                 <Forms.FormText className={Margins.bottom8}>
-                    {isOutdated ? (updates.length === 1 ? "There is 1 Update" : `There are ${updates.length} Updates`) : "Up to Date!"}
+                    {isOutdated ? (updates.length === 1 ? "There is 1 Update" : `There are ${updates.length} Updates`) : hyperTranslate("Up to Date!")}
                 </Forms.FormText>
             )}
 
@@ -103,8 +103,8 @@ export function Updatable(props: CommonProps) {
                                     openModal(props => (
                                         <ConfirmModal
                                             {...props}
-                                            title="Update Success!"
-                                            subtitle="Successfully updated. Restart now to apply the changes?"
+                                            title={hyperTranslate("Update Success!")}
+                                            subtitle={hyperTranslate("Successfully updated. Restart now to apply the changes?")}
                                             confirmText="Restart"
                                             cancelText="Not now!"
                                             variant="primary"
@@ -119,8 +119,7 @@ export function Updatable(props: CommonProps) {
                             }
                         })}
                     >
-                        Update Now
-                    </Button>
+                        {hyperTranslate("Update Now")}</Button>
                 )}
                 <Button
                     disabled={isUpdating || isChecking}
@@ -143,8 +142,7 @@ export function Updatable(props: CommonProps) {
                         }
                     })}
                 >
-                    Check for Updates
-                </Button>
+                    {hyperTranslate("Check for Updates")}</Button>
             </Flex>
         </>
     );

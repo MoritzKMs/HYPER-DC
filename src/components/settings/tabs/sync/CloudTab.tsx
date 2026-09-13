@@ -31,6 +31,7 @@ import { CloudDownloadIcon, CloudUploadIcon, DeleteIcon, RestartIcon } from "@co
 import { Link } from "@components/Link";
 import { Paragraph } from "@components/Paragraph";
 import { SettingsTab, wrapTab } from "@components/settings/tabs/BaseTab";
+import { hyperTranslate } from "@utils/hyperLanguage";
 import { Margins } from "@utils/margins";
 import { classes } from "@utils/misc";
 import { IconComponent } from "@utils/types";
@@ -73,15 +74,11 @@ function CloudSetupSection() {
             <SectionHeading text="Cloud Integrations" />
 
             <Paragraph size="md" className={Margins.bottom20}>
-                Vencord comes with a cloud integration that adds goodies like settings sync across devices.
-                It <Link href="https://vencord.dev/cloud/privacy">respects your privacy</Link>, and
-                the <Link href="https://github.com/Vencord/Backend">source code</Link> is AGPL 3.0 licensed so you
-                can host it yourself.
-            </Paragraph>
+                {hyperTranslate("Vencord comes with a cloud integration that adds goodies like settings sync across devices. It") + " "}<Link href="https://vencord.dev/cloud/privacy">{hyperTranslate("respects your privacy")}</Link>{hyperTranslate(", and the") + " "}<Link href="https://github.com/Vencord/Backend">{hyperTranslate("source code")}</Link> {hyperTranslate("is AGPL 3.0 licensed so you can host it yourself.")}</Paragraph>
             <FormSwitch
                 key="backend"
-                title="Enable Cloud Integrations"
-                description="This will request authorization if you have not yet set up cloud integrations."
+                title={hyperTranslate("Enable Cloud Integrations")}
+                description={hyperTranslate("This will request authorization if you have not yet set up cloud integrations.")}
                 value={cloud.authenticated}
                 onChange={v => {
                     if (v)
@@ -90,10 +87,9 @@ function CloudSetupSection() {
                         cloud.authenticated = v;
                 }}
             />
-            <Heading tag="h5" className={Margins.top16}>Backend URL</Heading>
+            <Heading tag="h5" className={Margins.top16}>{hyperTranslate("Backend URL")}</Heading>
             <Paragraph className={Margins.bottom8}>
-                Which backend to use when using cloud integrations.
-            </Paragraph>
+                {hyperTranslate("Which backend to use when using cloud integrations.")}</Paragraph>
             <CheckedTextInput
                 key="backendUrl"
                 initialValue={cloud.url}
@@ -116,8 +112,7 @@ function CloudSetupSection() {
                     }}
                     Icon={RestartIcon}
                 >
-                    Reauthorise
-                </ButtonWithIcon>
+                    {hyperTranslate("Reauthorise")}</ButtonWithIcon>
             </Grid>
         </section>
     );
@@ -134,8 +129,8 @@ function SettingsSyncSection() {
             <Flex flexDirection="column" gap="1em">
                 <FormSwitch
                     key="cloud-sync"
-                    title="Enable Settings Sync"
-                    description="Save your Vencord settings to the cloud so you can easily keep them the same on all your devices"
+                    title={hyperTranslate("Enable Settings Sync")}
+                    description={hyperTranslate("Save your Vencord settings to the cloud so you can easily keep them the same on all your devices")}
                     value={cloud.settingsSync}
                     onChange={v => { cloud.settingsSync = v; }}
                     disabled={!cloud.authenticated}
@@ -144,29 +139,26 @@ function SettingsSyncSection() {
 
                 <div>
                     <Heading tag="h5">
-                        Sync Rules for This Device
-                    </Heading>
+                        {hyperTranslate("Sync Rules for This Device")}</Heading>
                     <Paragraph className={Margins.bottom8}>
-                        This setting controls how settings move between <strong>this device</strong> and the cloud.
-                        You can let changes flow both ways, or choose one place to be the main source of truth.
-                    </Paragraph>
+                        {hyperTranslate("This setting controls how settings move between") + " "}<strong>{hyperTranslate("this device")}</strong> {hyperTranslate("and the cloud. You can let changes flow both ways, or choose one place to be the main source of truth.")}</Paragraph>
                     <Select
                         options={[
                             {
-                                label: "Two-way sync (changes go both directions)",
+                                label: hyperTranslate("Two-way sync (changes go both directions)"),
                                 value: "both",
                                 default: true,
                             },
                             {
-                                label: "This device is the source (upload only)",
+                                label: hyperTranslate("This device is the source (upload only)"),
                                 value: "push",
                             },
                             {
-                                label: "The cloud is the source (download only)",
+                                label: hyperTranslate("The cloud is the source (download only)"),
                                 value: "pull",
                             },
                             {
-                                label: "Do not sync automatically (manual sync via buttons below only)",
+                                label: hyperTranslate("Do not sync automatically (manual sync via buttons below only)"),
                                 value: "manual",
                             }
                         ]}
@@ -187,8 +179,7 @@ function SettingsSyncSection() {
                         onClick={() => putCloudSettings(true)}
                         Icon={CloudUploadIcon}
                     >
-                        Upload Settings
-                    </ButtonWithIcon>
+                        {hyperTranslate("Upload Settings")}</ButtonWithIcon>
                     <Tooltip text="This will replace your current settings with the ones saved in the cloud. Be careful!">
                         {({ onMouseLeave, onMouseEnter }) => (
                             <ButtonWithIcon
@@ -199,8 +190,7 @@ function SettingsSyncSection() {
                                 onClick={() => getCloudSettings(true, true)}
                                 Icon={CloudDownloadIcon}
                             >
-                                Download Settings
-                            </ButtonWithIcon>
+                                {hyperTranslate("Download Settings")}</ButtonWithIcon>
                         )}
                     </Tooltip>
                 </Grid>
@@ -223,16 +213,15 @@ function ResetSection() {
                     onClick={() => deleteCloudSettings()}
                     Icon={DeleteIcon}
                 >
-                    Delete Settings from Cloud
-                </ButtonWithIcon>
+                    {hyperTranslate("Delete Settings from Cloud")}</ButtonWithIcon>
                 <ButtonWithIcon
                     variant="dangerPrimary"
                     disabled={!authenticated}
                     onClick={() => openModal(props => (
                         <ConfirmModal
                             {...props}
-                            title="Are you sure?"
-                            subtitle="Once your data is erased, we cannot recover it. There's no going back!"
+                            title={hyperTranslate("Are you sure?")}
+                            subtitle={hyperTranslate("Once your data is erased, we cannot recover it. There's no going back!")}
                             onConfirm={eraseAllCloudData}
                             confirmText="Erase it!"
                             cancelText="Nevermind"
@@ -240,8 +229,7 @@ function ResetSection() {
                     ))}
                     Icon={DeleteIcon}
                 >
-                    Delete your Cloud Account
-                </ButtonWithIcon>
+                    {hyperTranslate("Delete your Cloud Account")}</ButtonWithIcon>
             </Grid>
         </section>
     );

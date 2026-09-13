@@ -18,26 +18,27 @@
 
 import { definePluginSettings } from "@api/Settings";
 import { Devs } from "@utils/constants";
+import { hyperTranslate } from "@utils/hyperLanguage";
 import definePlugin, { OptionType } from "@utils/types";
 
 const settings = definePluginSettings({
     domain: {
         type: OptionType.BOOLEAN,
         default: true,
-        description: "Remove the untrusted domain popup when opening links",
+        description: hyperTranslate("Remove the untrusted domain popup when opening links"),
         restartNeeded: true
     },
     file: {
         type: OptionType.BOOLEAN,
         default: true,
-        description: "Remove the 'Potentially Dangerous Download' popup when opening links",
+        description: hyperTranslate("Remove the 'Potentially Dangerous Download' popup when opening links"),
         restartNeeded: true
     }
 });
 
 export default definePlugin({
     name: "AlwaysTrust",
-    description: "Removes the annoying untrusted domain and suspicious file popup",
+    description: hyperTranslate("Removes the annoying untrusted domain and suspicious file popup"),
     tags: ["Utility"],
     authors: [Devs.zt, Devs.Trwy],
     patches: [

@@ -9,12 +9,13 @@ import "./styles.css";
 import { definePluginSettings } from "@api/Settings";
 import ErrorBoundary from "@components/ErrorBoundary";
 import { Devs } from "@utils/constants";
+import { hyperTranslate } from "@utils/hyperLanguage";
 import definePlugin, { OptionType } from "@utils/types";
 import { Tooltip } from "@webpack/common";
 
 const settings = definePluginSettings({
     loop: {
-        description: "Whether to make the PiP video loop or not",
+        description: hyperTranslate("Whether to make the PiP video loop or not"),
         type: OptionType.BOOLEAN,
         default: true,
         restartNeeded: false
@@ -23,7 +24,7 @@ const settings = definePluginSettings({
 
 export default definePlugin({
     name: "PictureInPicture",
-    description: "Adds picture in picture to videos (next to the Download button)",
+    description: hyperTranslate("Adds picture in picture to videos (next to the Download button)"),
     tags: ["Media", "Utility"],
     authors: [Devs.Lumap],
     settings,

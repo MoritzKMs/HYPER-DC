@@ -19,6 +19,7 @@
 import { showNotification } from "@api/Notifications";
 import { definePluginSettings } from "@api/Settings";
 import { Devs } from "@utils/constants";
+import { hyperTranslate } from "@utils/hyperLanguage";
 import { Logger } from "@utils/Logger";
 import { canonicalizeMatch, canonicalizeReplace } from "@utils/patches";
 import definePlugin, { OptionType, ReporterTestable } from "@utils/types";
@@ -65,7 +66,7 @@ interface FindData {
 
 const settings = definePluginSettings({
     notifyOnAutoConnect: {
-        description: "Whether to notify when Dev Companion has automatically connected.",
+        description: hyperTranslate("Whether to notify when Dev Companion has automatically connected."),
         type: OptionType.BOOLEAN,
         default: true
     }
@@ -98,8 +99,8 @@ function initWs(isManual = false) {
         logger.info("Connected to WebSocket");
 
         (settings.store.notifyOnAutoConnect || isManual) && showNotification({
-            title: "Dev Companion Connected",
-            body: "Connected to WebSocket",
+            title: hyperTranslate("Dev Companion Connected"),
+            body: hyperTranslate("Connected to WebSocket"),
             noPersist: true
         });
     });
@@ -112,7 +113,7 @@ function initWs(isManual = false) {
         logger.error("Dev Companion Error:", e);
 
         showNotification({
-            title: "Dev Companion Error",
+            title: hyperTranslate("Dev Companion Error"),
             body: (e as ErrorEvent).message || "No Error Message",
             color: "var(--status-danger, red)",
             noPersist: true,
@@ -125,7 +126,7 @@ function initWs(isManual = false) {
         logger.info("Dev Companion Disconnected:", e.code, e.reason);
 
         showNotification({
-            title: "Dev Companion Disconnected",
+            title: hyperTranslate("Dev Companion Disconnected"),
             body: e.reason || "No Reason provided",
             color: "var(--status-danger, red)",
             noPersist: true,
@@ -245,7 +246,7 @@ function initWs(isManual = false) {
 
 export default definePlugin({
     name: "DevCompanion",
-    description: "Dev Companion Plugin",
+    description: hyperTranslate("Dev Companion Plugin"),
     tags: ["Developers", "Utility"],
     authors: [Devs.Ven],
     reporterTestable: ReporterTestable.None,

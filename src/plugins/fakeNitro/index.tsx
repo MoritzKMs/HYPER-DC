@@ -21,6 +21,7 @@ import { definePluginSettings } from "@api/Settings";
 import { ApngBlendOp, ApngDisposeOp, parseAPNG } from "@utils/apng";
 import { Devs } from "@utils/constants";
 import { getCurrentGuild } from "@utils/discord";
+import { hyperTranslate } from "@utils/hyperLanguage";
 import { Logger } from "@utils/Logger";
 import definePlugin, { OptionType } from "@utils/types";
 import type { Emoji, Message, RenderModalProps, Sticker } from "@vencord/discord-types";
@@ -79,13 +80,13 @@ const DEFAULT_STICKER_SIZE = 160;
 
 const settings = definePluginSettings({
     enableEmojiBypass: {
-        description: "Allows sending fake emojis (also bypasses missing permission to use custom emojis)",
+        description: hyperTranslate("Allows sending fake emojis (also bypasses missing permission to use custom emojis)"),
         type: OptionType.BOOLEAN,
         default: true,
         restartNeeded: true
     },
     emojiSize: {
-        description: "Size of the emojis when sending",
+        description: hyperTranslate("Size of the emojis when sending"),
         type: OptionType.SELECT,
         default: DEFAULT_EMOJI_SIZE,
         options: mediaSizes.map(size => ({
@@ -94,19 +95,19 @@ const settings = definePluginSettings({
         }))
     },
     transformEmojis: {
-        description: "Whether to transform fake emojis into real ones",
+        description: hyperTranslate("Whether to transform fake emojis into real ones"),
         type: OptionType.BOOLEAN,
         default: true,
         restartNeeded: true
     },
     enableStickerBypass: {
-        description: "Allows sending fake stickers (also bypasses missing permission to use stickers)",
+        description: hyperTranslate("Allows sending fake stickers (also bypasses missing permission to use stickers)"),
         type: OptionType.BOOLEAN,
         default: true,
         restartNeeded: true
     },
     stickerSize: {
-        description: "Size of the stickers when sending",
+        description: hyperTranslate("Size of the stickers when sending"),
         type: OptionType.SELECT,
         default: DEFAULT_STICKER_SIZE,
         options: mediaSizes.map(size => ({
@@ -115,34 +116,34 @@ const settings = definePluginSettings({
         }))
     },
     transformStickers: {
-        description: "Whether to transform fake stickers into real ones",
+        description: hyperTranslate("Whether to transform fake stickers into real ones"),
         type: OptionType.BOOLEAN,
         default: true,
         restartNeeded: true
     },
     transformCompoundSentence: {
-        description: "Whether to transform fake stickers and emojis in compound sentences (sentences with more content than just the fake emoji or sticker link)",
+        description: hyperTranslate("Whether to transform fake stickers and emojis in compound sentences (sentences with more content than just the fake emoji or sticker link)"),
         type: OptionType.BOOLEAN,
         default: false
     },
     enableStreamQualityBypass: {
-        description: "Allow streaming in nitro quality",
+        description: hyperTranslate("Allow streaming in nitro quality"),
         type: OptionType.BOOLEAN,
         default: true,
         restartNeeded: true
     },
     useHyperLinks: {
-        description: "Whether to use hyperlinks when sending fake emojis and stickers",
+        description: hyperTranslate("Whether to use hyperlinks when sending fake emojis and stickers"),
         type: OptionType.BOOLEAN,
         default: true
     },
     hyperLinkText: {
-        description: "What text the hyperlink should use. {{NAME}} will be replaced with the emoji/sticker name.",
+        description: hyperTranslate("What text the hyperlink should use. {{NAME}} will be replaced with the emoji/sticker name."),
         type: OptionType.STRING,
         default: "{{NAME}}"
     },
     disableEmbedPermissionCheck: {
-        description: "Whether to disable the embed permission check when sending fake emojis and stickers",
+        description: hyperTranslate("Whether to disable the embed permission check when sending fake emojis and stickers"),
         type: OptionType.BOOLEAN,
         default: false
     }
@@ -170,8 +171,8 @@ function CannotEmbedNoticeModal({ modalProps, resolve }: { modalProps: RenderMod
     return (
         <ConfirmModal
             {...modalProps}
-            title="Hold on!"
-            subtitle="You are trying to send/edit a message that contains a FakeNitro emoji or sticker, however you do not have permissions to embed links in the current channel. Are you sure you want to send this message? Your FakeNitro items will appear as a link only."
+            title={hyperTranslate("Hold on!")}
+            subtitle={hyperTranslate("You are trying to send/edit a message that contains a FakeNitro emoji or sticker, however you do not have permissions to embed links in the current channel. Are you sure you want to send this message? Your FakeNitro items will appear as a link only.")}
             confirmText="Send Anyway"
             cancelText="Cancel"
             onConfirm={() => resolve(true)}
@@ -193,7 +194,7 @@ function showCannotEmbedNotice() {
 export default definePlugin({
     name: "FakeNitro",
     authors: [Devs.Arjix, Devs.D3SOX, Devs.Ven, Devs.fawn, Devs.captain, Devs.Nuckyz, Devs.AutumnVN, Devs.sadan],
-    description: "Allows you to send fake emojis/stickers, use nitro themes, and stream in nitro quality",
+    description: hyperTranslate("Allows you to send fake emojis/stickers, use nitro themes, and stream in nitro quality"),
     tags: ["Emotes", "Appearance", "Customisation", "Chat"],
     dependencies: ["MessageEventsAPI"],
 
@@ -860,15 +861,13 @@ export default definePlugin({
                         openModal(props => (
                             <ConfirmModal
                                 {...props}
-                                title="Hold on!"
+                                title={hyperTranslate("Hold on!")}
                                 confirmText="OK"
                                 variant="primary"
                             >
                                 <div>
                                     <Forms.FormText>
-                                        You cannot send this message because it contains an animated FakeNitro sticker,
-                                        and you do not have permissions to attach files in the current channel. Please remove the sticker to proceed.
-                                    </Forms.FormText>
+                                        {hyperTranslate("You cannot send this message because it contains an animated FakeNitro sticker, and you do not have permissions to attach files in the current channel. Please remove the sticker to proceed.")}</Forms.FormText>
                                 </div>
                             </ConfirmModal>
                         ));

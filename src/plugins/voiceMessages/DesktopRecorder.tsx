@@ -16,6 +16,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+import { hyperTranslate } from "@utils/hyperLanguage";
 import { PluginNative } from "@utils/types";
 import { Button, MediaEngineStore, showToast, Toasts, useState } from "@webpack/common";
 
@@ -47,7 +48,7 @@ export const VoiceRecorderDesktop: VoiceRecorder = ({ setAudioBlob, onRecordingC
                     if (success)
                         changeRecording(true);
                     else
-                        showToast("Failed to start recording", Toasts.Type.FAILURE);
+                        showToast(hyperTranslate("Failed to start recording"), Toasts.Type.FAILURE);
                 }
             );
         } else {
@@ -57,7 +58,7 @@ export const VoiceRecorderDesktop: VoiceRecorder = ({ setAudioBlob, onRecordingC
                     if (buf)
                         setAudioBlob(new Blob([buf], { type: "audio/ogg; codecs=opus" }));
                     else
-                        showToast("Failed to finish recording", Toasts.Type.FAILURE);
+                        showToast(hyperTranslate("Failed to finish recording"), Toasts.Type.FAILURE);
                 }
                 changeRecording(false);
             });
@@ -66,7 +67,6 @@ export const VoiceRecorderDesktop: VoiceRecorder = ({ setAudioBlob, onRecordingC
 
     return (
         <Button onClick={toggleRecording}>
-            {recording ? "Stop" : "Start"} recording
-        </Button>
+            {recording ? hyperTranslate("Stop") : hyperTranslate("Start")} {hyperTranslate("recording")}</Button>
     );
 };

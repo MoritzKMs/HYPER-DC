@@ -19,6 +19,7 @@
 import { definePluginSettings } from "@api/Settings";
 import ErrorBoundary from "@components/ErrorBoundary";
 import { Devs } from "@utils/constants";
+import { hyperTranslate } from "@utils/hyperLanguage";
 import definePlugin, { OptionType } from "@utils/types";
 import { CloudUpload } from "@vencord/discord-types";
 import { findByCodeLazy } from "@webpack";
@@ -37,26 +38,26 @@ const tarExtMatcher = /\.tar\.\w+$/;
 
 const settings = definePluginSettings({
     anonymiseByDefault: {
-        description: "Whether to anonymise file names by default",
+        description: hyperTranslate("Whether to anonymise file names by default"),
         type: OptionType.BOOLEAN,
         default: true,
     },
     method: {
-        description: "Anonymising method",
+        description: hyperTranslate("Anonymising method"),
         type: OptionType.SELECT,
         options: [
-            { label: "Random Characters", value: Methods.Random, default: true },
-            { label: "Consistent", value: Methods.Consistent },
-            { label: "Timestamp", value: Methods.Timestamp },
+            { label: hyperTranslate("Random Characters"), value: Methods.Random, default: true },
+            { label: hyperTranslate("Consistent"), value: Methods.Consistent },
+            { label: hyperTranslate("Timestamp"), value: Methods.Timestamp },
         ],
     },
     randomisedLength: {
-        description: "Random characters length",
+        description: hyperTranslate("Random characters length"),
         type: OptionType.NUMBER,
         default: 7
     },
     consistent: {
-        description: "Consistent filename",
+        description: hyperTranslate("Consistent filename"),
         type: OptionType.STRING,
         default: "image"
     },
@@ -72,7 +73,7 @@ const settings = definePluginSettings({
 export default definePlugin({
     name: "AnonymiseFileNames",
     authors: [Devs.fawn],
-    description: "Anonymise uploaded file names",
+    description: hyperTranslate("Anonymise uploaded file names"),
     tags: ["Privacy", "Utility"],
     settings,
 
@@ -105,7 +106,7 @@ export default definePlugin({
 
         return (
             <ActionBarIcon
-                tooltip={anonymise ? "Using anonymous file name" : "Using normal file name"}
+                tooltip={anonymise ? hyperTranslate("Using anonymous file name") : hyperTranslate("Using normal file name")}
                 onClick={onToggleAnonymise}
             >
                 {anonymise

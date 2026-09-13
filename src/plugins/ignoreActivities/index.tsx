@@ -14,6 +14,7 @@ import { Heading } from "@components/Heading";
 import { Paragraph } from "@components/Paragraph";
 import CustomRpcPlugin from "@plugins/customRPC";
 import { Devs } from "@utils/constants";
+import { hyperTranslate } from "@utils/hyperLanguage";
 import { Margins } from "@utils/margins";
 import definePlugin, { OptionType } from "@utils/types";
 import { FluxDispatcher, Menu, RunningGameStore, showToast, TextArea, Toasts, Tooltip, useEffect, useState } from "@webpack/common";
@@ -85,7 +86,7 @@ function recalculateActivities() {
 function ImportCustomRPCComponent() {
     return (
         <Flex flexDirection="column">
-            <Paragraph>Import the application id of the CustomRPC plugin to the filter list</Paragraph>
+            <Paragraph>{hyperTranslate("Import the application id of the CustomRPC plugin to the filter list")}</Paragraph>
             <div>
                 <Button
                     onClick={() => {
@@ -100,8 +101,7 @@ function ImportCustomRPCComponent() {
                         }
                     }}
                 >
-                    Import CustomRPC ID
-                </Button>
+                    {hyperTranslate("Import CustomRPC ID")}</Button>
             </div>
         </Flex>
     );
@@ -135,8 +135,8 @@ function IdsListComponent(props: { setValue: (value: string) => void; }) {
 
     return (
         <section>
-            <Heading tag="h3">Filter List</Heading>
-            <Paragraph className={Margins.bottom8}>Comma separated list of activity IDs to filter (Useful for filtering specific RPC activities and CustomRPC</Paragraph>
+            <Heading tag="h3">{hyperTranslate("Filter List")}</Heading>
+            <Paragraph className={Margins.bottom8}>{hyperTranslate("Comma separated list of activity IDs to filter (Useful for filtering specific RPC activities and CustomRPC")}</Paragraph>
             <TextArea
                 type="text"
                 value={idsList}
@@ -191,7 +191,7 @@ const registeredGameOverflowContextMenuPatch: NavContextMenuPatchCallback = (chi
     children.push(
         <Menu.MenuCheckboxItem
             id="ignore-activities-toggle-activity"
-            label="Enable Activity"
+            label={hyperTranslate("Enable Activity")}
             checked={!isCurrentlyIgnored}
             action={handleToggleActivity}
         />
@@ -205,15 +205,15 @@ const settings = definePluginSettings({
     },
     listMode: {
         type: OptionType.SELECT,
-        description: "Change the mode of the filter list",
+        description: hyperTranslate("Change the mode of the filter list"),
         options: [
             {
-                label: "Whitelist",
+                label: hyperTranslate("Whitelist"),
                 value: FilterMode.Whitelist,
                 default: true
             },
             {
-                label: "Blacklist",
+                label: hyperTranslate("Blacklist"),
                 value: FilterMode.Blacklist,
             }
         ],
@@ -231,31 +231,31 @@ const settings = definePluginSettings({
     },
     ignorePlaying: {
         type: OptionType.BOOLEAN,
-        description: "Ignore all playing activities (These are usually game and RPC activities)",
+        description: hyperTranslate("Ignore all playing activities (These are usually game and RPC activities)"),
         default: false,
         onChange: recalculateActivities
     },
     ignoreStreaming: {
         type: OptionType.BOOLEAN,
-        description: "Ignore all streaming activities",
+        description: hyperTranslate("Ignore all streaming activities"),
         default: false,
         onChange: recalculateActivities
     },
     ignoreListening: {
         type: OptionType.BOOLEAN,
-        description: "Ignore all listening activities (These are usually Spotify activities)",
+        description: hyperTranslate("Ignore all listening activities (These are usually Spotify activities)"),
         default: false,
         onChange: recalculateActivities
     },
     ignoreWatching: {
         type: OptionType.BOOLEAN,
-        description: "Ignore all watching activities",
+        description: hyperTranslate("Ignore all watching activities"),
         default: false,
         onChange: recalculateActivities
     },
     ignoreCompeting: {
         type: OptionType.BOOLEAN,
-        description: "Ignore all competing activities (These are normally special game activities)",
+        description: hyperTranslate("Ignore all competing activities (These are normally special game activities)"),
         default: false,
         onChange: recalculateActivities
     },
@@ -285,7 +285,7 @@ function isActivityTypeIgnored(type: number, id?: string) {
 export default definePlugin({
     name: "IgnoreActivities",
     authors: [Devs.Nuckyz, Devs.Kylie],
-    description: "Ignore activities from showing up on your status ONLY. You can configure which ones are specifically ignored from the Registered Games and Activities tabs, or use the general settings below",
+    description: hyperTranslate("Ignore activities from showing up on your status ONLY. You can configure which ones are specifically ignored from the Registered Games and Activities tabs, or use the general settings below"),
     tags: ["Activity", "Privacy", "Customisation"],
     dependencies: ["UserSettingsAPI"],
     settings,

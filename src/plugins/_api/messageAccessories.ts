@@ -17,11 +17,12 @@
 */
 
 import { Devs } from "@utils/constants";
+import { hyperTranslate } from "@utils/hyperLanguage";
 import definePlugin from "@utils/types";
 
 export default definePlugin({
     name: "MessageAccessoriesAPI",
-    description: "API to add message accessories.",
+    description: hyperTranslate("API to add message accessories."),
     authors: [Devs.Cyn],
     patches: [
         {

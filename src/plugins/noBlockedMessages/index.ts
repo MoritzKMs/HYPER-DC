@@ -18,6 +18,7 @@
 
 import { definePluginSettings, migratePluginSetting } from "@api/Settings";
 import { Devs } from "@utils/constants";
+import { hyperTranslate } from "@utils/hyperLanguage";
 import { runtimeHashMessageKey } from "@utils/intlHash";
 import { Logger } from "@utils/Logger";
 import definePlugin, { OptionType } from "@utils/types";
@@ -33,13 +34,13 @@ interface MessageDeleteProps {
 migratePluginSetting("NoBlockedMessages", "ignoreBlockedMessages", "ignoreMessages");
 const settings = definePluginSettings({
     ignoreMessages: {
-        description: "Completely ignores incoming messages from blocked and ignored (if enabled) users",
+        description: hyperTranslate("Completely ignores incoming messages from blocked and ignored (if enabled) users"),
         type: OptionType.BOOLEAN,
         default: false,
         restartNeeded: true
     },
     applyToIgnoredUsers: {
-        description: "Additionally apply to 'ignored' users",
+        description: hyperTranslate("Additionally apply to 'ignored' users"),
         type: OptionType.BOOLEAN,
         default: true,
         restartNeeded: false
@@ -48,7 +49,7 @@ const settings = definePluginSettings({
 
 export default definePlugin({
     name: "NoBlockedMessages",
-    description: "Hides all blocked/ignored messages from chat completely",
+    description: hyperTranslate("Hides all blocked/ignored messages from chat completely"),
     authors: [Devs.rushii, Devs.Samu, Devs.jamesbt365],
     tags: ["Accessibility", "Chat"],
     settings,

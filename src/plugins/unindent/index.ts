@@ -18,11 +18,12 @@
 
 import { MessageObject } from "@api/MessageEvents";
 import { Devs } from "@utils/constants";
+import { hyperTranslate } from "@utils/hyperLanguage";
 import definePlugin from "@utils/types";
 
 export default definePlugin({
     name: "Unindent",
-    description: "Trims leading indentation from codeblocks",
+    description: hyperTranslate("Trims leading indentation from codeblocks"),
     tags: ["Chat", "Utility"],
     authors: [Devs.Ven],
 

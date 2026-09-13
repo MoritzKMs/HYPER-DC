@@ -18,6 +18,7 @@
 
 import { definePluginSettings } from "@api/Settings";
 import { Devs } from "@utils/constants";
+import { hyperTranslate } from "@utils/hyperLanguage";
 import { Logger } from "@utils/Logger";
 import definePlugin, { OptionType, PluginSettingDef } from "@utils/types";
 import { GuildMember, Role } from "@vencord/discord-types";
@@ -38,7 +39,7 @@ const settings = definePluginSettings({
 export default definePlugin({
     name: "ShowHiddenThings",
     searchTerms: ["ShowTimeouts", "ShowInvitesPaused", "ShowModView", "DisableDiscoveryFilters"],
-    description: "Displays various hidden & moderator-only things regardless of permissions.",
+    description: hyperTranslate("Displays various hidden & moderator-only things regardless of permissions."),
     tags: ["Servers", "Utility"],
     authors: [Devs.Dolfies],
     settings,

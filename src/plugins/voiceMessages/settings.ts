@@ -17,17 +17,18 @@
 */
 
 import { definePluginSettings } from "@api/Settings";
+import { hyperTranslate } from "@utils/hyperLanguage";
 import { OptionType } from "@utils/types";
 
 export const settings = definePluginSettings({
     noiseSuppression: {
         type: OptionType.BOOLEAN,
-        description: "Noise Suppression",
+        description: hyperTranslate("Noise Suppression"),
         default: true,
     },
     echoCancellation: {
         type: OptionType.BOOLEAN,
-        description: "Echo Cancellation",
+        description: hyperTranslate("Echo Cancellation"),
         default: true,
     },
 });

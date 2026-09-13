@@ -6,6 +6,7 @@
 
 import { addThemeChangeListener, removeThemeChangeListener } from "@api/Themes";
 import { Devs } from "@utils/constants";
+import { hyperTranslate } from "@utils/hyperLanguage";
 import { sleep } from "@utils/misc";
 import definePlugin from "@utils/types";
 import { FluxStore } from "@vencord/discord-types";
@@ -53,7 +54,7 @@ async function setManifest() {
         background_color: colorToHex(styles.getPropertyValue("--background-base-lower")),
         theme_color: colorToHex(styles.getPropertyValue("--background-base-lowest")),
         scope: endpoint + "/", // scope of all possible URL"s
-        description: "Imagine a place...",
+        description: hyperTranslate("Imagine a place..."),
         orientation: "any",
         categories: ["social"],
         shortcuts: [
@@ -67,13 +68,13 @@ async function setManifest() {
         launch_handler: { client_mode: "navigate-existing" },
         // Strange CDN but these links are straight from discord.com
         screenshots: [
-            { src: "https://cdn.prod.website-files.com/6257adef93867e50d84d30e2/664723dbe91e5ee8db15cfe7_Discord_Website_Refresh_Activities.webp", sizes: "691x720", type: "image/webp", label: "Activities", form_factor: "wide" },
-            { src: "https://cdn.prod.website-files.com/6257adef93867e50d84d30e2/664723da372be4a12a3dc9df_Discord_Website_Refresh_Hop-In.webp", sizes: "939x639", type: "image/webp", label: "Hop In", form_factor: "wide" },
-            { src: "https://cdn.prod.website-files.com/6257adef93867e50d84d30e2/664723da94dd30e64e74357a_Discord_Website_Refresh_StatusHover.webp", sizes: "904x708", type: "image/webp", label: "Status", form_factor: "wide" },
-            { src: "https://cdn.prod.website-files.com/6257adef93867e50d84d30e2/664723da0a2e6be98fa5216b_Discord_Website_Refresh_Emojis%2BSoundboard-p-1080.webp", sizes: "1080x918", type: "image/webp", label: "Emojis", form_factor: "wide" },
-            { src: "https://cdn.prod.website-files.com/6257adef93867e50d84d30e2/6638bdbd1150b7c8509fb2be_Discord_Website_Refresh_SameRoom.webp", sizes: "796x593", type: "image/webp", label: "Rooms", form_factor: "wide" },
-            { src: "https://cdn.prod.website-files.com/6257adef93867e50d84d30e2/68407334ccf9aeca71903bab_home-new.webp", sizes: "1716×1606", type: "image/webp", label: "Discord", form_factor: "wide" },
-            { src: "https://cdn.prod.website-files.com/6257adef93867e50d84d30e2/6638bcb99c2b8dc14e6f67fd_Discord_Website_Refresh_Platforms.webp", sizes: "760x580", type: "image/webp", label: "Platforms", form_factor: "wide" }
+            { src: "https://cdn.prod.website-files.com/6257adef93867e50d84d30e2/664723dbe91e5ee8db15cfe7_Discord_Website_Refresh_Activities.webp", sizes: "691x720", type: "image/webp", label: hyperTranslate("Activities"), form_factor: "wide" },
+            { src: "https://cdn.prod.website-files.com/6257adef93867e50d84d30e2/664723da372be4a12a3dc9df_Discord_Website_Refresh_Hop-In.webp", sizes: "939x639", type: "image/webp", label: hyperTranslate("Hop In"), form_factor: "wide" },
+            { src: "https://cdn.prod.website-files.com/6257adef93867e50d84d30e2/664723da94dd30e64e74357a_Discord_Website_Refresh_StatusHover.webp", sizes: "904x708", type: "image/webp", label: hyperTranslate("Status"), form_factor: "wide" },
+            { src: "https://cdn.prod.website-files.com/6257adef93867e50d84d30e2/664723da0a2e6be98fa5216b_Discord_Website_Refresh_Emojis%2BSoundboard-p-1080.webp", sizes: "1080x918", type: "image/webp", label: hyperTranslate("Emojis"), form_factor: "wide" },
+            { src: "https://cdn.prod.website-files.com/6257adef93867e50d84d30e2/6638bdbd1150b7c8509fb2be_Discord_Website_Refresh_SameRoom.webp", sizes: "796x593", type: "image/webp", label: hyperTranslate("Rooms"), form_factor: "wide" },
+            { src: "https://cdn.prod.website-files.com/6257adef93867e50d84d30e2/68407334ccf9aeca71903bab_home-new.webp", sizes: "1716×1606", type: "image/webp", label: hyperTranslate("Discord"), form_factor: "wide" },
+            { src: "https://cdn.prod.website-files.com/6257adef93867e50d84d30e2/6638bcb99c2b8dc14e6f67fd_Discord_Website_Refresh_Platforms.webp", sizes: "760x580", type: "image/webp", label: hyperTranslate("Platforms"), form_factor: "wide" }
         ],
         icons: [
             {
@@ -98,7 +99,7 @@ async function setManifest() {
 
 export default definePlugin({
     name: "WebPWA",
-    description: "Makes Discord installable as an App (PWA). Enables notification badges, global key-binds and Discord's custom title bar.",
+    description: hyperTranslate("Makes Discord installable as an App (PWA). Enables notification badges, global key-binds and Discord's custom title bar."),
     authors: [Devs.ThaUnknown],
     tags: ["Utility"],
     managedStyle,
@@ -183,8 +184,7 @@ export default definePlugin({
 
     renderKeybindsButton: () => (
         <div>
-            Custom global Push To X keybinds are supported. Navigate to <a onClick={() => { window.postMessage({ type: "OPEN_SHORTCUTS" }, "*"); }}>about://extensions/shortcuts</a> to change them. Hold To X keybinds are not supported.
-        </div>
+            {hyperTranslate("Custom global Push To X keybinds are supported. Navigate to") + " "}<a onClick={() => { window.postMessage({ type: "OPEN_SHORTCUTS" }, "*"); }}>{hyperTranslate("about://extensions/shortcuts")}</a> {hyperTranslate("to change them. Hold To X keybinds are not supported.")}</div>
     ),
 
     // Vesktop/src/renderer/appBadge.ts

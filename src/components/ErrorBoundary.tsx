@@ -16,6 +16,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+import { hyperTranslate } from "@utils/hyperLanguage";
 import { LazyComponent, LazyComponentWrapper } from "@utils/lazyReact";
 import { Logger } from "@utils/Logger";
 import { Margins } from "@utils/margins";
@@ -100,7 +101,7 @@ const ErrorBoundary = LazyComponent(() => {
 
             return (
                 <ErrorCard style={{ overflow: "hidden" }}>
-                    <h1>Oh no!</h1>
+                    <h1>{hyperTranslate("Oh no!")}</h1>
                     <p>{msg}</p>
                     <code>
                         {this.state.message}

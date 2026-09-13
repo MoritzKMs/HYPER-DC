@@ -18,6 +18,7 @@
 
 import { ChatBarButton, ChatBarButtonFactory } from "@api/ChatButtons";
 import { TooltipContainer } from "@components/TooltipContainer";
+import { hyperTranslate } from "@utils/hyperLanguage";
 import { classes } from "@utils/misc";
 import { IconComponent } from "@utils/types";
 import { RenderModalProps } from "@vencord/discord-types";
@@ -48,8 +49,8 @@ function AutoTranslateConfirmModal(props: RenderModalProps) {
     return (
         <ConfirmModal
             {...props}
-            title="Vencord Auto-Translate Enabled"
-            subtitle="You just enabled Auto Translate! Any message will automatically be translated before being sent."
+            title={hyperTranslate("Vencord Auto-Translate Enabled")}
+            subtitle={hyperTranslate("You just enabled Auto Translate! Any message will automatically be translated before being sent.")}
             confirmText="Disable Auto-Translate"
             onConfirm={() => settings.store.autoTranslate = false}
             cancelText="Got it"
@@ -82,7 +83,7 @@ export const TranslateChatBarIcon: ChatBarButtonFactory = ({ isMainChat }) => {
 
     const button = (
         <ChatBarButton
-            tooltip="Open Translate Modal"
+            tooltip={hyperTranslate("Open Translate Modal")}
             onClick={e => {
                 if (e.shiftKey) return toggle();
                 else openTranslateModal();

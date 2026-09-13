@@ -1,20 +1,8 @@
 /*
- * Vencord, a modification for Discord's desktop app
- * Copyright (c) 2022 Sofia Lima
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <https://www.gnu.org/licenses/>.
-*/
+ * Vencord, a Discord client mod
+ * Copyright (c) 2026 Vendicated and contributors
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ */
 
 import { definePluginSettings, migratePluginSetting, migratePluginSettings } from "@api/Settings";
 import { LinkButton } from "@components/Button";
@@ -23,6 +11,7 @@ import { Heading } from "@components/Heading";
 import { Margins } from "@components/margins";
 import { Paragraph } from "@components/Paragraph";
 import { Devs } from "@utils/constants";
+import { hyperTranslate } from "@utils/hyperLanguage";
 import definePlugin, { OptionType } from "@utils/types";
 import { Activity, ActivityAssets, ActivityButton } from "@vencord/discord-types";
 import { ActivityFlags, ActivityStatusDisplayType, ActivityType } from "@vencord/discord-types/enums";
@@ -77,152 +66,152 @@ function setActivity(activity: Activity | null) {
 
 export const settings = definePluginSettings({
     scrobblerBackend: {
-        description: "The scrobbler backend to use.",
+        description: hyperTranslate("The scrobbler backend to use."),
         type: OptionType.SELECT,
         options: [
             {
-                "label": "Last.FM",
+                "label": hyperTranslate("Last.FM"),
                 "value": "lastfm",
                 "default": true
             },
             {
-                "label": "ListenBrainz",
+                "label": hyperTranslate("ListenBrainz"),
                 "value": "listenbrainz"
             },
             {
-                "label": "ListenBrainz Compatible (self-hosted)",
+                "label": hyperTranslate("ListenBrainz Compatible (self-hosted)"),
                 "value": "listenbrainz-compatible"
             }
         ] as const
     },
     instanceBaseURL: {
-        description: "The base url of your ListenBrainz instance.",
+        description: hyperTranslate("The base url of your ListenBrainz instance."),
         type: OptionType.STRING,
         placeholder: "https://example.org",
         onChange: invalidateListenBrainzCache
     },
     instanceAPIBaseUrl: {
-        description: "The base url of your ListenBrainz API.",
+        description: hyperTranslate("The base url of your ListenBrainz API."),
         type: OptionType.STRING,
         placeholder: "https://api.example.org",
         onChange: invalidateListenBrainzCache
     },
     apiKey: {
-        displayName: "API Key",
-        description: "Last.fm API key. Not required but highly recommended to avoid rate limiting with our shared key",
+        displayName: hyperTranslate("API Key"),
+        description: hyperTranslate("Last.fm API key. Not required but highly recommended to avoid rate limiting with our shared key"),
         type: OptionType.STRING,
     },
     username: {
-        description: "Username",
+        description: hyperTranslate("Username"),
         type: OptionType.STRING,
     },
     shareUsername: {
-        description: "Show link to scrobbler profile",
+        description: hyperTranslate("Show link to scrobbler profile"),
         type: OptionType.BOOLEAN,
         default: false,
     },
     clickableLinks: {
-        description: "Make track, artist and album names clickable links",
+        description: hyperTranslate("Make track, artist and album names clickable links"),
         type: OptionType.BOOLEAN,
         default: true,
     },
     hideWithSpotify: {
-        description: "Hide presence if Spotify is running",
+        description: hyperTranslate("Hide presence if Spotify is running"),
         type: OptionType.BOOLEAN,
         default: true,
     },
     hideWithActivity: {
-        description: "Hide presence if you have any other presence",
+        description: hyperTranslate("Hide presence if you have any other presence"),
         type: OptionType.BOOLEAN,
         default: false,
     },
     statusName: {
-        description: "Custom status text. You can use the following variables: {artist} | {album} | {title}",
+        description: hyperTranslate("Custom status text. You can use the following variables: {artist} | {album} | {title}"),
         type: OptionType.STRING,
         default: "some music",
     },
     statusDisplayType: {
-        description: "Show the track / artist name in the member list",
+        description: hyperTranslate("Show the track / artist name in the member list"),
         type: OptionType.SELECT,
         options: [
             {
-                label: "Don't show (shows generic listening message)",
+                label: hyperTranslate("Don't show (shows generic listening message)"),
                 value: "off"
             },
             {
-                label: "Show artist name",
+                label: hyperTranslate("Show artist name"),
                 value: "artist",
                 default: true
             },
             {
-                label: "Show track name",
+                label: hyperTranslate("Show track name"),
                 value: "track"
             }
         ]
     },
     nameFormat: {
-        description: "Show name of song and artist in status name",
+        description: hyperTranslate("Show name of song and artist in status name"),
         type: OptionType.SELECT,
         options: [
             {
-                label: "Use custom status name",
+                label: hyperTranslate("Use custom status name"),
                 value: NameFormat.StatusName,
                 default: true
             },
             {
-                label: "Use music service name (falls back to custom status text)",
+                label: hyperTranslate("Use music service name (falls back to custom status text)"),
                 value: NameFormat.ServiceName
             },
             {
-                label: "Use format 'artist - song'",
+                label: hyperTranslate("Use format 'artist - song'"),
                 value: NameFormat.ArtistFirst
             },
             {
-                label: "Use format 'song - artist'",
+                label: hyperTranslate("Use format 'song - artist'"),
                 value: NameFormat.SongFirst
             },
             {
-                label: "Use artist name only",
+                label: hyperTranslate("Use artist name only"),
                 value: NameFormat.ArtistOnly
             },
             {
-                label: "Use song name only",
+                label: hyperTranslate("Use song name only"),
                 value: NameFormat.SongOnly
             },
             {
-                label: "Use album name (falls back to custom status text if song has no album)",
+                label: hyperTranslate("Use album name (falls back to custom status text if song has no album)"),
                 value: NameFormat.AlbumName
             }
         ],
     },
     useListeningStatus: {
-        description: 'Show "Listening to" status instead of "Playing"',
+        description: hyperTranslate("Show \"Listening to\" status instead of \"Playing\""),
         type: OptionType.BOOLEAN,
         default: false,
     },
     missingArt: {
-        description: "When album or album art is missing",
+        description: hyperTranslate("When album or album art is missing"),
         type: OptionType.SELECT,
         options: [
             {
-                label: "Use large scrobbler logo",
+                label: hyperTranslate("Use large scrobbler logo"),
                 value: "logo",
                 default: true
             },
             {
-                label: "Use generic placeholder",
+                label: hyperTranslate("Use generic placeholder"),
                 value: "placeholder"
             }
         ],
     },
     showLogo: {
-        displayName: "Show Scrobbler Logo",
-        description: "Show the scrobbler service logo by the album cover",
+        displayName: hyperTranslate("Show Scrobbler Logo"),
+        description: hyperTranslate("Show the scrobbler service logo by the album cover"),
         type: OptionType.BOOLEAN,
         default: true,
     },
     showAlbumCover: {
-        description: "Show album cover. Disabling this will display a placeholder. Useful if your music has inappropriate art",
+        description: hyperTranslate("Show album cover. Disabling this will display a placeholder. Useful if your music has inappropriate art"),
         type: OptionType.BOOLEAN,
         default: true,
     }
@@ -236,7 +225,7 @@ migratePluginSettings("MusicRichPresence", "LastFMRichPresence");
 migratePluginSetting("MusicRichPresence", "showLastFmLogo", "showLogo");
 export default definePlugin({
     name: "MusicRichPresence",
-    description: "Rich Presence for Last.FM/Listenbrainz",
+    description: hyperTranslate("Rich Presence for Last.FM/Listenbrainz"),
     tags: ["Activity", "Media"],
     searchTerms: ["lastfm", "LastFMRichPresence"],
     authors: [Devs.Rini, Devs.Ven, Devs.angelcube, Devs.RuiNtD, Devs.blahajZip, Devs.archeruwu],
@@ -249,10 +238,10 @@ export default definePlugin({
 
         return (
             <Card>
-                <Heading tag="h2">Last.FM</Heading>
-                <Heading tag="h5">How to create an API key</Heading>
-                <Paragraph>Set <strong>Application name</strong> and <strong>Application description</strong> to anything and leave the rest blank.</Paragraph>
-                <LinkButton size="small" href="https://www.last.fm/api/account/create" className={Margins.top8}>Create API Key</LinkButton>
+                <Heading tag="h2">{hyperTranslate("Last.FM")}</Heading>
+                <Heading tag="h5">{hyperTranslate("How to create an API key")}</Heading>
+                <Paragraph>{hyperTranslate("Set") + " "}<strong>{hyperTranslate("Application name")}</strong> {hyperTranslate("and") + " "}<strong>{hyperTranslate("Application description")}</strong> {hyperTranslate("to anything and leave the rest blank.")}</Paragraph>
+                <LinkButton size="small" href="https://www.last.fm/api/account/create" className={Margins.top8}>{hyperTranslate("Create API Key")}</LinkButton>
             </Card>
         );
     },
@@ -389,3 +378,4 @@ export default definePlugin({
         return activity;
     }
 });
+

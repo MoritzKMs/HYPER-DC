@@ -17,11 +17,12 @@
 */
 
 import { Devs } from "@utils/constants";
+import { hyperTranslate } from "@utils/hyperLanguage";
 import definePlugin from "@utils/types";
 
 export default definePlugin({
     name: "NoOnboardingDelay",
-    description: "Skips the slow and annoying onboarding delay",
+    description: hyperTranslate("Skips the slow and annoying onboarding delay"),
     tags: ["Utility", "Servers"],
     authors: [Devs.nekohaxx],
     patches: [

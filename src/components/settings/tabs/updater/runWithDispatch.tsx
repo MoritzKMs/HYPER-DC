@@ -5,6 +5,7 @@
  */
 
 import { ErrorCard } from "@components/ErrorCard";
+import { hyperTranslate } from "@utils/hyperLanguage";
 import { UpdateLogger } from "@utils/updater";
 import { ConfirmModal,openModal, Parser } from "@webpack/common";
 
@@ -36,7 +37,7 @@ export function runWithDispatch(dispatch: React.Dispatch<React.SetStateAction<bo
             openModal(props => (
                 <ConfirmModal
                     {...props}
-                    title="Oops!"
+                    title={hyperTranslate("Oops!")}
                     confirmText="OK"
                     variant="primary"
                 >

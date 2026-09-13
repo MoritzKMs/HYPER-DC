@@ -20,6 +20,7 @@ import { addServerListElement, removeServerListElement, ServerListRenderPosition
 import { definePluginSettings } from "@api/Settings";
 import ErrorBoundary from "@components/ErrorBoundary";
 import { Devs } from "@utils/constants";
+import { hyperTranslate } from "@utils/hyperLanguage";
 import definePlugin, { OptionType } from "@utils/types";
 import { findStoreLazy } from "@webpack";
 import { GuildStore, PresenceStore, RelationshipStore, useStateFromStores } from "@webpack/common";
@@ -34,12 +35,12 @@ const UserGuildJoinRequestStore = findStoreLazy("UserGuildJoinRequestStore");
 
 const settings = definePluginSettings({
     mode: {
-        description: "Mode",
+        description: hyperTranslate("Mode"),
         type: OptionType.SELECT,
         options: [
-            { label: "Only online friend count", value: IndicatorType.FRIEND, default: true },
-            { label: "Only server count", value: IndicatorType.SERVER },
-            { label: "Both server and online friend counts", value: IndicatorType.BOTH },
+            { label: hyperTranslate("Only online friend count"), value: IndicatorType.FRIEND, default: true },
+            { label: hyperTranslate("Only server count"), value: IndicatorType.SERVER },
+            { label: hyperTranslate("Both server and online friend counts"), value: IndicatorType.BOTH },
         ]
     }
 });
@@ -71,8 +72,7 @@ function FriendsIndicator() {
             textTransform: "uppercase",
             textAlign: "center",
         }}>
-            {onlineFriendsCount} online
-        </span>
+            {onlineFriendsCount} {hyperTranslate("online")}</span>
     );
 }
 
@@ -95,14 +95,13 @@ function ServersIndicator() {
             textTransform: "uppercase",
             textAlign: "center",
         }}>
-            {guildCount} servers
-        </span>
+            {guildCount} {hyperTranslate("servers")}</span>
     );
 }
 
 export default definePlugin({
     name: "ServerListIndicators",
-    description: "Add online friend count or server count in the server list",
+    description: hyperTranslate("Add online friend count or server count in the server list"),
     tags: ["Servers", "Appearance"],
     authors: [Devs.Rini],
     dependencies: ["ServerListAPI"],

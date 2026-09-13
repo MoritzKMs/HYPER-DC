@@ -21,6 +21,7 @@ import { updateMessage } from "@api/MessageUpdater";
 import { definePluginSettings } from "@api/Settings";
 import { getUserSettingLazy } from "@api/UserSettings";
 import { Devs } from "@utils/constants.js";
+import { hyperTranslate } from "@utils/hyperLanguage";
 import { Queue } from "@utils/Queue";
 import definePlugin, { OptionType } from "@utils/types";
 import { Channel, Message } from "@vencord/discord-types";
@@ -73,46 +74,46 @@ const messageFetchQueue = new Queue();
 
 const settings = definePluginSettings({
     messageBackgroundColor: {
-        description: "Background color for messages in rich embeds",
+        description: hyperTranslate("Background color for messages in rich embeds"),
         type: OptionType.BOOLEAN
     },
     automodEmbeds: {
-        description: "Use automod embeds instead of rich embeds (smaller but less info)",
+        description: hyperTranslate("Use automod embeds instead of rich embeds (smaller but less info)"),
         type: OptionType.SELECT,
         options: [
             {
-                label: "Always use automod embeds",
+                label: hyperTranslate("Always use automod embeds"),
                 value: "always"
             },
             {
-                label: "Prefer automod embeds, but use rich embeds if some content can't be shown",
+                label: hyperTranslate("Prefer automod embeds, but use rich embeds if some content can't be shown"),
                 value: "prefer"
             },
             {
-                label: "Never use automod embeds",
+                label: hyperTranslate("Never use automod embeds"),
                 value: "never",
                 default: true
             }
         ]
     },
     listMode: {
-        description: "Whether to use ID list as blacklist or whitelist",
+        description: hyperTranslate("Whether to use ID list as blacklist or whitelist"),
         type: OptionType.SELECT,
         options: [
             {
-                label: "Blacklist",
+                label: hyperTranslate("Blacklist"),
                 value: "blacklist",
                 default: true
             },
             {
-                label: "Whitelist",
+                label: hyperTranslate("Whitelist"),
                 value: "whitelist"
             }
         ]
     },
     idList: {
-        displayName: "ID List",
-        description: "Guild/channel/user IDs to blacklist or whitelist (separate with comma)",
+        displayName: hyperTranslate("ID List"),
+        description: hyperTranslate("Guild/channel/user IDs to blacklist or whitelist (separate with comma)"),
         type: OptionType.STRING,
         default: "",
         multiline: true,
@@ -121,8 +122,7 @@ const settings = definePluginSettings({
         type: OptionType.COMPONENT,
         component: () => (
             <Button onClick={() => messageCache.clear()}>
-                Clear the linked message cache
-            </Button>
+                {hyperTranslate("Clear the linked message cache")}</Button>
         )
     }
 });
@@ -370,7 +370,7 @@ function AutomodEmbedAccessory(props: MessageEmbedProps): JSX.Element | null {
 
 export default definePlugin({
     name: "MessageLinkEmbeds",
-    description: "Adds a preview to messages that link another message",
+    description: hyperTranslate("Adds a preview to messages that link another message"),
     tags: ["Chat", "Appearance"],
     authors: [Devs.TheSun, Devs.Ven, Devs.RyanCaoDev],
     dependencies: ["MessageAccessoriesAPI", "MessageUpdaterAPI", "UserSettingsAPI"],

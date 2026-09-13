@@ -5,12 +5,13 @@
  */
 
 import { Devs } from "@utils/constants.js";
+import { hyperTranslate } from "@utils/hyperLanguage";
 import definePlugin from "@utils/types";
 
 export default definePlugin({
     name: "NoMaskedUrlPaste",
     authors: [Devs.CatNoir],
-    description: "Pasting a link while having text selected will not paste as masked URL",
+    description: hyperTranslate("Pasting a link while having text selected will not paste as masked URL"),
     tags: ["Chat", "Utility"],
     patches: [
         {

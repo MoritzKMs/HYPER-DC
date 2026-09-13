@@ -19,6 +19,7 @@ import DecorationGridNone from "@plugins/decor/ui/components/DecorationGridNone"
 import DecorDecorationGridDecoration from "@plugins/decor/ui/components/DecorDecorationGridDecoration";
 import SectionedGridList from "@plugins/decor/ui/components/SectionedGridList";
 import { copyWithToast, openInviteModal } from "@utils/discord";
+import { hyperTranslate } from "@utils/hyperLanguage";
 import { Margins } from "@utils/margins";
 import { Queue } from "@utils/Queue";
 import { RenderModalProps, User } from "@vencord/discord-types";
@@ -120,8 +121,8 @@ function ChangeDecorationModal(props: RenderModalProps) {
 
     const data = [
         {
-            title: "Your Decorations",
-            subtitle: "You can delete your own decorations by right clicking on them.",
+            title: hyperTranslate("Your Decorations"),
+            subtitle: hyperTranslate("You can delete your own decorations by right clicking on them."),
             sectionKey: "ownDecorations",
             items: ["none", ...ownDecorations, "create"]
         },
@@ -136,7 +137,7 @@ function ChangeDecorationModal(props: RenderModalProps) {
 
     return <Modal
         {...props}
-        title="Change Decoration"
+        title={hyperTranslate("Change Decoration")}
         size="lg"
         actions={[
             {
@@ -173,15 +174,14 @@ function ChangeDecorationModal(props: RenderModalProps) {
                         }}
                         variant="link"
                     >
-                        Discord Server
-                    </NewButton>}
+                        {hyperTranslate("Discord Server")}</NewButton>}
                 </Tooltip>
                 <NewButton
                     onClick={() => openModal(modalProps => (
                         <ConfirmModal
                             {...modalProps}
-                            title="Log Out"
-                            subtitle="Are you sure you want to log out of Decor?"
+                            title={hyperTranslate("Log Out")}
+                            subtitle={hyperTranslate("Are you sure you want to log out of Decor?")}
                             confirmText="Log Out"
                             cancelText="Cancel"
                             onConfirm={() => {
@@ -192,8 +192,7 @@ function ChangeDecorationModal(props: RenderModalProps) {
                     ))}
                     variant="dangerSecondary"
                 >
-                    Log Out
-                </NewButton>
+                    {hyperTranslate("Log Out")}</NewButton>
             </div>
         }
     >
@@ -242,7 +241,7 @@ function ChangeDecorationModal(props: RenderModalProps) {
                     avatarDecoration={avatarDecoration}
                     user={UserStore.getCurrentUser()}
                 />
-                {isActiveDecorationPreset && <Forms.FormTitle className="">Part of the {activeDecorationPreset.name} Preset</Forms.FormTitle>}
+                {isActiveDecorationPreset && <Forms.FormTitle className="">{hyperTranslate("Part of the") + " "}{activeDecorationPreset.name} {hyperTranslate("Preset")}</Forms.FormTitle>}
                 {typeof activeSelectedDecoration === "object" &&
                     <Text
                         variant="text-sm/semibold"
@@ -253,13 +252,12 @@ function ChangeDecorationModal(props: RenderModalProps) {
                 }
                 {activeDecorationHasAuthor && (
                     <Text key={`createdBy-${activeSelectedDecoration.authorId}`}>
-                        Created by {Parser.parse(`<@${activeSelectedDecoration.authorId}>`)}
+                        {hyperTranslate("Created by") + " "}{Parser.parse(`<@${activeSelectedDecoration.authorId}>`)}
                     </Text>
                 )}
                 {isActiveDecorationPreset && (
                     <Button onClick={() => copyWithToast(activeDecorationPreset.id)}>
-                        Copy Preset ID
-                    </Button>
+                        {hyperTranslate("Copy Preset ID")}</Button>
                 )}
             </div>
 

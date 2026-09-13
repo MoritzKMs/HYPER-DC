@@ -18,6 +18,7 @@
 
 import { definePluginSettings } from "@api/Settings";
 import { disableStyle, enableStyle } from "@api/Styles";
+import { hyperTranslate } from "@utils/hyperLanguage";
 import { parseUrl } from "@utils/misc";
 import { wordsFromPascal, wordsToTitle } from "@utils/text";
 import { OptionType } from "@utils/types";
@@ -33,7 +34,7 @@ export type ShikiSettings = typeof settings.store;
 export const settings = definePluginSettings({
     theme: {
         type: OptionType.SELECT,
-        description: "Default themes",
+        description: hyperTranslate("Default themes"),
         options: themeNames.map(themeName => ({
             label: wordsToTitle(wordsFromPascal(themeName)),
             value: themes[themeName],
@@ -43,7 +44,7 @@ export const settings = definePluginSettings({
     },
     customTheme: {
         type: OptionType.STRING,
-        description: "A link to a custom vscode theme",
+        description: hyperTranslate("A link to a custom vscode theme"),
         placeholder: themes.MaterialCandy,
         onChange: value => {
             shiki.setTheme(value || settings.store.theme);
@@ -51,43 +52,43 @@ export const settings = definePluginSettings({
     },
     tryHljs: {
         type: OptionType.SELECT,
-        displayName: "Try Highlight.js",
-        description: "Use the more lightweight default Discord highlighter and theme.",
+        displayName: hyperTranslate("Try Highlight.js"),
+        description: hyperTranslate("Use the more lightweight default Discord highlighter and theme."),
         options: [
             {
-                label: "Never",
+                label: hyperTranslate("Never"),
                 value: HljsSetting.Never,
             },
             {
-                label: "Prefer Shiki instead of Highlight.js",
+                label: hyperTranslate("Prefer Shiki instead of Highlight.js"),
                 value: HljsSetting.Secondary,
                 default: true,
             },
             {
-                label: "Prefer Highlight.js instead of Shiki",
+                label: hyperTranslate("Prefer Highlight.js instead of Shiki"),
                 value: HljsSetting.Primary,
             },
             {
-                label: "Always",
+                label: hyperTranslate("Always"),
                 value: HljsSetting.Always,
             },
         ],
     },
     useDevIcon: {
         type: OptionType.SELECT,
-        description: "How to show language icons on codeblocks",
+        description: hyperTranslate("How to show language icons on codeblocks"),
         options: [
             {
-                label: "Disabled",
+                label: hyperTranslate("Disabled"),
                 value: DeviconSetting.Disabled,
             },
             {
-                label: "Colorless",
+                label: hyperTranslate("Colorless"),
                 value: DeviconSetting.Greyscale,
                 default: true,
             },
             {
-                label: "Colored",
+                label: hyperTranslate("Colored"),
                 value: DeviconSetting.Color,
             },
         ],
@@ -98,7 +99,7 @@ export const settings = definePluginSettings({
     },
     bgOpacity: {
         type: OptionType.SLIDER,
-        description: "Background opacity",
+        description: hyperTranslate("Background opacity"),
         markers: [0, 20, 40, 60, 80, 100],
         default: 100,
         stickToMarkers: false,

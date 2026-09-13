@@ -5,11 +5,12 @@
  */
 
 import { Devs } from "@utils/constants";
+import { hyperTranslate } from "@utils/hyperLanguage";
 import definePlugin from "@utils/types";
 
 export default definePlugin({
     name: "StickerPaste",
-    description: "Makes picking a sticker in the sticker picker insert it into the chatbox instead of instantly sending",
+    description: hyperTranslate("Makes picking a sticker in the sticker picker insert it into the chatbox instead of instantly sending"),
     tags: ["Emotes", "Chat"],
     authors: [Devs.ImBanana],
 

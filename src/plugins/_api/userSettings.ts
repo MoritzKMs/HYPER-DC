@@ -17,11 +17,12 @@
 */
 
 import { Devs } from "@utils/constants";
+import { hyperTranslate } from "@utils/hyperLanguage";
 import definePlugin from "@utils/types";
 
 export default definePlugin({
     name: "UserSettingsAPI",
-    description: "Patches Discord's UserSettings to expose their group and name.",
+    description: hyperTranslate("Patches Discord's UserSettings to expose their group and name."),
     authors: [Devs.Nuckyz],
 
     patches: [

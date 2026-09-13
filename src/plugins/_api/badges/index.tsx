@@ -27,6 +27,7 @@ import DonateButton from "@components/settings/DonateButton";
 import { openContributorModal } from "@components/settings/tabs";
 import { Devs } from "@utils/constants";
 import { copyWithToast } from "@utils/discord";
+import { hyperTranslate } from "@utils/hyperLanguage";
 import { Logger } from "@utils/Logger";
 import { Margins } from "@utils/margins";
 import { shouldShowContributorBadge } from "@utils/misc";
@@ -37,7 +38,7 @@ const CONTRIBUTOR_BADGE = "https://cdn.discordapp.com/emojis/1092089799109775453
 
 const ContributorBadge: ProfileBadge = {
     id: "vencord_contributor_badge",
-    description: "Vencord Contributor",
+    description: hyperTranslate("Vencord Contributor"),
     iconSrc: CONTRIBUTOR_BADGE,
     position: BadgePosition.START,
     shouldShow: ({ userId }) => shouldShowContributorBadge(userId),
@@ -62,12 +63,12 @@ function BadgeContextMenu({ badge }: { badge: Omit<ProfileBadge, "id"> & BadgeUs
         <Menu.Menu
             navId="vc-badge-context"
             onClose={ContextMenuApi.closeContextMenu}
-            aria-label="Badge Options"
+            aria-label={hyperTranslate("Badge Options")}
         >
             {badge.description && (
                 <Menu.MenuItem
                     id="vc-badge-copy-name"
-                    label="Copy Badge Name"
+                    label={hyperTranslate("Copy Badge Name")}
                     action={() => copyWithToast(badge.description!)}
                     leadingAccessory={{ type: "icon", icon: CopyIcon }}
                 />
@@ -75,7 +76,7 @@ function BadgeContextMenu({ badge }: { badge: Omit<ProfileBadge, "id"> & BadgeUs
             {badge.iconSrc && (
                 <Menu.MenuItem
                     id="vc-badge-copy-link"
-                    label="Copy Badge Image Link"
+                    label={hyperTranslate("Copy Badge Image Link")}
                     action={() => copyWithToast(badge.iconSrc!)}
                     leadingAccessory={{ type: "icon", icon: LinkIcon }}
                 />
@@ -86,7 +87,7 @@ function BadgeContextMenu({ badge }: { badge: Omit<ProfileBadge, "id"> & BadgeUs
 
 export default definePlugin({
     name: "BadgeAPI",
-    description: "API to add badges to users",
+    description: hyperTranslate("API to add badges to users"),
     authors: [Devs.Megu, Devs.Ven, Devs.TheSun],
     required: true,
     patches: [
@@ -133,7 +134,7 @@ export default definePlugin({
             await loadBadges(true);
             Toasts.show({
                 id: Toasts.genId(),
-                message: "Successfully refetched badges!",
+                message: hyperTranslate("Successfully refetched badges!"),
                 type: Toasts.Type.SUCCESS
             });
         }
@@ -216,8 +217,7 @@ export default definePlugin({
                                 >
                                     <Flex justifyContent="center" alignItems="center" gap="0.5em">
                                         <Heart />
-                                        Vencord Donor
-                                    </Flex>
+                                        {hyperTranslate("Vencord Donor")}</Flex>
                                 </Forms.FormTitle>
                             }
                         >
@@ -238,11 +238,9 @@ export default definePlugin({
                                 </Flex>
                                 <div style={{ padding: "1em" }}>
                                     <Forms.FormText>
-                                        This Badge is a special perk for Vencord Donors
-                                    </Forms.FormText>
+                                        {hyperTranslate("This Badge is a special perk for Vencord Donors")}</Forms.FormText>
                                     <Forms.FormText className={Margins.top20}>
-                                        Please consider supporting the development of Vencord by becoming a donor. It would mean a lot!!
-                                    </Forms.FormText>
+                                        {hyperTranslate("Please consider supporting the development of Vencord by becoming a donor. It would mean a lot!!")}</Forms.FormText>
                                 </div>
                             </div>
                             <div>

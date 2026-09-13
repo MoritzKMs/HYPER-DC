@@ -10,6 +10,7 @@ import { useAuthorizationStore } from "@plugins/decor/lib/stores/AuthorizationSt
 import { useCurrentUserDecorationsStore } from "@plugins/decor/lib/stores/CurrentUserDecorationsStore";
 import { cl } from "@plugins/decor/ui";
 import { openChangeDecorationModal } from "@plugins/decor/ui/modals/ChangeDecorationModal";
+import { hyperTranslate } from "@utils/hyperLanguage";
 import { findComponentByCodeLazy } from "@webpack";
 import { useEffect } from "@webpack/common";
 
@@ -45,15 +46,13 @@ export default function DecorSection({ hideTitle = false, hideDivider = false, n
                 variant="primary"
                 size="small"
             >
-                Change Decoration
-            </Button>
+                {hyperTranslate("Change Decoration")}</Button>
             {selectedDecoration && authorization.isAuthorized() && <Button
                 onClick={() => selectDecoration(null)}
                 variant="secondary"
                 size={"small"}
             >
-                Remove Decoration
-            </Button>}
+                {hyperTranslate("Remove Decoration")}</Button>}
         </Flex>
     </CustomizationSection>;
 }

@@ -22,6 +22,7 @@ import { BaseText } from "@components/BaseText";
 import ErrorBoundary from "@components/ErrorBoundary";
 import { Devs } from "@utils/constants";
 import { isNonNullish } from "@utils/guards";
+import { hyperTranslate } from "@utils/hyperLanguage";
 import { Logger } from "@utils/Logger";
 import { classes } from "@utils/misc";
 import definePlugin from "@utils/types";
@@ -78,7 +79,7 @@ function renderClickableGDMs(mutualDms: Channel[], onClose?: () => void) {
             </Avatar>
             <div className={MutualsListClasses.details}>
                 <div className={MutualsListClasses.name}>{getGroupDMName(c)}</div>
-                <BaseText size="xs" weight="medium">{c.recipients.length + 1} Members</BaseText>
+                <BaseText size="xs" weight="medium">{c.recipients.length + 1} {hyperTranslate("Members")}</BaseText>
             </div>
         </Clickable>
     ));
@@ -86,7 +87,7 @@ function renderClickableGDMs(mutualDms: Channel[], onClose?: () => void) {
 
 export default definePlugin({
     name: "MutualGroupDMs",
-    description: "Shows mutual group dms in profiles",
+    description: hyperTranslate("Shows mutual group dms in profiles"),
     tags: ["Friends", "Appearance"],
     authors: [Devs.amia],
 
@@ -194,7 +195,7 @@ export default definePlugin({
                     : (
                         <div className={ProfileListClasses.empty}>
                             <div className={ProfileListClasses.textContainer}>
-                                <BaseText tag="h3" size="md" weight="medium" style={{ color: "var(--text-strong)" }}>You don't have any group chats in common</BaseText>
+                                <BaseText tag="h3" size="md" weight="medium" style={{ color: "var(--text-strong)" }}>{hyperTranslate("You don't have any group chats in common")}</BaseText>
                             </div>
                         </div>
                     )

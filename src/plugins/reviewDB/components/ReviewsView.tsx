@@ -21,6 +21,7 @@ import { Review, ReviewType } from "@plugins/reviewDB/entities";
 import { addReview, getReviews, REVIEWS_PER_PAGE, UserReviewsData } from "@plugins/reviewDB/reviewDbApi";
 import { settings } from "@plugins/reviewDB/settings";
 import { cl, showToast } from "@plugins/reviewDB/utils";
+import { hyperTranslate } from "@utils/hyperLanguage";
 import { useAwaiter, useForceUpdater } from "@utils/react";
 import { findByCodeLazy, findByPropsLazy, findComponentByCodeLazy } from "@webpack";
 import { Forms, React, RelationshipStore, useRef, UserStore } from "@webpack/common";
@@ -116,8 +117,7 @@ function ReviewList({ refetch, reviews, hideOwnReview, profileId, type }: { refe
 
             {reviews?.length === 0 && (
                 <Forms.FormText className={cl("placeholder")}>
-                    Looks like nobody reviewed this {type === ReviewType.User ? "user" : "server"} yet. You could be the first!
-                </Forms.FormText>
+                    {hyperTranslate("Looks like nobody reviewed this") + " "}{type === ReviewType.User ? hyperTranslate("user") : hyperTranslate("server")} {hyperTranslate("yet. You could be the first!")}</Forms.FormText>
             )}
         </div>
     );
@@ -147,7 +147,7 @@ export function ReviewsInputComponent(
                     channel={channel}
                     placeholder={
                         !token
-                            ? "You need to authorize to review users!"
+                            ? hyperTranslate("You need to authorize to review users!")
                             : isAuthor
                                 ? `Update review for @${name}`
                                 : `Review @${name}`

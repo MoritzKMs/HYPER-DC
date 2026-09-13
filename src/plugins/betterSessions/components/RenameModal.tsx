@@ -19,6 +19,7 @@
 import { TextButton } from "@components/Button";
 import { SessionInfo } from "@plugins/betterSessions/types";
 import { getDefaultName, savedSessionsCache, saveSessionsToDataStore } from "@plugins/betterSessions/utils";
+import { hyperTranslate } from "@utils/hyperLanguage";
 import { RenderModalProps } from "@vencord/discord-types";
 import { Forms, Modal,React, TextInput } from "@webpack/common";
 import { KeyboardEvent } from "react";
@@ -42,7 +43,7 @@ export function RenameModal({ props, session, state }: { props: RenderModalProps
     return (
         <Modal
             {...props}
-            title="Rename"
+            title={hyperTranslate("Rename")}
             actions={[
                 {
                     text: "Cancel",
@@ -57,7 +58,7 @@ export function RenameModal({ props, session, state }: { props: RenderModalProps
             ]}
         >
             <div>
-                <Forms.FormTitle tag="h5">New device name</Forms.FormTitle>
+                <Forms.FormTitle tag="h5">{hyperTranslate("New device name")}</Forms.FormTitle>
                 <TextInput
                     style={{ marginBottom: "10px" }}
                     placeholder={getDefaultName(session.client_info)}
@@ -76,8 +77,7 @@ export function RenameModal({ props, session, state }: { props: RenderModalProps
                     }}
                     onClick={() => setValue("")}
                 >
-                    Reset Name
-                </TextButton>
+                    {hyperTranslate("Reset Name")}</TextButton>
             </div>
         </Modal>
     );

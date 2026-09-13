@@ -22,6 +22,7 @@ import { Flex } from "@components/Flex";
 import { Heading } from "@components/Heading";
 import { Paragraph } from "@components/Paragraph";
 import { SettingsTab, wrapTab } from "@components/settings/tabs/BaseTab";
+import { hyperTranslate } from "@utils/hyperLanguage";
 import { Margins } from "@utils/margins";
 import { Button, Text } from "@webpack/common";
 
@@ -30,32 +31,27 @@ function BackupAndRestoreTab() {
         <SettingsTab>
             <Flex flexDirection="column" gap="0.5em">
                 <Card variant="warning">
-                    <Heading tag="h4">Warning</Heading>
-                    <Paragraph>Importing a settings file will overwrite your current settings.</Paragraph>
+                    <Heading tag="h4">{hyperTranslate("Warning")}</Heading>
+                    <Paragraph>{hyperTranslate("Importing a settings file will overwrite your current settings.")}</Paragraph>
                 </Card>
 
                 <Text variant="text-md/normal" className={Margins.bottom8}>
-                    You can import and export your Vencord settings as a JSON file.
-                    This allows you to easily transfer your settings to another device,
-                    or recover your settings after reinstalling Vencord or Discord.
-                </Text>
+                    {hyperTranslate("You can import and export your Vencord settings as a JSON file. This allows you to easily transfer your settings to another device, or recover your settings after reinstalling Vencord or Discord.")}</Text>
 
-                <Heading tag="h4">Settings Export contains:</Heading>
+                <Heading tag="h4">{hyperTranslate("Settings Export contains:")}</Heading>
                 <Text variant="text-md/normal" className={Margins.bottom8}>
                     <ul>
-                        <li>&mdash; Custom QuickCSS</li>
-                        <li>&mdash; Theme Links</li>
-                        <li>&mdash; Plugin Settings</li>
+                        <li>{hyperTranslate("&mdash; Custom QuickCSS")}</li>
+                        <li>{hyperTranslate("&mdash; Theme Links")}</li>
+                        <li>{hyperTranslate("&mdash; Plugin Settings")}</li>
                     </ul>
                 </Text>
 
                 <Flex>
                     <Button onClick={() => uploadSettingsBackup()}>
-                        Import Settings
-                    </Button>
+                        {hyperTranslate("Import Settings")}</Button>
                     <Button onClick={downloadSettingsBackup}>
-                        Export Settings
-                    </Button>
+                        {hyperTranslate("Export Settings")}</Button>
                 </Flex>
             </Flex>
         </SettingsTab >

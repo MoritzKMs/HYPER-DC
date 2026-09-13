@@ -17,6 +17,7 @@
 */
 
 import { Devs } from "@utils/constants";
+import { hyperTranslate } from "@utils/hyperLanguage";
 import definePlugin from "@utils/types";
 import { Emoji } from "@vencord/discord-types";
 import { EmojiStore } from "@webpack/common";
@@ -36,7 +37,7 @@ interface EmojiAutocompleteState {
 export default definePlugin({
     name: "FavoriteEmojiFirst",
     authors: [Devs.Aria, Devs.Ven],
-    description: "Puts your favorite emoji first in the emoji autocomplete.",
+    description: hyperTranslate("Puts your favorite emoji first in the emoji autocomplete."),
     tags: ["Emotes", "Customisation"],
     patches: [
         {

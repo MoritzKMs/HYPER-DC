@@ -19,6 +19,7 @@
 import { definePluginSettings } from "@api/Settings";
 import ErrorBoundary from "@components/ErrorBoundary";
 import { Devs } from "@utils/constants";
+import { hyperTranslate } from "@utils/hyperLanguage";
 import { useTimer } from "@utils/react";
 import { formatDuration } from "@utils/text";
 import definePlugin, { OptionType } from "@utils/types";
@@ -29,15 +30,15 @@ import alignedChatInputFix from "./alignedChatInputFix.css?managed";
 const settings = definePluginSettings({
     format: {
         type: OptionType.SELECT,
-        description: "The timer format. This can be any valid moment.js format",
+        description: hyperTranslate("The timer format. This can be any valid moment.js format"),
         options: [
             {
-                label: "30d 23:00:42",
+                label: hyperTranslate("30d 23:00:42"),
                 value: "stopwatch",
                 default: true
             },
             {
-                label: "30d 23h 00m 42s",
+                label: hyperTranslate("30d 23h 00m 42s"),
                 value: "human"
             }
         ] as const
@@ -48,7 +49,7 @@ const settings = definePluginSettings({
 
 export default definePlugin({
     name: "CallTimer",
-    description: "Adds a timer to vcs",
+    description: hyperTranslate("Adds a timer to vcs"),
     tags: ["Voice", "Utility"],
     authors: [Devs.Ven],
     managedStyle: alignedChatInputFix,

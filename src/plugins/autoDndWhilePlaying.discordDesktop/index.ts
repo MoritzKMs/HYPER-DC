@@ -7,6 +7,7 @@
 import { definePluginSettings } from "@api/Settings";
 import { getUserSettingLazy } from "@api/UserSettings";
 import { Devs } from "@utils/constants";
+import { hyperTranslate } from "@utils/hyperLanguage";
 import definePlugin, { OptionType } from "@utils/types";
 import { UserSettingsProtoStore } from "@webpack/common";
 
@@ -17,23 +18,23 @@ const StatusSettings = getUserSettingLazy<string>("status", "status")!;
 const settings = definePluginSettings({
     statusToSet: {
         type: OptionType.SELECT,
-        description: "Status to set while playing a game",
+        description: hyperTranslate("Status to set while playing a game"),
         options: [
             {
-                label: "Online",
+                label: hyperTranslate("Online"),
                 value: "online",
             },
             {
-                label: "Idle",
+                label: hyperTranslate("Idle"),
                 value: "idle",
             },
             {
-                label: "Do Not Disturb",
+                label: hyperTranslate("Do Not Disturb"),
                 value: "dnd",
                 default: true
             },
             {
-                label: "Invisible",
+                label: hyperTranslate("Invisible"),
                 value: "invisible",
             }
         ]
@@ -59,7 +60,7 @@ async function setStatus(status: string) {
 
 export default definePlugin({
     name: "AutoDNDWhilePlaying",
-    description: "Automatically updates your online status (online, idle, dnd) when launching games",
+    description: hyperTranslate("Automatically updates your online status (online, idle, dnd) when launching games"),
     tags: ["Activity", "Utility"],
     authors: [Devs.thororen],
     settings,

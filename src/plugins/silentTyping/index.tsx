@@ -21,6 +21,7 @@ import { ApplicationCommandInputType, ApplicationCommandOptionType, findOption, 
 import { findGroupChildrenByChildId, NavContextMenuPatchCallback } from "@api/ContextMenu";
 import { definePluginSettings } from "@api/Settings";
 import { Devs } from "@utils/constants";
+import { hyperTranslate } from "@utils/hyperLanguage";
 import definePlugin, { IconComponent, OptionType } from "@utils/types";
 import { FluxDispatcher, Menu, React } from "@webpack/common";
 
@@ -28,17 +29,17 @@ const settings = definePluginSettings({
     showIcon: {
         type: OptionType.BOOLEAN,
         default: false,
-        description: "Show an icon for toggling the plugin",
+        description: hyperTranslate("Show an icon for toggling the plugin"),
         restartNeeded: true,
     },
     contextMenu: {
         type: OptionType.BOOLEAN,
-        description: "Add option to toggle the functionality in the chat input context menu",
+        description: hyperTranslate("Add option to toggle the functionality in the chat input context menu"),
         default: true
     },
     isEnabled: {
         type: OptionType.BOOLEAN,
-        description: "Toggle functionality",
+        description: hyperTranslate("Toggle functionality"),
         default: true,
     }
 });
@@ -78,7 +79,7 @@ const SilentTypingToggle: ChatBarButtonFactory = ({ isMainChat }) => {
 
     return (
         <ChatBarButton
-            tooltip={isEnabled ? "Disable Silent Typing" : "Enable Silent Typing"}
+            tooltip={isEnabled ? hyperTranslate("Disable Silent Typing") : hyperTranslate("Enable Silent Typing")}
             onClick={toggle}
         >
             {isEnabled ? <SilentTypingEnabledIcon /> : <SilentTypingIcon />}
@@ -100,7 +101,7 @@ const ChatBarContextCheckbox: NavContextMenuPatchCallback = children => {
     group.splice(idx + 1, 0,
         <Menu.MenuCheckboxItem
             id="vc-silent-typing"
-            label="Enable Silent Typing"
+            label={hyperTranslate("Enable Silent Typing")}
             checked={isEnabled}
             action={() => settings.store.isEnabled = !settings.store.isEnabled}
         />
@@ -111,7 +112,7 @@ const ChatBarContextCheckbox: NavContextMenuPatchCallback = children => {
 export default definePlugin({
     name: "SilentTyping",
     authors: [Devs.Ven, Devs.Rini, Devs.ImBanana],
-    description: "Hide that you are typing",
+    description: hyperTranslate("Hide that you are typing"),
     tags: ["Chat", "Privacy"],
     settings,
 
@@ -131,12 +132,12 @@ export default definePlugin({
 
     commands: [{
         name: "silenttype",
-        description: "Toggle whether you're hiding that you're typing or not.",
+        description: hyperTranslate("Toggle whether you're hiding that you're typing or not."),
         inputType: ApplicationCommandInputType.BUILT_IN,
         options: [
             {
                 name: "value",
-                description: "Whether to hide or not that you're typing (default is toggle)",
+                description: hyperTranslate("Whether to hide or not that you're typing (default is toggle)"),
                 required: false,
                 type: ApplicationCommandOptionType.BOOLEAN,
             },

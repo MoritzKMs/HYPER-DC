@@ -20,6 +20,7 @@ import { Auth } from "@plugins/reviewDB/auth";
 import { ReviewType } from "@plugins/reviewDB/entities";
 import { REVIEWS_PER_PAGE, UserReviewsData } from "@plugins/reviewDB/reviewDbApi";
 import { cl } from "@plugins/reviewDB/utils";
+import { hyperTranslate } from "@utils/hyperLanguage";
 import { useForceUpdater } from "@utils/react";
 import * as t from "@vencord/discord-types";
 import { DefaultExtractAndLoadChunksRegex, extractAndLoadChunksLazy, findComponentByCodeLazy } from "@webpack";
@@ -49,8 +50,7 @@ function ReviewsModal({ modalProps, modalKey, discordId, name, type }: { modalPr
             size="lg"
             title={
                 <Text variant="heading-lg/semibold" className={cl("modal-header")}>
-                    {name}'s Reviews
-                    {!!reviewCount && <span> ({reviewCount} Reviews)</span>}
+                    {name}{hyperTranslate("'s Reviews")}{!!reviewCount && <span> ({reviewCount} {hyperTranslate("Reviews)")}</span>}
                 </Text>
             }
             preview={

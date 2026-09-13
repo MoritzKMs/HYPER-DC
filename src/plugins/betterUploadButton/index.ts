@@ -17,12 +17,13 @@
 */
 
 import { Devs } from "@utils/constants";
+import { hyperTranslate } from "@utils/hyperLanguage";
 import definePlugin from "@utils/types";
 
 export default definePlugin({
     name: "BetterUploadButton",
     authors: [Devs.fawn, Devs.Ven],
-    description: "Upload with a single click, open menu with right click",
+    description: hyperTranslate("Upload with a single click, open menu with right click"),
     tags: ["Utility", "Shortcuts"],
     patches: [
         {

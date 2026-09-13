@@ -17,6 +17,7 @@
 */
 
 import { useCopyCooldown } from "@plugins/shikiCodeblocks.desktop/hooks/useCopyCooldown";
+import { hyperTranslate } from "@utils/hyperLanguage";
 
 export interface CopyButtonProps extends React.DetailedHTMLProps<React.ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement> {
     content: string;
@@ -34,7 +35,7 @@ export function CopyButton({ content, ...props }: CopyButtonProps) {
             }}
             onClick={() => copy(content)}
         >
-            {copyCooldown ? "Copied!" : "Copy"}
+            {copyCooldown ? hyperTranslate("Copied!") : hyperTranslate("Copy")}
         </button>
 
     );

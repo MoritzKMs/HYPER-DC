@@ -17,11 +17,12 @@
 */
 
 import { Devs } from "@utils/constants";
+import { hyperTranslate } from "@utils/hyperLanguage";
 import definePlugin from "@utils/types";
 
 export default definePlugin({
     name: "MessagePopoverAPI",
-    description: "API to add buttons to message popovers.",
+    description: hyperTranslate("API to add buttons to message popovers."),
     authors: [Devs.KingFish, Devs.Ven, Devs.Nuckyz],
     patches: [
         {

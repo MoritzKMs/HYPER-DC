@@ -20,7 +20,7 @@ import "./styles.css";
 
 import * as DataStore from "@api/DataStore";
 import { isPluginEnabled } from "@api/PluginManager";
-import { useSettings } from "@api/Settings";
+import { Settings, useSettings } from "@api/Settings";
 import { Card } from "@components/Card";
 import { Divider } from "@components/Divider";
 import ErrorBoundary from "@components/ErrorBoundary";
@@ -30,6 +30,7 @@ import { SettingsTab, wrapTab } from "@components/settings/tabs/BaseTab";
 import { ChangeList } from "@utils/ChangeList";
 import { classNameFactory } from "@utils/css";
 import { isTruthy } from "@utils/guards";
+import { hyperTranslate } from "@utils/hyperLanguage";
 import { Logger } from "@utils/Logger";
 import { Margins } from "@utils/margins";
 import { classes } from "@utils/misc";
@@ -47,26 +48,47 @@ import { UIElementsButton } from "./UIElements";
 export const cl = classNameFactory("vc-plugins-");
 export const logger = new Logger("PluginSettings", "#a6d189");
 
+function LanguagePicker() {
+    const { plugins } = useSettings(["plugins.HyperDCLanguage.language"]);
+    const language = plugins.HyperDCLanguage.language ?? "tr";
+    const [needsReload, setNeedsReload] = useState(false);
+    return <Card className={cl("info-card")}>
+        <HeadingTertiary>HyperDC · Dil / Language</HeadingTertiary>
+        <Select
+            options={[{ label: "Türkçe", value: "tr" }, { label: "English", value: "en" }]}
+            serialize={String}
+            isSelected={value => value === language}
+            select={value => {
+                Settings.plugins.HyperDCLanguage.language = value;
+                setNeedsReload(true);
+            }}
+            closeOnSelect={true}
+        />
+        {needsReload && <>
+            <Paragraph>Dili uygulamak için yeniden başlatın / Restart to apply the language.</Paragraph>
+            <Button onClick={() => location.reload()}>Yeniden başlat / Restart</Button>
+        </>}
+    </Card>;
+}
+
 function ReloadRequiredCard({ required }: { required: boolean; }) {
     return (
         <Card variant={required ? "warning" : "normal"} className={cl("info-card")}>
             {required
                 ? (
                     <>
-                        <HeadingTertiary>Restart required!</HeadingTertiary>
+                        <HeadingTertiary>{hyperTranslate("Restart required!")}</HeadingTertiary>
                         <Paragraph className={cl("dep-text")}>
-                            Restart now to apply new plugins and their settings
-                        </Paragraph>
+                            {hyperTranslate("Restart now to apply new plugins and their settings")}</Paragraph>
                         <Button onClick={() => location.reload()} className={cl("restart-button")}>
-                            Restart
-                        </Button>
+                            {hyperTranslate("Restart")}</Button>
                     </>
                 )
                 : (
                     <>
-                        <HeadingTertiary>Plugin Management</HeadingTertiary>
-                        <Paragraph>Press the cog wheel or info icon to get more info on a plugin</Paragraph>
-                        <Paragraph>Plugins with a cog wheel have settings you can modify!</Paragraph>
+                        <HeadingTertiary>{hyperTranslate("Plugin Management")}</HeadingTertiary>
+                        <Paragraph>{hyperTranslate("Press the cog wheel or info icon to get more info on a plugin")}</Paragraph>
+                        <Paragraph>{hyperTranslate("Plugins with a cog wheel have settings you can modify!")}</Paragraph>
                     </>
                 )}
         </Card>
@@ -102,16 +124,16 @@ function ExcludedPluginsList({ search }: { search: string; }) {
         <Paragraph className={Margins.top16}>
             {matchingExcludedPlugins.length
                 ? <>
-                    <Paragraph>Are you looking for:</Paragraph>
+                    <Paragraph>{hyperTranslate("Are you looking for:")}</Paragraph>
                     <ul>
                         {matchingExcludedPlugins.map(([name, reason]) => (
                             <li key={name}>
-                                <b>{name}</b>: Only available on the {ExcludedReasons[reason]}
+                                <b>{name}</b>{hyperTranslate(": Only available on the") + " "}{ExcludedReasons[reason]}
                             </li>
                         ))}
                     </ul>
                 </>
-                : "No plugins meet the search criteria."
+                : hyperTranslate("No plugins meet the search criteria.")
             }
         </Paragraph>
     );
@@ -127,14 +149,14 @@ function PluginSettings() {
             openModal(props => (
                 <ConfirmModal
                     {...props}
-                    title="Restart required"
+                    title={hyperTranslate("Restart required")}
                     confirmText="Restart now"
                     cancelText="Later!"
                     variant="primary"
                     onConfirm={() => location.reload()}
                 >
                     <>
-                        <p>The following plugins require a restart:</p>
+                        <p>{hyperTranslate("The following plugins require a restart:")}</p>
                         <div>{changes.map((s, i) => (
                             <React.Fragment key={s}>
                                 {i > 0 && ", "}
@@ -272,18 +294,18 @@ function PluginSettings() {
 
     return (
         <SettingsTab>
+            <LanguagePicker />
             <ReloadRequiredCard required={changes.hasChanges} />
 
             <UIElementsButton />
 
             <HeadingTertiary className={classes(Margins.top20, Margins.bottom8)}>
-                Filters
-            </HeadingTertiary>
+                {hyperTranslate("Filters")}</HeadingTertiary>
 
             <ErrorBoundary noop>
                 <TextInput
                     inputClassName={cl("filter-control")}
-                    placeholder="Search for a plugin..."
+                    placeholder={hyperTranslate("Search for a plugin...")}
                     value={searchValue.value}
                     onChange={onSearch}
                     autoFocus
@@ -294,39 +316,39 @@ function PluginSettings() {
                 <div className={classes(Margins.bottom20, Margins.top8, cl("filter-controls"))}>
                     <Select
                         options={[
-                            { label: "Show All", value: SearchStatus.ALL, default: true },
-                            { label: "Show Favorites", value: SearchStatus.FAVORITES },
-                            { label: "Show Enabled", value: SearchStatus.ENABLED },
-                            { label: "Show Disabled", value: SearchStatus.DISABLED },
-                            { label: "Show New", value: SearchStatus.NEW },
-                            hasUserPlugins && { label: "Show UserPlugins", value: SearchStatus.USER_PLUGINS },
-                            { label: "Show API Plugins", value: SearchStatus.API_PLUGINS },
+                            { label: hyperTranslate("Show All"), value: SearchStatus.ALL, default: true },
+                            { label: hyperTranslate("Show Favorites"), value: SearchStatus.FAVORITES },
+                            { label: hyperTranslate("Show Enabled"), value: SearchStatus.ENABLED },
+                            { label: hyperTranslate("Show Disabled"), value: SearchStatus.DISABLED },
+                            { label: hyperTranslate("Show New"), value: SearchStatus.NEW },
+                            hasUserPlugins && { label: hyperTranslate("Show UserPlugins"), value: SearchStatus.USER_PLUGINS },
+                            { label: hyperTranslate("Show API Plugins"), value: SearchStatus.API_PLUGINS },
                         ].filter(isTruthy)}
                         serialize={String}
                         select={status => setSearchValue(prev => ({ ...prev, status }))}
                         isSelected={v => v === searchValue.status}
                         closeOnSelect={true}
-                        placeholder="Filter by Type"
+                        placeholder={hyperTranslate("Filter by Type")}
                     />
                     <SearchableSelect
                         options={PluginTags.map(tag => ({ label: tag, value: tag }))}
                         value={searchValue.tags}
                         onChange={tags => setSearchValue(prev => ({ ...prev, tags }))}
                         closeOnSelect={false}
-                        placeholder="Filter by Tags"
+                        placeholder={hyperTranslate("Filter by Tags")}
                         multi
                     />
                 </div>
             </ErrorBoundary>
 
-            <HeadingTertiary className={Margins.top20}>Plugins</HeadingTertiary>
+            <HeadingTertiary className={Margins.top20}>{hyperTranslate("Plugins")}</HeadingTertiary>
 
             {plugins.length || requiredPlugins.length
                 ? (
                     <div className={cl("grid")}>
                         {plugins.length
                             ? plugins
-                            : <Paragraph>No plugins meet the search criteria.</Paragraph>
+                            : <Paragraph>{hyperTranslate("No plugins meet the search criteria.")}</Paragraph>
                         }
                     </div>
                 )
@@ -337,13 +359,12 @@ function PluginSettings() {
             <Divider className={Margins.top20} />
 
             <HeadingTertiary className={classes(Margins.top20, Margins.bottom8)}>
-                Required Plugins
-            </HeadingTertiary>
+                {hyperTranslate("Required Plugins")}</HeadingTertiary>
 
             <div className={cl("grid")}>
                 {requiredPlugins.length
                     ? requiredPlugins
-                    : <Paragraph>No plugins meet the search criteria.</Paragraph>
+                    : <Paragraph>{hyperTranslate("No plugins meet the search criteria.")}</Paragraph>
                 }
             </div>
         </SettingsTab >
@@ -353,7 +374,7 @@ function PluginSettings() {
 function makeDependencyList(deps: string[]) {
     return (
         <>
-            <Paragraph>This plugin is required by:</Paragraph>
+            <Paragraph>{hyperTranslate("This plugin is required by:")}</Paragraph>
             {deps.map((dep: string) => <Paragraph key={dep} className={cl("dep-text")}>{dep}</Paragraph>)}
         </>
     );

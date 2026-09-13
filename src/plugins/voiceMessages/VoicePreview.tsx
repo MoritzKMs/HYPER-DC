@@ -16,6 +16,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+import { hyperTranslate } from "@utils/hyperLanguage";
 import { useTimer } from "@utils/react";
 
 import { cl, VoiceMessage } from ".";
@@ -45,7 +46,7 @@ export const VoicePreview = ({
         <div className={cl("preview", recording ? "preview-recording" : [])}>
             <div className={cl("preview-indicator")} />
             <div className={cl("preview-time")}>{durationDisplay}</div>
-            <div className={cl("preview-label")}>{recording ? "RECORDING" : "----"}</div>
+            <div className={cl("preview-label")}>{recording ? hyperTranslate("RECORDING") : "----"}</div>
         </div>
     );
 };

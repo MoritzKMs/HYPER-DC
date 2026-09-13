@@ -18,6 +18,7 @@
 
 import { definePluginSettings } from "@api/Settings";
 import { Devs } from "@utils/constants";
+import { hyperTranslate } from "@utils/hyperLanguage";
 import definePlugin, { OptionType } from "@utils/types";
 import { findByPropsLazy } from "@webpack";
 
@@ -26,19 +27,19 @@ const MessageRequestStore = findByPropsLazy("getMessageRequestsCount");
 const settings = definePluginSettings({
     hideFriendRequestsCount: {
         type: OptionType.BOOLEAN,
-        description: "Hide incoming friend requests count",
+        description: hyperTranslate("Hide incoming friend requests count"),
         default: true,
         restartNeeded: true
     },
     hideMessageRequestsCount: {
         type: OptionType.BOOLEAN,
-        description: "Hide message requests count",
+        description: hyperTranslate("Hide message requests count"),
         default: true,
         restartNeeded: true
     },
     hidePremiumOffersCount: {
         type: OptionType.BOOLEAN,
-        description: "Hide nitro offers count",
+        description: hyperTranslate("Hide nitro offers count"),
         default: true,
         restartNeeded: true
     }
@@ -46,7 +47,7 @@ const settings = definePluginSettings({
 
 export default definePlugin({
     name: "NoPendingCount",
-    description: "Removes the ping count of incoming friend requests, message requests, and nitro offers.",
+    description: hyperTranslate("Removes the ping count of incoming friend requests, message requests, and nitro offers."),
     tags: ["Notifications", "Appearance"],
     authors: [Devs.amia],
 

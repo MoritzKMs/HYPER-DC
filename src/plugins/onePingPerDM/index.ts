@@ -6,6 +6,7 @@
 
 import { definePluginSettings } from "@api/Settings";
 import { Devs } from "@utils/constants";
+import { hyperTranslate } from "@utils/hyperLanguage";
 import definePlugin, { OptionType } from "@utils/types";
 import { MessageJSON } from "@vencord/discord-types";
 import { ChannelType } from "@vencord/discord-types/enums";
@@ -14,28 +15,28 @@ import { ChannelStore, ReadStateStore, UserStore } from "@webpack/common";
 const settings = definePluginSettings({
     channelToAffect: {
         type: OptionType.SELECT,
-        description: "Select the type of DM for the plugin to affect",
+        description: hyperTranslate("Select the type of DM for the plugin to affect"),
         options: [
-            { label: "Both", value: "both_dms", default: true },
-            { label: "User DMs", value: "user_dm" },
-            { label: "Group DMs", value: "group_dm" },
+            { label: hyperTranslate("Both"), value: "both_dms", default: true },
+            { label: hyperTranslate("User DMs"), value: "user_dm" },
+            { label: hyperTranslate("Group DMs"), value: "group_dm" },
         ]
     },
     allowMentions: {
         type: OptionType.BOOLEAN,
-        description: "Receive audio pings for @mentions",
+        description: hyperTranslate("Receive audio pings for @mentions"),
         default: false,
     },
     allowEveryone: {
         type: OptionType.BOOLEAN,
-        description: "Receive audio pings for @everyone and @here in group DMs",
+        description: hyperTranslate("Receive audio pings for @everyone and @here in group DMs"),
         default: false,
     },
 });
 
 export default definePlugin({
     name: "OnePingPerDM",
-    description: "If unread messages are sent by a user in DMs multiple times, you'll only receive one audio ping. Read the messages to reset the limit",
+    description: hyperTranslate("If unread messages are sent by a user in DMs multiple times, you'll only receive one audio ping. Read the messages to reset the limit"),
     tags: ["Notifications", "Customisation"],
     authors: [Devs.ProffDea],
     settings,

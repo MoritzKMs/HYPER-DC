@@ -7,6 +7,7 @@
 import { Button } from "@components/Button";
 import { SessionInfo } from "@plugins/betterSessions/types";
 import { cl } from "@plugins/betterSessions/utils";
+import { hyperTranslate } from "@utils/hyperLanguage";
 import { openModal } from "@webpack/common";
 
 import { RenameModal } from "./RenameModal";
@@ -27,8 +28,7 @@ export function RenameButton({ session, state }: { session: SessionInfo["session
                 ))
             }
         >
-            Rename
-        </Button>
+            {hyperTranslate("Rename")}</Button>
     );
 }
 
@@ -39,7 +39,6 @@ export function NewButton() {
             size="min"
             className={cl("new-btn")}
         >
-            NEW
-        </Button>
+            {hyperTranslate("NEW")}</Button>
     );
 }

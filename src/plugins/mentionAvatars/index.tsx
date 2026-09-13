@@ -9,6 +9,7 @@ import "./styles.css";
 import { definePluginSettings } from "@api/Settings";
 import ErrorBoundary from "@components/ErrorBoundary";
 import { Devs } from "@utils/constants";
+import { hyperTranslate } from "@utils/hyperLanguage";
 import definePlugin, { OptionType } from "@utils/types";
 import { User } from "@vencord/discord-types";
 import { GuildRoleStore, SelectedGuildStore, useState } from "@webpack/common";
@@ -16,8 +17,8 @@ import { GuildRoleStore, SelectedGuildStore, useState } from "@webpack/common";
 const settings = definePluginSettings({
     showAtSymbol: {
         type: OptionType.BOOLEAN,
-        displayName: "Show @ Symbol",
-        description: "Whether the the @ symbol should be displayed on user mentions",
+        displayName: hyperTranslate("Show @ Symbol"),
+        description: hyperTranslate("Whether the the @ symbol should be displayed on user mentions"),
         default: true
     }
 });
@@ -45,7 +46,7 @@ function DefaultRoleIcon() {
 
 export default definePlugin({
     name: "MentionAvatars",
-    description: "Shows user avatars and role icons inside mentions",
+    description: hyperTranslate("Shows user avatars and role icons inside mentions"),
     tags: ["Appearance", "Customisation"],
     authors: [Devs.Ven, Devs.SerStars],
 

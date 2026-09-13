@@ -7,6 +7,7 @@
 import { Link } from "@components/Link";
 import { settings } from "@plugins/decor/settings";
 import { DecorationModalClasses, requireAvatarDecorationModal } from "@plugins/decor/ui";
+import { hyperTranslate } from "@utils/hyperLanguage";
 import { RenderModalProps } from "@vencord/discord-types";
 import { ConfirmModal, Forms, openModal } from "@webpack/common";
 
@@ -16,7 +17,7 @@ function GuidelinesModal(props: RenderModalProps) {
     return (
         <ConfirmModal
             {...props}
-            title="Hold on"
+            title={hyperTranslate("Hold on")}
             confirmText="Continue"
             variant="primary"
             onConfirm={() => {
@@ -27,12 +28,10 @@ function GuidelinesModal(props: RenderModalProps) {
         >
             <div className={DecorationModalClasses.modal}>
                 <Forms.FormText>
-                    By submitting a decoration, you agree to <Link
+                    {hyperTranslate("By submitting a decoration, you agree to") + " "}<Link
                         href="https://github.com/decor-discord/.github/blob/main/GUIDELINES.md"
                     >
-                        the guidelines
-                    </Link>. Not reading these guidelines may get your account suspended from creating more decorations in the future.
-                </Forms.FormText>
+                        {hyperTranslate("the guidelines")}</Link>{hyperTranslate(". Not reading these guidelines may get your account suspended from creating more decorations in the future.")}</Forms.FormText>
             </div>
         </ConfirmModal>
     );

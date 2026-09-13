@@ -6,12 +6,13 @@
 
 import { definePluginSettings } from "@api/Settings";
 import { Devs } from "@utils/constants";
+import { hyperTranslate } from "@utils/hyperLanguage";
 import definePlugin, { makeRange, OptionType } from "@utils/types";
 
 const settings = definePluginSettings({
     zoomMultiplier: {
         type: OptionType.SLIDER,
-        description: "Zoom multiplier",
+        description: hyperTranslate("Zoom multiplier"),
         markers: makeRange(2, 16),
         default: 4,
     },
@@ -19,7 +20,7 @@ const settings = definePluginSettings({
 
 export default definePlugin({
     name: "UnlockedAvatarZoom",
-    description: "Allows you to zoom in further in the image crop tool when changing your avatar",
+    description: hyperTranslate("Allows you to zoom in further in the image crop tool when changing your avatar"),
     tags: ["Media", "Utility"],
     authors: [Devs.nakoyasha],
     settings,

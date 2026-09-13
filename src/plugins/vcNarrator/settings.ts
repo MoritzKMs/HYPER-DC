@@ -5,6 +5,7 @@
  */
 
 import { definePluginSettings } from "@api/Settings";
+import { hyperTranslate } from "@utils/hyperLanguage";
 import { Logger } from "@utils/Logger";
 import { OptionType } from "@utils/types";
 
@@ -37,61 +38,61 @@ export const settings = definePluginSettings({
     },
     volume: {
         type: OptionType.SLIDER,
-        description: "Narrator Volume",
+        description: hyperTranslate("Narrator Volume"),
         default: 1,
         markers: [0, 0.25, 0.5, 0.75, 1],
         stickToMarkers: false
     },
     rate: {
         type: OptionType.SLIDER,
-        description: "Narrator Speed",
+        description: hyperTranslate("Narrator Speed"),
         default: 1,
         markers: [0.1, 0.5, 1, 2, 5, 10],
         stickToMarkers: false
     },
     sayOwnName: {
-        description: "Say own name",
+        description: hyperTranslate("Say own name"),
         type: OptionType.BOOLEAN,
         default: false
     },
     latinOnly: {
-        description: "Strip non latin characters from names before saying them",
+        description: hyperTranslate("Strip non latin characters from names before saying them"),
         type: OptionType.BOOLEAN,
         default: false
     },
     joinMessage: {
         type: OptionType.STRING,
-        description: "Join Message",
+        description: hyperTranslate("Join Message"),
         default: "{{USER}} joined"
     },
     leaveMessage: {
         type: OptionType.STRING,
-        description: "Leave Message",
+        description: hyperTranslate("Leave Message"),
         default: "{{USER}} left"
     },
     moveMessage: {
         type: OptionType.STRING,
-        description: "Move Message",
+        description: hyperTranslate("Move Message"),
         default: "{{USER}} moved to {{CHANNEL}}"
     },
     muteMessage: {
         type: OptionType.STRING,
-        description: "Mute Message (only self for now)",
+        description: hyperTranslate("Mute Message (only self for now)"),
         default: "{{USER}} muted"
     },
     unmuteMessage: {
         type: OptionType.STRING,
-        description: "Unmute Message (only self for now)",
+        description: hyperTranslate("Unmute Message (only self for now)"),
         default: "{{USER}} unmuted"
     },
     deafenMessage: {
         type: OptionType.STRING,
-        description: "Deafen Message (only self for now)",
+        description: hyperTranslate("Deafen Message (only self for now)"),
         default: "{{USER}} deafened"
     },
     undeafenMessage: {
         type: OptionType.STRING,
-        description: "Undeafen Message (only self for now)",
+        description: hyperTranslate("Undeafen Message (only self for now)"),
         default: "{{USER}} undeafened"
     }
 });

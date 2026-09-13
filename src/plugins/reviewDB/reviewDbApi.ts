@@ -4,6 +4,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+import { hyperTranslate } from "@utils/hyperLanguage";
 import { Toasts } from "@webpack/common";
 
 import { Auth, authorize, getToken, updateAuth } from "./auth";
@@ -51,7 +52,7 @@ async function rdbRequest<T = unknown>(path: string, options: RequestInit = {}):
         ...options,
         headers,
     }).catch(err => {
-        showToast("Network error: Failed to connect to ReviewDB.", Toasts.Type.FAILURE);
+        showToast(hyperTranslate("Network error: Failed to connect to ReviewDB."), Toasts.Type.FAILURE);
         return null;
     });
 
@@ -144,7 +145,7 @@ export async function addReview(review: { userid: string; comment: string }): Pr
 
     const token = await getToken();
     if (!token) {
-        showToast("Please authorize to add a review.");
+        showToast(hyperTranslate("Please authorize to add a review."));
         authorize();
         return null;
     }
@@ -181,7 +182,7 @@ export async function reportReview(id: number) {
 export async function voteReview(id: number, isUpvote: boolean) {
     const token = await getToken();
     if (!token) {
-        showToast("Please authorize to vote on reviews.");
+        showToast(hyperTranslate("Please authorize to vote on reviews."));
         authorize();
         return false;
     }
@@ -199,7 +200,7 @@ export async function voteReview(id: number, isUpvote: boolean) {
 export async function deleteReviewVote(id: number) {
     const token = await getToken();
     if (!token) {
-        showToast("Please authorize to vote on reviews.");
+        showToast(hyperTranslate("Please authorize to vote on reviews."));
         authorize();
         return false;
     }

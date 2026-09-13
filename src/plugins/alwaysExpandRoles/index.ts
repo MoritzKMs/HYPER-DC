@@ -18,12 +18,13 @@
 
 import { migratePluginSettings } from "@api/Settings";
 import { Devs } from "@utils/constants";
+import { hyperTranslate } from "@utils/hyperLanguage";
 import definePlugin from "@utils/types";
 
 migratePluginSettings("AlwaysExpandRoles", "ShowAllRoles");
 export default definePlugin({
     name: "AlwaysExpandRoles",
-    description: "Always expands the role list in profile popouts",
+    description: hyperTranslate("Always expands the role list in profile popouts"),
     tags: ["Appearance", "Roles"],
     authors: [Devs.surgedevs],
     patches: [

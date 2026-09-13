@@ -17,6 +17,7 @@
 */
 
 import { Devs } from "@utils/constants";
+import { hyperTranslate } from "@utils/hyperLanguage";
 import { canonicalizeMatch } from "@utils/patches";
 import definePlugin from "@utils/types";
 import { Menu } from "@webpack/common";
@@ -37,7 +38,7 @@ const nameMap = {
 
 export default definePlugin({
     name: "ContextMenuAPI",
-    description: "API for adding/removing items to/from context menus.",
+    description: hyperTranslate("API for adding/removing items to/from context menus."),
     authors: [Devs.Nuckyz, Devs.Ven, Devs.Kyuuhachi],
     required: true,
 

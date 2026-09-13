@@ -9,6 +9,7 @@ import "./styles.css";
 import { definePluginSettings } from "@api/Settings";
 import ErrorBoundary from "@components/ErrorBoundary";
 import { Devs } from "@utils/constants";
+import { hyperTranslate } from "@utils/hyperLanguage";
 import { Logger } from "@utils/Logger";
 import definePlugin, { OptionType } from "@utils/types";
 import { Tooltip } from "@webpack/common";
@@ -119,7 +120,7 @@ function DearrowButton({ component }: { component: Component<Props>; }) {
                         width="24px"
                         height="24px"
                         viewBox="0 0 36 36"
-                        aria-label="Toggle Dearrow"
+                        aria-label={hyperTranslate("Toggle Dearrow")}
                         className="vc-dearrow-icon"
                     >
                         <path
@@ -144,23 +145,23 @@ function DearrowButton({ component }: { component: Component<Props>; }) {
 
 const settings = definePluginSettings({
     hideButton: {
-        description: "Hides the Dearrow button from YouTube embeds",
+        description: hyperTranslate("Hides the Dearrow button from YouTube embeds"),
         type: OptionType.BOOLEAN,
         default: false,
         restartNeeded: true
     },
     replaceElements: {
-        description: "Choose which elements of the embed will be replaced",
+        description: hyperTranslate("Choose which elements of the embed will be replaced"),
         type: OptionType.SELECT,
         restartNeeded: true,
         options: [
-            { label: "Everything (Titles & Thumbnails)", value: ReplaceElements.ReplaceAllElements, default: true },
-            { label: "Titles", value: ReplaceElements.ReplaceTitlesOnly },
-            { label: "Thumbnails", value: ReplaceElements.ReplaceThumbnailsOnly },
+            { label: hyperTranslate("Everything (Titles & Thumbnails)"), value: ReplaceElements.ReplaceAllElements, default: true },
+            { label: hyperTranslate("Titles"), value: ReplaceElements.ReplaceTitlesOnly },
+            { label: hyperTranslate("Thumbnails"), value: ReplaceElements.ReplaceThumbnailsOnly },
         ],
     },
     dearrowByDefault: {
-        description: "Dearrow videos automatically",
+        description: hyperTranslate("Dearrow videos automatically"),
         type: OptionType.BOOLEAN,
         default: true,
         restartNeeded: false
@@ -169,7 +170,7 @@ const settings = definePluginSettings({
 
 export default definePlugin({
     name: "Dearrow",
-    description: "Makes YouTube embed titles and thumbnails less sensationalist, powered by Dearrow",
+    description: hyperTranslate("Makes YouTube embed titles and thumbnails less sensationalist, powered by Dearrow"),
     tags: ["Media", "Utility"],
     authors: [Devs.Ven],
     settings,

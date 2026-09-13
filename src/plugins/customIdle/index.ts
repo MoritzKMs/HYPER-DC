@@ -7,12 +7,13 @@
 import { currentNotice, noticesQueue, popNotice, showNotice } from "@api/Notices";
 import { definePluginSettings } from "@api/Settings";
 import { Devs } from "@utils/constants";
+import { hyperTranslate } from "@utils/hyperLanguage";
 import definePlugin, { makeRange, OptionType } from "@utils/types";
 import { FluxDispatcher } from "@webpack/common";
 
 const settings = definePluginSettings({
     idleTimeout: {
-        description: "Minutes before Discord goes idle (0 to disable auto-idle)",
+        description: hyperTranslate("Minutes before Discord goes idle (0 to disable auto-idle)"),
         type: OptionType.SLIDER,
         markers: makeRange(0, 60, 5),
         default: 10,
@@ -20,7 +21,7 @@ const settings = definePluginSettings({
         restartNeeded: true // Because of the setInterval patch
     },
     remainInIdle: {
-        description: "When you come back to Discord, remain idle until you confirm you want to go online",
+        description: hyperTranslate("When you come back to Discord, remain idle until you confirm you want to go online"),
         type: OptionType.BOOLEAN,
         default: true
     }
@@ -28,7 +29,7 @@ const settings = definePluginSettings({
 
 export default definePlugin({
     name: "CustomIdle",
-    description: "Allows you to set the time before Discord goes idle (or disable auto-idle)",
+    description: hyperTranslate("Allows you to set the time before Discord goes idle (or disable auto-idle)"),
     tags: ["Activity", "Customisation"],
     authors: [Devs.newwares],
     settings,

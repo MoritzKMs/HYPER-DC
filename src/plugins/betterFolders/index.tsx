@@ -21,6 +21,7 @@ import "./style.css";
 import { definePluginSettings } from "@api/Settings";
 import { Devs } from "@utils/constants";
 import { getIntlMessage } from "@utils/discord";
+import { hyperTranslate } from "@utils/hyperLanguage";
 import { Logger } from "@utils/Logger";
 import definePlugin, { OptionType } from "@utils/types";
 import { findByPropsLazy, findStoreLazy } from "@webpack";
@@ -82,54 +83,54 @@ function filterTreeWithTargetNode(children: any, predicate: (node: any) => boole
 export const settings = definePluginSettings({
     sidebar: {
         type: OptionType.BOOLEAN,
-        description: "Display servers from folder on dedicated sidebar",
+        description: hyperTranslate("Display servers from folder on dedicated sidebar"),
         restartNeeded: true,
         default: true
     },
     sidebarAnim: {
         type: OptionType.BOOLEAN,
-        description: "Animate opening the folder sidebar",
+        description: hyperTranslate("Animate opening the folder sidebar"),
         default: true
     },
     closeAllFolders: {
         type: OptionType.BOOLEAN,
-        description: "Close all folders when selecting a server not in a folder",
+        description: hyperTranslate("Close all folders when selecting a server not in a folder"),
         default: false
     },
     closeAllHomeButton: {
         type: OptionType.BOOLEAN,
-        description: "Close all folders when clicking on the home button",
+        description: hyperTranslate("Close all folders when clicking on the home button"),
         restartNeeded: true,
         default: false
     },
     closeOthers: {
         type: OptionType.BOOLEAN,
-        description: "Close other folders when opening a folder",
+        description: hyperTranslate("Close other folders when opening a folder"),
         default: false
     },
     closeServerFolder: {
         type: OptionType.BOOLEAN,
-        description: "Close folder when selecting a server in that folder",
+        description: hyperTranslate("Close folder when selecting a server in that folder"),
         default: false,
     },
     forceOpen: {
         type: OptionType.BOOLEAN,
-        description: "Force a folder to open when switching to a server of that folder",
+        description: hyperTranslate("Force a folder to open when switching to a server of that folder"),
         default: false
     },
     keepIcons: {
         type: OptionType.BOOLEAN,
-        description: "Keep showing guild icons in the primary guild bar folder when it's open in the BetterFolders sidebar",
+        description: hyperTranslate("Keep showing guild icons in the primary guild bar folder when it's open in the BetterFolders sidebar"),
         restartNeeded: true,
         default: false
     },
     showFolderIcon: {
         type: OptionType.SELECT,
-        description: "Show the folder icon above the folder guilds in the BetterFolders sidebar",
+        description: hyperTranslate("Show the folder icon above the folder guilds in the BetterFolders sidebar"),
         options: [
-            { label: "Never", value: FolderIconDisplay.Never },
-            { label: "Always", value: FolderIconDisplay.Always, default: true },
-            { label: "When more than one folder is expanded", value: FolderIconDisplay.MoreThanOneFolderExpanded }
+            { label: hyperTranslate("Never"), value: FolderIconDisplay.Never },
+            { label: hyperTranslate("Always"), value: FolderIconDisplay.Always, default: true },
+            { label: hyperTranslate("When more than one folder is expanded"), value: FolderIconDisplay.MoreThanOneFolderExpanded }
         ],
         restartNeeded: true
     }
@@ -141,7 +142,7 @@ const GRID_STYLE_NAME = "vc-betterFolders-sidebar-grid";
 
 export default definePlugin({
     name: "BetterFolders",
-    description: "Shows server folders on dedicated sidebar and adds folder related improvements",
+    description: hyperTranslate("Shows server folders on dedicated sidebar and adds folder related improvements"),
     authors: [Devs.juby, Devs.AutumnVN, Devs.Nuckyz],
     tags: ["Organisation", "Servers", "Appearance"],
     settings,

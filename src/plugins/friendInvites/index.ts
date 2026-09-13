@@ -18,6 +18,7 @@
 
 import { ApplicationCommandInputType, sendBotMessage } from "@api/Commands";
 import { Devs } from "@utils/constants";
+import { hyperTranslate } from "@utils/hyperLanguage";
 import definePlugin from "@utils/types";
 import { findByPropsLazy } from "@webpack";
 
@@ -25,13 +26,13 @@ const FriendInvites = findByPropsLazy("createFriendInvite");
 
 export default definePlugin({
     name: "FriendInvites",
-    description: "Create and manage friend invite links via slash commands (/create friend invite, /view friend invites, /revoke friend invites).",
+    description: hyperTranslate("Create and manage friend invite links via slash commands (/create friend invite, /view friend invites, /revoke friend invites)."),
     tags: ["Friends", "Commands"],
     authors: [Devs.afn, Devs.Dziurwa],
     commands: [
         {
             name: "create friend invite",
-            description: "Generates a friend invite link.",
+            description: hyperTranslate("Generates a friend invite link."),
             inputType: ApplicationCommandInputType.BUILT_IN,
 
             execute: async (args, ctx) => {
@@ -48,7 +49,7 @@ export default definePlugin({
         },
         {
             name: "view friend invites",
-            description: "View a list of all generated friend invites.",
+            description: hyperTranslate("View a list of all generated friend invites."),
             inputType: ApplicationCommandInputType.BUILT_IN,
             execute: async (_, ctx) => {
                 const invites = await FriendInvites.getAllFriendInvites();
@@ -67,7 +68,7 @@ export default definePlugin({
         },
         {
             name: "revoke friend invites",
-            description: "Revokes all generated friend invites.",
+            description: hyperTranslate("Revokes all generated friend invites."),
             inputType: ApplicationCommandInputType.BUILT_IN,
             execute: async (_, ctx) => {
                 await FriendInvites.revokeFriendInvites();

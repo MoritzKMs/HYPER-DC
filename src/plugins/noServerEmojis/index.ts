@@ -6,18 +6,19 @@
 
 import { definePluginSettings } from "@api/Settings";
 import { Devs } from "@utils/constants";
+import { hyperTranslate } from "@utils/hyperLanguage";
 import definePlugin, { OptionType } from "@utils/types";
 import type { Channel, Emoji } from "@vencord/discord-types";
 
 const settings = definePluginSettings({
     shownEmojis: {
-        description: "The types of emojis to show in the autocomplete menu.",
+        description: hyperTranslate("The types of emojis to show in the autocomplete menu."),
         type: OptionType.SELECT,
         default: "onlyUnicode",
         options: [
-            { label: "Only unicode emojis", value: "onlyUnicode" },
-            { label: "Unicode emojis and server emojis from current server", value: "currentServer" },
-            { label: "Unicode emojis and all server emojis (Discord default)", value: "all" }
+            { label: hyperTranslate("Only unicode emojis"), value: "onlyUnicode" },
+            { label: hyperTranslate("Unicode emojis and server emojis from current server"), value: "currentServer" },
+            { label: hyperTranslate("Unicode emojis and all server emojis (Discord default)"), value: "all" }
         ]
     }
 });
@@ -25,7 +26,7 @@ const settings = definePluginSettings({
 export default definePlugin({
     name: "NoServerEmojis",
     authors: [Devs.UlyssesZhan],
-    description: "Do not show server emojis in the autocomplete menu.",
+    description: hyperTranslate("Do not show server emojis in the autocomplete menu."),
     tags: ["Emotes", "Servers"],
     settings,
 

@@ -10,6 +10,7 @@ import ErrorBoundary from "@components/ErrorBoundary";
 import { CopyIcon, NoEntrySignIcon } from "@components/Icons";
 import { Devs } from "@utils/constants";
 import { copyWithToast } from "@utils/discord";
+import { hyperTranslate } from "@utils/hyperLanguage";
 import definePlugin from "@utils/types";
 import { Tooltip, useState } from "@webpack/common";
 
@@ -21,7 +22,7 @@ const CheckMarkIcon = () => {
 
 export default definePlugin({
     name: "CopyFileContents",
-    description: "Adds a button to text file attachments to copy their contents",
+    description: hyperTranslate("Adds a button to text file attachments to copy their contents"),
     tags: ["Utility"],
     authors: [Devs.Obsidian, Devs.Nuckyz],
     patches: [

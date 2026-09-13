@@ -19,6 +19,7 @@
 import { ClockIcon } from "@components/Icons";
 import SettingsPlugin from "@plugins/_core/settings";
 import { Devs } from "@utils/constants";
+import { hyperTranslate } from "@utils/hyperLanguage";
 import { removeFromArray } from "@utils/misc";
 import definePlugin from "@utils/types";
 
@@ -26,13 +27,13 @@ import StartupTimingPage from "./StartupTimingPage";
 
 export default definePlugin({
     name: "StartupTimings",
-    description: "Adds Startup Timings to the Settings menu",
+    description: hyperTranslate("Adds Startup Timings to the Settings menu"),
     tags: ["Developers"],
     authors: [Devs.Megu],
     start() {
         SettingsPlugin.customEntries.push({
             key: "vencord_startup_timings",
-            title: "Startup Timings",
+            title: hyperTranslate("Startup Timings"),
             Component: StartupTimingPage,
             Icon: ClockIcon
         });

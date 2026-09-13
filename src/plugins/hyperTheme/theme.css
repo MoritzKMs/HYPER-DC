@@ -1,0 +1,65 @@
+/**
+ * @name HYPER DC Carbon
+ * @author HYPER DC
+ * @version 0.1.0
+ * @description Kömür siyahı yüzeyler ve turuncu vurgular.
+ */
+
+.theme-dark, .theme-darker, .theme-midnight {
+    --background-primary: #15171c;
+    --background-secondary: #101216;
+    --background-secondary-alt: #0d0f12;
+    --background-tertiary: #0b0d10;
+    --background-base-lowest: #0b0d10;
+    --background-base-lower: #101216;
+    --background-base-low: #15171c;
+    --background-surface-high: #23262e;
+    --background-surface-higher: #292d36;
+    --background-surface-highest: #323742;
+    --background-floating: #1b1e25;
+    --background-modifier-hover: #ffffff0a;
+    --background-modifier-selected: #fc70451f;
+    --background-mentioned: #fc704512;
+    --background-mentioned-hover: #fc704520;
+    --channeltextarea-background: #1e2128;
+    --text-link: #ffab7a;
+    --brand-500: #ed754a;
+    --brand-560: #d85e37;
+    --brand-600: #bc4b29;
+    --brand-experiment: #ed754a;
+    --scrollbar-auto-thumb: #414650;
+    --scrollbar-auto-track: #101216;
+    --scrollbar-thin-thumb: #414650;
+}
+
+:is(.theme-dark, .theme-darker, .theme-midnight) [class*="chatContent_"] {
+    background-color: #11141a;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 700'%3E%3Cg transform='translate(230 85) scale(1.4)' opacity='.14'%3E%3Cpath d='M72 45h43l-13 61h40l13-61h43l-35 166h-43l14-64H94l-14 64H37z' fill='%23fc7045'/%3E%3Cpath d='M187 184h30v27h-36z' fill='%23eee8de'/%3E%3C/g%3E%3Ctext x='400' y='490' text-anchor='middle' font-family='Arial,sans-serif' font-weight='900' font-size='76' letter-spacing='12' fill='%23fc7045' opacity='.10'%3EHYPERDC%3C/text%3E%3Cpath d='M160 530h480' stroke='%23fc7045' stroke-opacity='.13'/%3E%3Ctext x='400' y='564' text-anchor='middle' font-family='Arial,sans-serif' font-size='14' letter-spacing='8' fill='%23ffffff' opacity='.14'%3EMAKE IT YOURS%3C/text%3E%3C/svg%3E"), radial-gradient(ellipse at 80% 20%, #fc70450e, transparent 65%);
+    background-position: center;
+    background-size: min(72%, 700px) auto, cover;
+    background-repeat: no-repeat;
+}
+
+:is(.theme-dark, .theme-darker, .theme-midnight) [class*="chatContent_"] :is([class*="messagesWrapper_"], [class*="scroller_"]) {
+    background: transparent;
+}
+
+:is(.theme-dark, .theme-darker, .theme-midnight) [class*="sidebarList_"] {
+    background: linear-gradient(180deg, #17191f, #101216);
+    border-right: 1px solid #fc70451f;
+}
+
+:is(.theme-dark, .theme-darker, .theme-midnight) [class*="channelTextArea_"] {
+    border: 1px solid #ffffff0c;
+    border-radius: 14px;
+}
+
+:is(.theme-dark, .theme-darker, .theme-midnight) [class*="panels_"] {
+    border: 1px solid #fc70452b;
+    border-radius: 14px;
+    background: #101216;
+}
+
+:is(.theme-dark, .theme-darker, .theme-midnight) [class*="mentioned_"]::before {
+    background: #fc7045;
+}

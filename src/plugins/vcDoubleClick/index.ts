@@ -17,6 +17,7 @@
 */
 
 import { Devs } from "@utils/constants";
+import { hyperTranslate } from "@utils/hyperLanguage";
 import definePlugin from "@utils/types";
 import { ChannelStore, SelectedChannelStore } from "@webpack/common";
 
@@ -27,7 +28,7 @@ const timers = {} as Record<string, {
 
 export default definePlugin({
     name: "VoiceChatDoubleClick",
-    description: "Join voice chats via double click instead of single click",
+    description: hyperTranslate("Join voice chats via double click instead of single click"),
     tags: ["Voice"],
     authors: [Devs.Ven, Devs.D3SOX],
     patches: [

@@ -20,6 +20,7 @@ import { isPluginEnabled } from "@api/PluginManager";
 import { definePluginSettings } from "@api/Settings";
 import NoReplyMentionPlugin from "@plugins/noReplyMention";
 import { Devs } from "@utils/constants";
+import { hyperTranslate } from "@utils/hyperLanguage";
 import definePlugin, { OptionType } from "@utils/types";
 import { ApplicationIntegrationType, MessageFlags } from "@vencord/discord-types/enums";
 import { findByPropsLazy } from "@webpack";
@@ -36,29 +37,29 @@ const focusChanged = () => !WindowStore.isFocused() && (isDeletePressed = false)
 const settings = definePluginSettings({
     enableDeleteOnClick: {
         type: OptionType.BOOLEAN,
-        description: "Enable delete on click while holding backspace",
+        description: hyperTranslate("Enable delete on click while holding backspace"),
         default: true
     },
     enableDoubleClickToEdit: {
         type: OptionType.BOOLEAN,
-        description: "Enable double click to edit",
+        description: hyperTranslate("Enable double click to edit"),
         default: true
     },
     enableDoubleClickToReply: {
         type: OptionType.BOOLEAN,
-        description: "Enable double click to reply",
+        description: hyperTranslate("Enable double click to reply"),
         default: true
     },
     requireModifier: {
         type: OptionType.BOOLEAN,
-        description: "Only do double click actions when shift/ctrl is held",
+        description: hyperTranslate("Only do double click actions when shift/ctrl is held"),
         default: false
     }
 });
 
 export default definePlugin({
     name: "MessageClickActions",
-    description: "Hold Backspace and click to delete, double click to edit/reply",
+    description: hyperTranslate("Hold Backspace and click to delete, double click to edit/reply"),
     tags: ["Chat", "Shortcuts"],
     authors: [Devs.Ven],
 

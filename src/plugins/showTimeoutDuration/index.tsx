@@ -11,6 +11,7 @@ import ErrorBoundary from "@components/ErrorBoundary";
 import { TooltipContainer } from "@components/TooltipContainer";
 import { Devs } from "@utils/constants";
 import { getIntlMessage } from "@utils/discord";
+import { hyperTranslate } from "@utils/hyperLanguage";
 import { canonicalizeMatch } from "@utils/patches";
 import definePlugin, { OptionType } from "@utils/types";
 import { Message } from "@vencord/discord-types";
@@ -28,11 +29,11 @@ const enum DisplayStyle {
 
 const settings = definePluginSettings({
     displayStyle: {
-        description: "How to display the timeout duration",
+        description: hyperTranslate("How to display the timeout duration"),
         type: OptionType.SELECT,
         options: [
-            { label: "In the Tooltip", value: DisplayStyle.Tooltip },
-            { label: "Next to the timeout icon", value: DisplayStyle.Inline, default: true },
+            { label: hyperTranslate("In the Tooltip"), value: DisplayStyle.Tooltip },
+            { label: hyperTranslate("Next to the timeout icon"), value: DisplayStyle.Inline, default: true },
         ],
     }
 });
@@ -67,7 +68,7 @@ function renderTimeout(message: Message, inline: boolean) {
 
 export default definePlugin({
     name: "ShowTimeoutDuration",
-    description: "Shows how much longer a user's timeout will last, either in the timeout icon tooltip or next to it",
+    description: hyperTranslate("Shows how much longer a user's timeout will last, either in the timeout icon tooltip or next to it"),
     tags: ["Servers", "Utility"],
     authors: [Devs.Ven, Devs.Sqaaakoi],
 
@@ -93,8 +94,7 @@ export default definePlugin({
             <div className="vc-std-wrapper">
                 <TooltipContainer text={text}>{children}</TooltipContainer>
                 <Text variant="text-md/normal" color="status-danger">
-                    {renderTimeout(message, true)} timeout remaining
-                </Text>
+                    {renderTimeout(message, true)} {hyperTranslate("timeout remaining")}</Text>
             </div>
         );
     }, { noop: true })

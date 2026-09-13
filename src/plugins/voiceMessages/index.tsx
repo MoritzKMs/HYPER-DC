@@ -25,6 +25,7 @@ import { Link } from "@components/Link";
 import { Paragraph } from "@components/Paragraph";
 import { Devs } from "@utils/constants";
 import { classNameFactory } from "@utils/css";
+import { hyperTranslate } from "@utils/hyperLanguage";
 import { Margins } from "@utils/margins";
 import { useAwaiter } from "@utils/react";
 import definePlugin from "@utils/types";
@@ -67,7 +68,7 @@ const ctxMenuPatch: NavContextMenuPatchCallback = (children, props) => {
                 type: "icon",
                 icon: Microphone
             }}
-            label="Send Voice Message"
+            label={hyperTranslate("Send Voice Message")}
             action={() => openModal(modalProps => <VoiceMessageModal modalProps={modalProps} />)}
         />
     );
@@ -75,7 +76,7 @@ const ctxMenuPatch: NavContextMenuPatchCallback = (children, props) => {
 
 export default definePlugin({
     name: "VoiceMessages",
-    description: "Allows you to send voice messages like on mobile. To do so, right click the upload button and click Send Voice Message",
+    description: hyperTranslate("Allows you to send voice messages like on mobile. To do so, right click the upload button and click Send Voice Message"),
     tags: ["Voice"],
     authors: [Devs.Ven, Devs.Vap, Devs.Nickyux],
     settings,
@@ -140,7 +141,7 @@ function sendAudio(blob: Blob, meta: AudioMetadata) {
             }
         });
     });
-    upload.on("error", () => showToast("Failed to upload voice message", Toasts.Type.FAILURE));
+    upload.on("error", () => showToast(hyperTranslate("Failed to upload voice message"), Toasts.Type.FAILURE));
 
     upload.upload();
 }
@@ -209,7 +210,7 @@ function VoiceMessageModal({ modalProps }: { modalProps: RenderModalProps; }) {
     return (
         <Modal
             {...modalProps}
-            title="Record Voice Message"
+            title={hyperTranslate("Record Voice Message")}
             actions={[{
                 text: "Send",
                 variant: "primary",
@@ -239,13 +240,12 @@ function VoiceMessageModal({ modalProps }: { modalProps: RenderModalProps; }) {
                         }
                     }}
                 >
-                    Upload File
-                </Button>
+                    {hyperTranslate("Upload File")}</Button>
             </div>
 
-            <Forms.FormTitle>Preview</Forms.FormTitle>
+            <Forms.FormTitle>{hyperTranslate("Preview")}</Forms.FormTitle>
             {metaError
-                ? <Paragraph className={cl("error")}>Failed to parse selected audio file: {metaError.message}</Paragraph>
+                ? <Paragraph className={cl("error")}>{hyperTranslate("Failed to parse selected audio file:") + " "}{metaError.message}</Paragraph>
                 : (
                     <VoicePreview
                         src={blobUrl}
@@ -256,10 +256,10 @@ function VoiceMessageModal({ modalProps }: { modalProps: RenderModalProps; }) {
 
             {isUnsupportedFormat && (
                 <Card variant="warning" className={Margins.top16} defaultPadding>
-                    <Forms.FormText>Voice Messages have to be OggOpus to be playable on iOS. This file is <code>{blob.type}</code> so it will not be playable on iOS.</Forms.FormText>
+                    <Forms.FormText>{hyperTranslate("Voice Messages have to be OggOpus to be playable on iOS. This file is") + " "}<code>{blob.type}</code> {hyperTranslate("so it will not be playable on iOS.")}</Forms.FormText>
 
                     <Forms.FormText className={Margins.top8}>
-                        To fix it, first convert it to OggOpus, for example using the <Link href="https://convertio.co/mp3-opus/">convertio web converter</Link>
+                        {hyperTranslate("To fix it, first convert it to OggOpus, for example using the") + " "}<Link href="https://convertio.co/mp3-opus/">{hyperTranslate("convertio web converter")}</Link>
                     </Forms.FormText>
                 </Card>
             )}

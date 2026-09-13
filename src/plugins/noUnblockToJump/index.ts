@@ -17,11 +17,12 @@
 */
 
 import { Devs } from "@utils/constants";
+import { hyperTranslate } from "@utils/hyperLanguage";
 import definePlugin from "@utils/types";
 
 export default definePlugin({
     name: "NoUnblockToJump",
-    description: "Allows you to jump to messages of blocked or ignored users and likely spammers without unblocking them",
+    description: hyperTranslate("Allows you to jump to messages of blocked or ignored users and likely spammers without unblocking them"),
     tags: ["Utility"],
     authors: [Devs.Rini],
     patches: [

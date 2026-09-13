@@ -24,6 +24,7 @@ import ErrorBoundary from "@components/ErrorBoundary";
 import { SafetyIcon } from "@components/Icons";
 import { TooltipContainer } from "@components/TooltipContainer";
 import { Devs } from "@utils/constants";
+import { hyperTranslate } from "@utils/hyperLanguage";
 import { classes } from "@utils/misc";
 import definePlugin, { OptionType } from "@utils/types";
 import type { Guild, RoleOrUserPermission } from "@vencord/discord-types";
@@ -50,11 +51,11 @@ const enum MenuItemParentType {
 
 export const settings = definePluginSettings({
     permissionsSortOrder: {
-        description: "The sort method used for defining which role grants an user a certain permission",
+        description: hyperTranslate("The sort method used for defining which role grants an user a certain permission"),
         type: OptionType.SELECT,
         options: [
-            { label: "Highest Role", value: PermissionsSortOrder.HighestRole, default: true },
-            { label: "Lowest Role", value: PermissionsSortOrder.LowestRole }
+            { label: hyperTranslate("Highest Role"), value: PermissionsSortOrder.HighestRole, default: true },
+            { label: hyperTranslate("Lowest Role"), value: PermissionsSortOrder.LowestRole }
         ]
     },
 });
@@ -65,7 +66,7 @@ function MenuItem(guildId: string, { id, type, withIcon }: { id?: string, type?:
     return (
         <Menu.MenuItem
             id="perm-viewer-permissions"
-            label="View Permissions"
+            label={hyperTranslate("View Permissions")}
             leadingAccessory={withIcon ? { type: "icon", icon: SafetyIcon } : undefined}
             action={() => {
                 const guild = GuildStore.getGuild(guildId);
@@ -160,7 +161,7 @@ function makeContextMenuPatch(childId: string | string[], type?: MenuItemParentT
 
 export default definePlugin({
     name: "PermissionsViewer",
-    description: "View the permissions a user or channel has, and the roles of a server",
+    description: hyperTranslate("View the permissions a user or channel has, and the roles of a server"),
     tags: ["Servers", "Roles", "Utility"],
     authors: [Devs.Nuckyz, Devs.Ven],
     settings,

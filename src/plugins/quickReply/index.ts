@@ -21,6 +21,7 @@ import { definePluginSettings } from "@api/Settings";
 import NoBlockedMessagesPlugin from "@plugins/noBlockedMessages";
 import NoReplyMentionPlugin from "@plugins/noReplyMention";
 import { Devs, IS_MAC } from "@utils/constants";
+import { hyperTranslate } from "@utils/hyperLanguage";
 import definePlugin, { OptionType } from "@utils/types";
 import { Message } from "@vencord/discord-types";
 import { MessageFlags } from "@vencord/discord-types/enums";
@@ -38,20 +39,20 @@ const enum MentionOptions {
 const settings = definePluginSettings({
     shouldMention: {
         type: OptionType.SELECT,
-        description: "Ping reply by default",
+        description: hyperTranslate("Ping reply by default"),
         options: [
             {
-                label: "Follow NoReplyMention plugin (if enabled)",
+                label: hyperTranslate("Follow NoReplyMention plugin (if enabled)"),
                 value: MentionOptions.NO_REPLY_MENTION_PLUGIN,
                 default: true
             },
-            { label: "Enabled", value: MentionOptions.ENABLED },
-            { label: "Disabled", value: MentionOptions.DISABLED },
+            { label: hyperTranslate("Enabled"), value: MentionOptions.ENABLED },
+            { label: hyperTranslate("Disabled"), value: MentionOptions.DISABLED },
         ]
     },
     ignoreBlockedAndIgnored: {
         type: OptionType.BOOLEAN,
-        description: "Ignore messages by blocked/ignored users when navigating",
+        description: hyperTranslate("Ignore messages by blocked/ignored users when navigating"),
         default: true
     }
 });
@@ -59,7 +60,7 @@ const settings = definePluginSettings({
 export default definePlugin({
     name: "QuickReply",
     authors: [Devs.fawn, Devs.Ven, Devs.pylix],
-    description: "Reply to (ctrl + up/down) and edit (ctrl + shift + up/down) messages via keybinds",
+    description: hyperTranslate("Reply to (ctrl + up/down) and edit (ctrl + shift + up/down) messages via keybinds"),
     tags: ["Chat", "Shortcuts"],
     settings,
 

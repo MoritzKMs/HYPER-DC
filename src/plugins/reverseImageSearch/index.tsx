@@ -19,6 +19,7 @@
 import { findGroupChildrenByChildId, NavContextMenuPatchCallback } from "@api/ContextMenu";
 import { OpenExternalIcon, SearchIcon } from "@components/Icons";
 import { Devs } from "@utils/constants";
+import { hyperTranslate } from "@utils/hyperLanguage";
 import definePlugin from "@utils/types";
 import { Menu } from "@webpack/common";
 
@@ -39,7 +40,7 @@ function search(src: string, engine: string) {
 function makeSearchItem(src: string) {
     return (
         <Menu.MenuItem
-            label="Search Image"
+            label={hyperTranslate("Search Image")}
             key="search-image"
             id="search-image"
             leadingAccessory={{ type: "icon", icon: SearchIcon }}
@@ -59,7 +60,7 @@ function makeSearchItem(src: string) {
             <Menu.MenuItem
                 key="search-image-all"
                 id="search-image-all"
-                label="All"
+                label={hyperTranslate("All")}
                 leadingAccessory={{ type: "icon", icon: OpenExternalIcon }}
                 action={() => Object.values(Engines).forEach(e => search(src, e))}
             />
@@ -85,7 +86,7 @@ const imageContextMenuPatch: NavContextMenuPatchCallback = (children, props) => 
 
 export default definePlugin({
     name: "ReverseImageSearch",
-    description: "Adds ImageSearch to image context menus",
+    description: hyperTranslate("Adds ImageSearch to image context menus"),
     tags: ["Media", "Utility"],
     authors: [Devs.Ven, Devs.Nuckyz],
     searchTerms: ["ImageUtilities"],

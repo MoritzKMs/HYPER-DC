@@ -17,11 +17,12 @@
 */
 
 import { Devs } from "@utils/constants";
+import { hyperTranslate } from "@utils/hyperLanguage";
 import definePlugin from "@utils/types";
 
 export default definePlugin({
     name: "FixCodeblockGap",
-    description: "Removes the gap between codeblocks and text below it",
+    description: hyperTranslate("Removes the gap between codeblocks and text below it"),
     tags: ["Appearance"],
     authors: [Devs.Grzesiek11],
     patches: [

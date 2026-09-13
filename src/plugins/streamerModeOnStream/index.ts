@@ -17,6 +17,7 @@
 */
 
 import { Devs } from "@utils/constants";
+import { hyperTranslate } from "@utils/hyperLanguage";
 import definePlugin from "@utils/types";
 import { FluxDispatcher, UserStore } from "@webpack/common";
 
@@ -36,7 +37,7 @@ function toggleStreamerMode({ streamKey }: StreamEvent, value: boolean) {
 
 export default definePlugin({
     name: "StreamerModeOnStream",
-    description: "Automatically enables streamer mode when you start streaming in Discord",
+    description: hyperTranslate("Automatically enables streamer mode when you start streaming in Discord"),
     tags: ["Privacy", "Utility"],
     authors: [Devs.IcedMarina],
     flux: {

@@ -11,6 +11,7 @@ import { useCurrentUserDecorationsStore } from "@plugins/decor/lib/stores/Curren
 import { cl, DecorationModalClasses, requireAvatarDecorationModal, requireCreateStickerModal } from "@plugins/decor/ui";
 import { AvatarDecorationModalPreview } from "@plugins/decor/ui/components";
 import { openInviteModal } from "@utils/discord";
+import { hyperTranslate } from "@utils/hyperLanguage";
 import { Margins } from "@utils/margins";
 import { RenderModalProps } from "@vencord/discord-types";
 import { filters, findComponentByCodeLazy, mapMangledModuleLazy } from "@webpack";
@@ -60,7 +61,7 @@ function CreateDecorationModal(props: RenderModalProps) {
     return <Modal
         {...props}
         size="lg"
-        title="Create Decoration"
+        title={hyperTranslate("Create Decoration")}
         actions={[
             {
                 text: "Cancel",
@@ -82,38 +83,34 @@ function CreateDecorationModal(props: RenderModalProps) {
         <div className={cl("create-decoration-modal-content", DecorationModalClasses.modal)}>
             <ErrorBoundary>
                 <HelpMessage messageType={HelpMessageTypes.WARNING}>
-                    Make sure your decoration does not violate <Link
+                    {hyperTranslate("Make sure your decoration does not violate") + " "}<Link
                         href="https://github.com/decor-discord/.github/blob/main/GUIDELINES.md"
                     >
-                        the guidelines
-                    </Link> before submitting it.
-                </HelpMessage>
+                        {hyperTranslate("the guidelines")}</Link> {hyperTranslate("before submitting it.")}</HelpMessage>
                 <div className={cl("create-decoration-modal-form-preview-container")}>
                     <div className={cl("create-decoration-modal-form")}>
                         {error !== null && <Text color="text-danger" variant="text-xs/normal">{error.message}</Text>}
                         <section>
-                            <Forms.FormTitle tag="h5">File</Forms.FormTitle>
+                            <Forms.FormTitle tag="h5">{hyperTranslate("File")}</Forms.FormTitle>
                             <FileUpload
                                 filename={file?.name}
-                                placeholder="Choose a file"
+                                placeholder={hyperTranslate("Choose a file")}
                                 buttonText="Browse"
                                 filters={[{ name: "Decoration file", extensions: ["png", "apng"] }]}
                                 onFileSelect={setFile}
                             />
                             <Forms.FormText className={Margins.top8}>
-                                File should be APNG or PNG.
-                            </Forms.FormText>
+                                {hyperTranslate("File should be APNG or PNG.")}</Forms.FormText>
                         </section>
                         <section>
-                            <Forms.FormTitle tag="h5">Name</Forms.FormTitle>
+                            <Forms.FormTitle tag="h5">{hyperTranslate("Name")}</Forms.FormTitle>
                             <TextInput
                                 placeholder="Companion Cube"
                                 value={name}
                                 onChange={setName}
                             />
                             <Forms.FormText className={Margins.top8}>
-                                This name will be used when referring to this decoration.
-                            </Forms.FormText>
+                                {hyperTranslate("This name will be used when referring to this decoration.")}</Forms.FormText>
                         </section>
                     </div>
                     <div>
@@ -124,7 +121,7 @@ function CreateDecorationModal(props: RenderModalProps) {
                     </div>
                 </div>
                 <HelpMessage messageType={HelpMessageTypes.INFO} className={Margins.bottom8}>
-                    To receive updates on your decoration's review, join <Link
+                    {hyperTranslate("To receive updates on your decoration's review, join") + " "}<Link
                         href={`https://discord.gg/${INVITE_KEY}`}
                         onClick={async e => {
                             e.preventDefault();
@@ -141,9 +138,7 @@ function CreateDecorationModal(props: RenderModalProps) {
                             }
                         }}
                     >
-                        Decor's Discord server
-                    </Link> and allow direct messages.
-                </HelpMessage>
+                        {hyperTranslate("Decor's Discord server")}</Link> {hyperTranslate("and allow direct messages.")}</HelpMessage>
             </ErrorBoundary>
         </div>
     </Modal>;

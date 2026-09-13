@@ -26,6 +26,7 @@ import { Link } from "@components/Link";
 import { openSettingsTabModal, UpdaterTab } from "@components/settings";
 import { CONTRIB_ROLE_ID, Devs, DONOR_ROLE_ID, KNOWN_ISSUES_CHANNEL_ID, REGULAR_ROLE_ID, SUPPORT_CATEGORY_ID, SUPPORT_CHANNEL_ID, VENBOT_USER_ID, VENCORD_GUILD_ID } from "@utils/constants";
 import { sendMessage } from "@utils/discord";
+import { hyperTranslate } from "@utils/hyperLanguage";
 import { Logger } from "@utils/Logger";
 import { Margins } from "@utils/margins";
 import { isPluginDev, tryOrElse } from "@utils/misc";
@@ -142,7 +143,7 @@ function DevBuildConfirmModal(props: RenderModalProps) {
     return (
         <ConfirmModal
             {...props}
-            title="Hold on!"
+            title={hyperTranslate("Hold on!")}
             confirmText="Understood"
             variant="primary"
             checkboxProps={{
@@ -151,14 +152,12 @@ function DevBuildConfirmModal(props: RenderModalProps) {
             }}
         >
             <div>
-                <Forms.FormText>You are using a custom build of Vencord, which we do not provide support for!</Forms.FormText>
+                <Forms.FormText>{hyperTranslate("You are using a custom build of Vencord, which we do not provide support for!")}</Forms.FormText>
 
                 <Forms.FormText className={Margins.top8}>
-                    We only provide support for <Link href="https://vencord.dev/download">official builds</Link>.
-                    Either <Link href="https://vencord.dev/download">switch to an official build</Link> or figure your issue out yourself.
-                </Forms.FormText>
+                    {hyperTranslate("We only provide support for") + " "}<Link href="https://vencord.dev/download">{hyperTranslate("official builds")}</Link>{hyperTranslate(". Either") + " "}<Link href="https://vencord.dev/download">{hyperTranslate("switch to an official build")}</Link> {hyperTranslate("or figure your issue out yourself.")}</Forms.FormText>
 
-                <Text variant="text-md/bold" className={Margins.top8}>You will be banned from receiving support if you ignore this rule.</Text>
+                <Text variant="text-md/bold" className={Margins.top8}>{hyperTranslate("You will be banned from receiving support if you ignore this rule.")}</Text>
             </div>
         </ConfirmModal>
     );
@@ -167,7 +166,7 @@ function DevBuildConfirmModal(props: RenderModalProps) {
 export default definePlugin({
     name: "SupportHelper",
     required: true,
-    description: "Helps us provide support to you",
+    description: hyperTranslate("Helps us provide support to you"),
     authors: [Devs.Ven],
     dependencies: ["UserSettingsAPI"],
 
@@ -184,13 +183,13 @@ export default definePlugin({
     commands: [
         {
             name: "vencord-debug",
-            description: "Send Vencord debug info",
+            description: hyperTranslate("Send Vencord debug info"),
             predicate: ctx => isPluginDev(UserStore.getCurrentUser()?.id) || isSupportAllowedChannel(ctx.channel),
             execute: async () => ({ content: await generateDebugInfoMessage() })
         },
         {
             name: "vencord-plugins",
-            description: "Send Vencord plugin list",
+            description: hyperTranslate("Send Vencord plugin list"),
             predicate: ctx => isPluginDev(UserStore.getCurrentUser()?.id) || isSupportAllowedChannel(ctx.channel),
             execute: () => ({ content: generatePluginList() })
         }
@@ -212,20 +211,18 @@ export default definePlugin({
                         <ConfirmModal
                             {...props}
                             variant="primary"
-                            title="Hold on!"
+                            title={hyperTranslate("Hold on!")}
                             confirmText="Update & Restart Now"
                             cancelText="View Updates"
                             onConfirm={forceUpdate}
                             onCancel={() => openSettingsTabModal(UpdaterTab!)}
                         >
                             <div>
-                                <Forms.FormText>You are using an outdated version of Vencord! Chances are, your issue is already fixed.</Forms.FormText>
+                                <Forms.FormText>{hyperTranslate("You are using an outdated version of Vencord! Chances are, your issue is already fixed.")}</Forms.FormText>
                                 <Forms.FormText className={Margins.top8}>
-                                    Please first update before asking for support!
-                                </Forms.FormText>
+                                    {hyperTranslate("Please first update before asking for support!")}</Forms.FormText>
                                 <Forms.FormText className={Margins.top8}>
-                                    If you know what you're doing or cannot update, you can dismiss this prompt.
-                                </Forms.FormText>
+                                    {hyperTranslate("If you know what you're doing or cannot update, you can dismiss this prompt.")}</Forms.FormText>
                             </div>
                         </ConfirmModal>
                     ));
@@ -240,16 +237,14 @@ export default definePlugin({
                 openModal(props => (
                     <ConfirmModal
                         {...props}
-                        title="Hold on!"
+                        title={hyperTranslate("Hold on!")}
                         confirmText="OK"
                         variant="primary"
                     >
                         <div>
-                            <Forms.FormText>You are using an externally updated Vencord version, which we do not provide support for!</Forms.FormText>
+                            <Forms.FormText>{hyperTranslate("You are using an externally updated Vencord version, which we do not provide support for!")}</Forms.FormText>
                             <Forms.FormText className={Margins.top8}>
-                                Please either switch to an <Link href="https://vencord.dev/download">officially supported version of Vencord</Link>, or
-                                contact your package maintainer for support instead.
-                            </Forms.FormText>
+                                {hyperTranslate("Please either switch to an") + " "}<Link href="https://vencord.dev/download">{hyperTranslate("officially supported version of Vencord")}</Link>{hyperTranslate(", or contact your package maintainer for support instead.")}</Forms.FormText>
                         </div>
                     </ConfirmModal>
                 ));
@@ -291,8 +286,7 @@ export default definePlugin({
                         }
                     }}
                 >
-                    Update Now
-                </Button>
+                    {hyperTranslate("Update Now")}</Button>
             );
         }
 
@@ -304,15 +298,13 @@ export default definePlugin({
                         color={Button.Colors.PRIMARY}
                         onClick={async () => sendMessage(props.channel.id, { content: await generateDebugInfoMessage() })}
                     >
-                        Run /vencord-debug
-                    </Button>,
+                        {hyperTranslate("Run /vencord-debug")}</Button>,
                     <Button
                         key="vc-plg-list"
                         color={Button.Colors.PRIMARY}
                         onClick={async () => sendMessage(props.channel.id, { content: generatePluginList() })}
                     >
-                        Run /vencord-plugins
-                    </Button>
+                        {hyperTranslate("Run /vencord-plugins")}</Button>
                 );
             }
         }
@@ -333,8 +325,7 @@ export default definePlugin({
                             }
                         }}
                     >
-                        Run Snippet
-                    </Button>
+                        {hyperTranslate("Run Snippet")}</Button>
                 );
             }
         }
@@ -351,9 +342,8 @@ export default definePlugin({
 
         return (
             <Card variant="warning" className={Margins.top8} defaultPadding>
-                Please do not private message Vencord plugin developers for support!
-                <br />
-                Instead, use the Vencord support channel: {Parser.parse("https://discord.com/channels/1015060230222131221/1026515880080842772")}
+                {hyperTranslate("Please do not private message Vencord plugin developers for support!")}<br />
+                {hyperTranslate("Instead, use the Vencord support channel:") + " "}{Parser.parse("https://discord.com/channels/1015060230222131221/1026515880080842772")}
                 {!ChannelStore.getChannel(SUPPORT_CHANNEL_ID) && " (Click the link to join)"}
             </Card>
         );

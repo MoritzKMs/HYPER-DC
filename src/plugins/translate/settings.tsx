@@ -18,6 +18,7 @@
 
 import { definePluginSettings } from "@api/Settings";
 import { Button } from "@components/Button";
+import { hyperTranslate } from "@utils/hyperLanguage";
 import { OptionType } from "@utils/types";
 
 import { openTranslateModal } from "./TranslateModal";
@@ -25,25 +26,25 @@ import { openTranslateModal } from "./TranslateModal";
 export const settings = definePluginSettings({
     receivedInput: {
         type: OptionType.STRING,
-        description: "Language incoming messages are translated from",
+        description: hyperTranslate("Language incoming messages are translated from"),
         default: "auto",
         hidden: true
     },
     receivedOutput: {
         type: OptionType.STRING,
-        description: "Language incoming messages are translated to",
+        description: hyperTranslate("Language incoming messages are translated to"),
         default: "en",
         hidden: true
     },
     sentInput: {
         type: OptionType.STRING,
-        description: "Language your messages are translated from",
+        description: hyperTranslate("Language your messages are translated from"),
         default: "auto",
         hidden: true
     },
     sentOutput: {
         type: OptionType.STRING,
-        description: "Language your messages are translated to",
+        description: hyperTranslate("Language your messages are translated to"),
         default: "en",
         hidden: true
     },
@@ -52,40 +53,39 @@ export const settings = definePluginSettings({
         description: IS_WEB ? "Translation provider (not available on web)" : "Translation provider",
         hidden: IS_WEB,
         options: [
-            { label: "Google Translate", value: "google", default: true },
-            { label: "DeepL Free — API key required", value: "deepl" },
-            { label: "DeepL Pro — API key required", value: "deepl-pro" },
-            { label: "Kagi Translate — API key required", value: "kagi" }
+            { label: hyperTranslate("Google Translate"), value: "google", default: true },
+            { label: hyperTranslate("DeepL Free — API key required"), value: "deepl" },
+            { label: hyperTranslate("DeepL Pro — API key required"), value: "deepl-pro" },
+            { label: hyperTranslate("Kagi Translate — API key required"), value: "kagi" }
         ] as const,
         onChange: resetLanguageDefaults
     },
     deeplApiKey: {
         type: OptionType.STRING,
-        displayName: "DeepL API Key",
-        description: "Your DeepL API key (from deepl.com/your-account)",
+        displayName: hyperTranslate("DeepL API Key"),
+        description: hyperTranslate("Your DeepL API key (from deepl.com/your-account)"),
         default: ""
     },
     kagiSession: {
         type: OptionType.STRING,
-        description: "Your Kagi session token (from kagi.com/settings?p=user_details)",
+        description: hyperTranslate("Your Kagi session token (from kagi.com/settings?p=user_details)"),
         default: ""
     },
     autoTranslate: {
         type: OptionType.BOOLEAN,
-        description: "Automatically translate your messages before sending. You can also Shift+click or right-click the translate button to toggle this",
+        description: hyperTranslate("Automatically translate your messages before sending. You can also Shift+click or right-click the translate button to toggle this"),
         default: false
     },
     showAutoTranslateTooltip: {
         type: OptionType.BOOLEAN,
-        description: "Show a tooltip on the chat bar button when a message is auto-translated",
+        description: hyperTranslate("Show a tooltip on the chat bar button when a message is auto-translated"),
         default: true
     },
     manageTranslateSettings: {
         type: OptionType.COMPONENT,
         component: () => (
             <Button onClick={openTranslateModal}>
-                Customize translation languages & Auto-Translate
-            </Button>
+                {hyperTranslate("Customize translation languages & Auto-Translate")}</Button>
         )
     }
 }, {

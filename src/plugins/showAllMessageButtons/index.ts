@@ -17,11 +17,12 @@
 */
 
 import { Devs } from "@utils/constants";
+import { hyperTranslate } from "@utils/hyperLanguage";
 import definePlugin from "@utils/types";
 
 export default definePlugin({
     name: "ShowAllMessageButtons",
-    description: "Always show all message buttons no matter if you are holding the shift key or not.",
+    description: hyperTranslate("Always show all message buttons no matter if you are holding the shift key or not."),
     tags: ["Chat", "Utility"],
     authors: [Devs.Nuckyz],
 

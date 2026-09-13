@@ -25,6 +25,7 @@ import { Link } from "@components/Link";
 import { Margins } from "@components/margins";
 import { Paragraph } from "@components/Paragraph";
 import { SettingsTab, wrapTab } from "@components/settings/tabs/BaseTab";
+import { hyperTranslate } from "@utils/hyperLanguage";
 import { getStylusWebStoreUrl } from "@utils/web";
 import { Forms, React, TabBar, useState } from "@webpack/common";
 
@@ -53,25 +54,21 @@ function ThemesTab() {
                     className="vc-settings-tab-bar-item"
                     id={ThemeTab.LOCAL}
                 >
-                    Local Themes
-                </TabBar.Item>
+                    {hyperTranslate("Local Themes")}</TabBar.Item>
                 <TabBar.Item
                     className="vc-settings-tab-bar-item"
                     id={ThemeTab.ONLINE}
                 >
-                    Online Themes
-                </TabBar.Item>
+                    {hyperTranslate("Online Themes")}</TabBar.Item>
             </TabBar>
 
             <Flex flexDirection="column" gap="1em">
                 <CspErrorCard />
 
                 <Card variant="warning">
-                    <BaseText tag="h3" size="md" weight="medium" className={Margins.bottom8}>Theme Performance</BaseText>
+                    <BaseText tag="h3" size="md" weight="medium" className={Margins.bottom8}>{hyperTranslate("Theme Performance")}</BaseText>
                     <Paragraph>
-                        Themes and custom CSS have the potential to cause major lag! If you experience performance issues, try
-                        disabling your themes and CSS to see if they're the cause. The most common cause of lag is the <code>:has()</code> operator.
-                    </Paragraph>
+                        {hyperTranslate("Themes and custom CSS have the potential to cause major lag! If you experience performance issues, try disabling your themes and CSS to see if they're the cause. The most common cause of lag is the") + " "}<code>{hyperTranslate(":has()")}</code> {hyperTranslate("operator.")}</Paragraph>
                 </Card>
 
                 {currentTab === ThemeTab.LOCAL && <LocalThemesTab />}
@@ -85,10 +82,10 @@ function UserscriptThemesTab() {
     return (
         <SettingsTab>
             <Card variant="danger">
-                <Forms.FormTitle tag="h5">Themes are not supported on the Userscript!</Forms.FormTitle>
+                <Forms.FormTitle tag="h5">{hyperTranslate("Themes are not supported on the Userscript!")}</Forms.FormTitle>
 
                 <Forms.FormText>
-                    You can instead install themes with the <Link href={getStylusWebStoreUrl()}>Stylus extension</Link>!
+                    {hyperTranslate("You can instead install themes with the") + " "}<Link href={getStylusWebStoreUrl()}>{hyperTranslate("Stylus extension")}</Link>!
                 </Forms.FormText>
             </Card>
         </SettingsTab>

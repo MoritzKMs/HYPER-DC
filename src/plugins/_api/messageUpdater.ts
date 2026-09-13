@@ -17,11 +17,12 @@
 */
 
 import { Devs } from "@utils/constants";
+import { hyperTranslate } from "@utils/hyperLanguage";
 import definePlugin from "@utils/types";
 
 export default definePlugin({
     name: "MessageUpdaterAPI",
-    description: "API for updating and re-rendering messages.",
+    description: hyperTranslate("API for updating and re-rendering messages."),
     authors: [Devs.Nuckyz],
 
     patches: [

@@ -17,13 +17,14 @@
 */
 
 import { Devs } from "@utils/constants";
+import { hyperTranslate } from "@utils/hyperLanguage";
 import definePlugin from "@utils/types";
 
 import managedStyle from "./style.css?managed";
 
 export default definePlugin({
     name: "MessageDecorationsAPI",
-    description: "API to add decorations to messages",
+    description: hyperTranslate("API to add decorations to messages"),
     authors: [Devs.TheSun],
 
     managedStyle,

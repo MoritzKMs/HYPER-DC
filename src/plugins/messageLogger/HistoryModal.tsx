@@ -7,6 +7,7 @@
 import ErrorBoundary from "@components/ErrorBoundary";
 import { TooltipContainer } from "@components/TooltipContainer";
 import { classNameFactory } from "@utils/css";
+import { hyperTranslate } from "@utils/hyperLanguage";
 import { Margins } from "@utils/margins";
 import { classes } from "@utils/misc";
 import { RenderModalProps } from "@vencord/discord-types";
@@ -40,7 +41,7 @@ export function HistoryModal({ modalProps, message }: { modalProps: RenderModalP
         <Modal
             {...modalProps}
             size="lg"
-            title="Message Edit History"
+            title={hyperTranslate("Message Edit History")}
         >
             <TabBar
                 type="top"

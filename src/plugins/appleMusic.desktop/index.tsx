@@ -7,6 +7,7 @@
 import { definePluginSettings } from "@api/Settings";
 import { Paragraph } from "@components/Paragraph";
 import { Devs, IS_MAC } from "@utils/constants";
+import { hyperTranslate } from "@utils/hyperLanguage";
 import definePlugin, { OptionType, PluginNative, ReporterTestable } from "@utils/types";
 import { Activity, ActivityAssets, ActivityButton } from "@vencord/discord-types";
 import { ActivityFlags, ActivityStatusDisplayType, ActivityType } from "@vencord/discord-types/enums";
@@ -55,125 +56,125 @@ function setActivity(activity: Activity | null) {
 const settings = definePluginSettings({
     activityType: {
         type: OptionType.SELECT,
-        description: "Which type of activity",
+        description: hyperTranslate("Which type of activity"),
         options: [
-            { label: "Playing", value: ActivityType.PLAYING, default: true },
-            { label: "Listening", value: ActivityType.LISTENING }
+            { label: hyperTranslate("Playing"), value: ActivityType.PLAYING, default: true },
+            { label: hyperTranslate("Listening"), value: ActivityType.LISTENING }
         ],
     },
     statusDisplayType: {
-        description: "Show the track / artist name in the member list",
+        description: hyperTranslate("Show the track / artist name in the member list"),
         type: OptionType.SELECT,
         options: [
             {
-                label: "Don't show (shows generic listening message)",
+                label: hyperTranslate("Don't show (shows generic listening message)"),
                 value: "off",
                 default: true
             },
             {
-                label: "Show artist name",
+                label: hyperTranslate("Show artist name"),
                 value: "artist"
             },
             {
-                label: "Show track name",
+                label: hyperTranslate("Show track name"),
                 value: "track"
             }
         ]
     },
     refreshInterval: {
         type: OptionType.SLIDER,
-        description: "The interval between activity refreshes (seconds)",
+        description: hyperTranslate("The interval between activity refreshes (seconds)"),
         markers: [1, 2, 2.5, 3, 5, 10, 15],
         default: 5,
         restartNeeded: true,
     },
     enableTimestamps: {
         type: OptionType.BOOLEAN,
-        description: "Whether or not to enable timestamps",
+        description: hyperTranslate("Whether or not to enable timestamps"),
         default: true,
     },
     enableButtons: {
         type: OptionType.BOOLEAN,
-        description: "Whether or not to enable buttons",
+        description: hyperTranslate("Whether or not to enable buttons"),
         default: true,
     },
     nameString: {
         type: OptionType.STRING,
-        description: "Activity name format string",
+        description: hyperTranslate("Activity name format string"),
         default: "Apple Music"
     },
     detailsString: {
         type: OptionType.STRING,
-        description: "Activity details format string",
+        description: hyperTranslate("Activity details format string"),
         default: "{name}"
     },
     stateString: {
         type: OptionType.STRING,
-        description: "Activity state format string",
+        description: hyperTranslate("Activity state format string"),
         default: "{artist} · {album}"
     },
     detailsLink: {
         type: OptionType.SELECT,
-        description: "Activity details link",
+        description: hyperTranslate("Activity details link"),
         options: [
-            { label: "Album", value: LinkType.Album, default: true },
-            { label: "Artist", value: LinkType.Artist },
-            { label: "Disabled", value: LinkType.Disabled }
+            { label: hyperTranslate("Album"), value: LinkType.Album, default: true },
+            { label: hyperTranslate("Artist"), value: LinkType.Artist },
+            { label: hyperTranslate("Disabled"), value: LinkType.Disabled }
         ],
     },
     stateLink: {
         type: OptionType.SELECT,
-        description: "Activity state link",
+        description: hyperTranslate("Activity state link"),
         options: [
-            { label: "Album", value: LinkType.Album },
-            { label: "Artist", value: LinkType.Artist, default: true },
-            { label: "Disabled", value: LinkType.Disabled }
+            { label: hyperTranslate("Album"), value: LinkType.Album },
+            { label: hyperTranslate("Artist"), value: LinkType.Artist, default: true },
+            { label: hyperTranslate("Disabled"), value: LinkType.Disabled }
         ],
     },
     largeImageType: {
         type: OptionType.SELECT,
-        description: "Activity assets large image type",
+        description: hyperTranslate("Activity assets large image type"),
         options: [
-            { label: "Album artwork", value: AssetImageType.Album, default: true },
-            { label: "Artist artwork", value: AssetImageType.Artist },
-            { label: "Disabled", value: AssetImageType.Disabled }
+            { label: hyperTranslate("Album artwork"), value: AssetImageType.Album, default: true },
+            { label: hyperTranslate("Artist artwork"), value: AssetImageType.Artist },
+            { label: hyperTranslate("Disabled"), value: AssetImageType.Disabled }
         ],
     },
     largeTextString: {
         type: OptionType.STRING,
-        description: "Activity assets large text format string",
+        description: hyperTranslate("Activity assets large text format string"),
         default: "{album}"
     },
     largeImageLink: {
         type: OptionType.SELECT,
-        description: "Activity assets large image link",
+        description: hyperTranslate("Activity assets large image link"),
         options: [
-            { label: "Album", value: LinkType.Album, default: true },
-            { label: "Artist", value: LinkType.Artist },
-            { label: "Disabled", value: LinkType.Disabled }
+            { label: hyperTranslate("Album"), value: LinkType.Album, default: true },
+            { label: hyperTranslate("Artist"), value: LinkType.Artist },
+            { label: hyperTranslate("Disabled"), value: LinkType.Disabled }
         ],
     },
     smallImageType: {
         type: OptionType.SELECT,
-        description: "Activity assets small image type",
+        description: hyperTranslate("Activity assets small image type"),
         options: [
-            { label: "Album artwork", value: AssetImageType.Album },
-            { label: "Artist artwork", value: AssetImageType.Artist, default: true },
-            { label: "Disabled", value: AssetImageType.Disabled }
+            { label: hyperTranslate("Album artwork"), value: AssetImageType.Album },
+            { label: hyperTranslate("Artist artwork"), value: AssetImageType.Artist, default: true },
+            { label: hyperTranslate("Disabled"), value: AssetImageType.Disabled }
         ],
     },
     smallTextString: {
         type: OptionType.STRING,
-        description: "Activity assets small text format string",
+        description: hyperTranslate("Activity assets small text format string"),
         default: "{artist}"
     },
     smallImageLink: {
         type: OptionType.SELECT,
-        description: "Activity assets small image link",
+        description: hyperTranslate("Activity assets small image link"),
         options: [
-            { label: "Album", value: LinkType.Album },
-            { label: "Artist", value: LinkType.Artist, default: true },
-            { label: "Disabled", value: LinkType.Disabled }
+            { label: hyperTranslate("Album"), value: LinkType.Album },
+            { label: hyperTranslate("Artist"), value: LinkType.Artist, default: true },
+            { label: hyperTranslate("Disabled"), value: LinkType.Disabled }
         ],
     },
 });
@@ -205,7 +206,7 @@ function getImageAsset(type: AssetImageType, data: TrackData) {
 
 export default definePlugin({
     name: "AppleMusicRichPresence",
-    description: "Discord rich presence for your Apple Music!",
+    description: hyperTranslate("Discord rich presence for your Apple Music!"),
     tags: ["Activity", "Media"],
     authors: [Devs.RyanCaoDev],
     hidden: !IS_MAC,
@@ -214,9 +215,8 @@ export default definePlugin({
     settingsAboutComponent() {
         return <>
             <Paragraph>
-                For the customizable activity format strings, you can use several special strings to include track data in activities!{" "}
-                <code>{"{name}"}</code> is replaced with the track name; <code>{"{artist}"}</code> is replaced with the artist(s)' name(s); and <code>{"{album}"}</code> is replaced with the album name.
-            </Paragraph>
+                {hyperTranslate("For the customizable activity format strings, you can use several special strings to include track data in activities!")}{" "}
+                <code>{"{name}"}</code> {hyperTranslate("is replaced with the track name;") + " "}<code>{"{artist}"}</code> {hyperTranslate("is replaced with the artist(s)' name(s); and") + " "}<code>{"{album}"}</code> {hyperTranslate("is replaced with the album name.")}</Paragraph>
         </>;
     },
 
@@ -266,13 +266,13 @@ export default definePlugin({
         if (settings.store.enableButtons) {
             if (trackData.appleMusicLink)
                 buttons.push({
-                    label: "Listen on Apple Music",
+                    label: hyperTranslate("Listen on Apple Music"),
                     url: trackData.appleMusicLink,
                 });
 
             if (trackData.songLink)
                 buttons.push({
-                    label: "View on SongLink",
+                    label: hyperTranslate("View on SongLink"),
                     url: trackData.songLink,
                 });
         }

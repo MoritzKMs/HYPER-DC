@@ -6,6 +6,7 @@
 
 import { definePluginSettings } from "@api/Settings";
 import { Devs } from "@utils/constants";
+import { hyperTranslate } from "@utils/hyperLanguage";
 import { canonicalizeMatch } from "@utils/patches";
 import definePlugin, { OptionType } from "@utils/types";
 
@@ -13,20 +14,20 @@ const settings = definePluginSettings({
     lockout: {
         type: OptionType.BOOLEAN,
         default: true,
-        description: 'Bypass the permission lockout prevention ("Pretty sure you don\'t want to do this")',
+        description: hyperTranslate("Bypass the permission lockout prevention (\"Pretty sure you don't want to do this\")"),
         restartNeeded: true
     },
     onboarding: {
         type: OptionType.BOOLEAN,
         default: true,
-        description: 'Bypass the onboarding requirements ("Making this change will make your server incompatible [...]")',
+        description: hyperTranslate("Bypass the onboarding requirements (\"Making this change will make your server incompatible [...]\")"),
         restartNeeded: true
     }
 });
 
 export default definePlugin({
     name: "PermissionFreeWill",
-    description: "Disables the client-side restrictions for channel permission management.",
+    description: hyperTranslate("Disables the client-side restrictions for channel permission management."),
     tags: ["Servers", "Roles"],
     authors: [Devs.lewisakura],
 

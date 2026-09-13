@@ -23,6 +23,7 @@ import { definePluginSettings } from "@api/Settings";
 import { Devs } from "@utils/constants";
 import { classNameFactory } from "@utils/css";
 import { getTheme, insertTextIntoChatInputBox, Theme } from "@utils/discord";
+import { hyperTranslate } from "@utils/hyperLanguage";
 import { Margins } from "@utils/margins";
 import definePlugin, { IconComponent, OptionType } from "@utils/types";
 import { RenderModalProps } from "@vencord/discord-types";
@@ -30,7 +31,7 @@ import { Forms, Modal,openModal, Parser, Select, useMemo, useState } from "@webp
 
 const settings = definePluginSettings({
     replaceMessageContents: {
-        description: "Replace timestamps in message contents",
+        description: hyperTranslate("Replace timestamps in message contents"),
         type: OptionType.BOOLEAN,
         default: true,
     },
@@ -68,7 +69,7 @@ function PickerModal(props: RenderModalProps) {
     return (
         <Modal
             {...props}
-            title="Timestamp Picker"
+            title={hyperTranslate("Timestamp Picker")}
             actions={[{
                 text: "Insert",
                 variant: "primary",
@@ -88,7 +89,7 @@ function PickerModal(props: RenderModalProps) {
                 }}
             />
 
-            <Forms.FormTitle>Timestamp Format</Forms.FormTitle>
+            <Forms.FormTitle>{hyperTranslate("Timestamp Format")}</Forms.FormTitle>
             <div className={cl("format-select")}>
                 <Select
                     options={
@@ -109,7 +110,7 @@ function PickerModal(props: RenderModalProps) {
                 />
             </div>
 
-            <Forms.FormTitle className={Margins.bottom8}>Preview</Forms.FormTitle>
+            <Forms.FormTitle className={Margins.bottom8}>{hyperTranslate("Preview")}</Forms.FormTitle>
             <Forms.FormText className={cl("preview-text")}>
                 {rendered} ({formatted})
             </Forms.FormText>
@@ -141,7 +142,7 @@ const SendTimestampButton: ChatBarButtonFactory = ({ isAnyChat }) => {
 
     return (
         <ChatBarButton
-            tooltip="Insert Timestamp"
+            tooltip={hyperTranslate("Insert Timestamp")}
             onClick={() => openModal(props => <PickerModal {...props} />)}
             buttonProps={{ "aria-haspopup": "dialog" }}
         >
@@ -152,7 +153,7 @@ const SendTimestampButton: ChatBarButtonFactory = ({ isAnyChat }) => {
 
 export default definePlugin({
     name: "SendTimestamps",
-    description: "Send timestamps easily via chat box button & text shortcuts. Read the extended description!",
+    description: hyperTranslate("Send timestamps easily via chat box button & text shortcuts. Read the extended description!"),
     tags: ["Chat", "Commands"],
     authors: [Devs.Ven, Devs.Tyler, Devs.Grzesiek11],
     settings,
@@ -181,15 +182,11 @@ export default definePlugin({
         return (
             <>
                 <Forms.FormText>
-                    To quickly send time only timestamps, include timestamps formatted as `HH:MM` (including the backticks!) in your message
-                </Forms.FormText>
+                    {hyperTranslate("To quickly send time only timestamps, include timestamps formatted as `HH:MM` (including the backticks!) in your message")}</Forms.FormText>
                 <Forms.FormText>
-                    See below for examples.
-                    If you need anything more specific, use the Date button in the chat bar!
-                </Forms.FormText>
+                    {hyperTranslate("See below for examples. If you need anything more specific, use the Date button in the chat bar!")}</Forms.FormText>
                 <Forms.FormText>
-                    Examples:
-                    <ul>
+                    {hyperTranslate("Examples:")}<ul>
                         {samples.map(s => (
                             <li key={s}>
                                 <code>{s}</code> {"->"} {Parser.parse(parseTime(s))}

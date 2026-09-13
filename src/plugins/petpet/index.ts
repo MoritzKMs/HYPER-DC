@@ -18,6 +18,7 @@
 
 import { ApplicationCommandInputType, ApplicationCommandOptionType, findOption, sendBotMessage } from "@api/Commands";
 import { Devs } from "@utils/constants";
+import { hyperTranslate } from "@utils/hyperLanguage";
 import { makeLazy } from "@utils/lazy";
 import definePlugin from "@utils/types";
 import { CommandArgument, CommandContext } from "@vencord/discord-types";
@@ -107,43 +108,43 @@ function applyPaletteTransparent(data: Uint8Array | Uint8ClampedArray, palette: 
 
 export default definePlugin({
     name: "petpet",
-    description: "Adds a /petpet slash command to create headpet gifs from any image",
+    description: hyperTranslate("Adds a /petpet slash command to create headpet gifs from any image"),
     tags: ["Fun", "Commands"],
     authors: [Devs.Ven, Devs.u32],
     commands: [
         {
             inputType: ApplicationCommandInputType.BUILT_IN,
             name: "petpet",
-            description: "Create a petpet gif. You can only specify one of the image options",
+            description: hyperTranslate("Create a petpet gif. You can only specify one of the image options"),
             options: [
                 {
                     name: "delay",
-                    description: "The delay between each frame in ms. Rounded to nearest 10ms. Defaults to the minimum value of 20.",
+                    description: hyperTranslate("The delay between each frame in ms. Rounded to nearest 10ms. Defaults to the minimum value of 20."),
                     type: ApplicationCommandOptionType.INTEGER
                 },
                 {
                     name: "resolution",
-                    description: "Resolution for the gif. Defaults to 120. If you enter an insane number and it freezes Discord that's your fault.",
+                    description: hyperTranslate("Resolution for the gif. Defaults to 120. If you enter an insane number and it freezes Discord that's your fault."),
                     type: ApplicationCommandOptionType.INTEGER
                 },
                 {
                     name: "image",
-                    description: "Image attachment to use",
+                    description: hyperTranslate("Image attachment to use"),
                     type: ApplicationCommandOptionType.ATTACHMENT
                 },
                 {
                     name: "url",
-                    description: "URL to fetch image from",
+                    description: hyperTranslate("URL to fetch image from"),
                     type: ApplicationCommandOptionType.STRING
                 },
                 {
                     name: "user",
-                    description: "User whose avatar to use as image",
+                    description: hyperTranslate("User whose avatar to use as image"),
                     type: ApplicationCommandOptionType.USER
                 },
                 {
                     name: "no-server-pfp",
-                    description: "Use the normal avatar instead of the server specific one when using the 'user' option",
+                    description: hyperTranslate("Use the normal avatar instead of the server specific one when using the 'user' option"),
                     type: ApplicationCommandOptionType.BOOLEAN
                 }
             ],
