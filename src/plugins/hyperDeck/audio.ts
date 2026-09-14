@@ -5,6 +5,7 @@
  */
 
 import { hyperTranslate } from "@utils/hyperLanguage";
+import { claimHyperMicrophone, releaseHyperMicrophone } from "@utils/hyperMicrophone";
 /*
  * Vencord, a Discord client mod
  * Copyright (c) 2026 Vendicated and contributors
@@ -77,8 +78,11 @@ export class DeckAudio {
             const input = devices.find(d => d.kind === "audioinput" && d.deviceId === micId);
             if (!input || micId === "default" || isVirtualDevice(input.label))
                 throw new Error(hyperTranslate("Select a physical microphone for microphone mixing."));
-            const stream = await navigator.mediaDevices.getUserMedia({ audio: { deviceId: { exact: micId } }, video: false });
-            if (!valid()) { stream.getTracks().forEach(t => t.stop()); return false; }
+            claimHyperMicrophone(this);
+            let stream: MediaStream;
+            try { stream = await navigator.mediaDevices.getUserMedia({ audio: { deviceId: { exact: micId } }, video: false }); }
+            catch (error) { releaseHyperMicrophone(this); throw error; }
+            if (!valid()) { stream.getTracks().forEach(t => t.stop()); releaseHyperMicrophone(this); return false; }
             this.mic = stream;
             this.micSource = this.context.createMediaStreamSource(stream);
             this.micSource.connect(this.destination);
@@ -90,7 +94,8 @@ export class DeckAudio {
         return true;
     }
 
-    disableSend() {
+    disableSend() {
+        releaseHyperMicrophone(this);
         this.generation++;
         this.send.gain.value = 0;
         this.output.pause();

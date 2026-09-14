@@ -13,6 +13,8 @@ import { findByPropsLazy } from "@webpack";
 import { MediaEngineStore, React, ReactDOM, SelectedChannelStore, useStateFromStores } from "@webpack/common";
 
 import { DeckAudio, isVirtualDevice } from "./audio";
+import { LibraryTrack } from "./library";
+import { downloadTrack } from "./libraryClient";
 import { MusicLibrary } from "./MusicLibrary";
 import { applyVoiceSetup, hasVoiceBackup, restoreVoiceSetup } from "./voiceSetup";
 
@@ -91,6 +93,37 @@ function Player({ original }: { original: React.ReactNode; }) {
     const [sending, setSending] = React.useState(false);
 
     const [busy, setBusy] = React.useState(false);
+    const queue = React.useRef<LibraryTrack[]>([]);
+    const generation = React.useRef(0);
+    const nextTrack = React.useRef<() => void>(() => {});
+    const [remaining, setRemaining] = React.useState(0);
+    const [repeat, setRepeat] = React.useState(false);
+    function clearQueue() { generation.current++; queue.current = []; setRemaining(0); setBusy(false); }
+    async function advance() {
+        const deck = engine.current;
+        const track = queue.current.shift();
+        setRemaining(queue.current.length);
+        if (!deck || !track) return;
+        const token = ++generation.current;
+        const voiceAtStart = voice;
+        const wasSending = sending;
+        setBusy(true); setStatus(`Parça hazırlanıyor: ${track.title}`);
+        try {
+            const data = await downloadTrack(track);
+            if (generation.current !== token || engine.current !== deck) return;
+            deck.load(data); deck.audio.loop = false; setRepeat(false);
+            setFile(track.title); setSending(false); setPosition(0); setDuration(0);
+            await deck.context.resume();
+            if (wasSending && canSend()) {
+                const sent = await deck.enableSend(sink, mic, () => generation.current === token && engine.current === deck && canSend() && `${channel() ?? ""}:${canSend()}` === voiceAtStart);
+                setSending(sent);
+            }
+            if (generation.current !== token || engine.current !== deck) return;
+            await deck.audio.play(); setPlaying(true); setStatus(`Çalıyor: ${track.title}`);
+        } catch { if (generation.current === token) { deck.disableSend(); setSending(false); setPlaying(false); setStatus("Parça yüklenemedi. Sonraki parça düğmesiyle devam edebilirsin."); } }
+        finally { if (generation.current === token) setBusy(false); }
+    }
+    nextTrack.current = () => { void advance(); };
 
     const [playing, setPlaying] = React.useState(false);
 
@@ -120,9 +153,9 @@ function Player({ original }: { original: React.ReactNode; }) {
 
         const stop = () => { deck.disableSend(); deck.audio.pause(); if (alive) setSending(false); };
 
-        const ended = () => { stop(); setPlaying(false); };
+        const ended = () => { if (queue.current.length) nextTrack.current(); else { stop(); setPlaying(false); } };
 
-        const error = () => { ended(); setStatus(hyperTranslate("Could not decode this MP3. Choose another file.")); };
+        const error = () => { stop(); setPlaying(false); setStatus(hyperTranslate("Could not decode this MP3. Choose another file.")); };
 
         const update = () => { setPosition(deck.audio.currentTime); setDuration(deck.audio.duration || 0); setPlaying(!deck.audio.paused); };
 
@@ -138,7 +171,7 @@ function Player({ original }: { original: React.ReactNode; }) {
 
         navigator.mediaDevices.addEventListener("devicechange", changed);
 
-        const shutdown = () => { stop(); restoreNoise(); deck.dispose(); engine.current = undefined; setDisabled(true); };
+        const shutdown = () => { generation.current++; queue.current = []; stop(); restoreNoise(); deck.dispose(); engine.current = undefined; setDisabled(true); };
 
         sessions.add(shutdown);
 
@@ -185,6 +218,7 @@ function Player({ original }: { original: React.ReactNode; }) {
             restoreNoise();
 
             alive = false;
+            generation.current++; queue.current = [];
 
             cancelAnimationFrame(frame);
 
@@ -213,6 +247,7 @@ function Player({ original }: { original: React.ReactNode; }) {
     React.useEffect(() => {
 
         engine.current?.disableSend();
+        generation.current++; setBusy(false);
 
         setSending(false);
 
@@ -284,12 +319,18 @@ function Player({ original }: { original: React.ReactNode; }) {
 
         <label className="hyper-deck-viz-switch"><input type="checkbox" checked={visualizer} onChange={e => setVisualizer(e.target.checked)} /> {hyperTranslate("Show the visualizer in the voice connection panel")}</label>
 
-        <MusicLibrary busy={busy} setBusy={setBusy} setStatus={setStatus} onLoad={(track, title) => {
+        <MusicLibrary busy={busy} setBusy={setBusy} setStatus={setStatus} onQueue={tracks => {
+            clearQueue(); queue.current = [...tracks]; setRemaining(tracks.length);
+            if (engine.current) { engine.current.audio.pause(); engine.current.audio.loop = false; }
+            void advance();
+        }} onLoad={(track, title) => {
             if (!engine.current) return;
+            clearQueue();
             engine.current.load(track);
             setFile(title); setSending(false); setPlaying(false); setPosition(0); setDuration(0);
             setStatus(hyperTranslate("Ready. Press Play."));
         }} />
+        <div className="hyper-deck-row"><span>Sırada: {remaining} parça</span><button disabled={busy || !remaining} onClick={() => { engine.current?.audio.pause(); void advance(); }}>Sonraki parça</button><button disabled={!remaining && !busy} onClick={clearQueue}>Sırayı temizle</button></div>
         <label className="hyper-deck-file">{hyperTranslate("Choose MP3")}<input type="file" accept=".mp3,audio/mpeg" disabled={busy} onChange={e => {
 
                 const chosen = e.target.files?.[0];
@@ -297,6 +338,7 @@ function Player({ original }: { original: React.ReactNode; }) {
                 e.target.value = "";
 
                 if (!chosen) return;
+                clearQueue();
 
                 try { engine.current?.load(chosen); setFile(chosen.name); setSending(false); setPlaying(false); setPosition(0); setDuration(0); setStatus(hyperTranslate("Ready. Press Play.")); }
 
@@ -307,7 +349,7 @@ function Player({ original }: { original: React.ReactNode; }) {
         </label>
 
         <strong className="hyper-deck-title">{file || hyperTranslate("No track selected yet")}</strong>
-        <small>HYPER Deck · 0.3.0</small>
+        <small>HYPER Deck · 0.4.1</small>
         <canvas ref={canvas} width={640} height={140} role="img" aria-label={hyperTranslate("Music frequency visualizer")} />
 
         <div className="hyper-deck-row">
@@ -326,7 +368,7 @@ function Player({ original }: { original: React.ReactNode; }) {
 
             }}>{playing ? hyperTranslate("Pause") : hyperTranslate("Play")}</button>
 
-            <button onClick={() => { const d = engine.current; if (d) { d.disableSend(); d.audio.pause(); d.audio.currentTime = 0; } setSending(false); setPlaying(false); }}>Durdur</button>
+            <button onClick={() => { clearQueue(); const d = engine.current; if (d) { d.disableSend(); d.audio.pause(); d.audio.currentTime = 0; } setSending(false); setPlaying(false); }}>Durdur</button>
 
             <span>{time(position)} / {time(duration)}</span>
 
@@ -340,7 +382,7 @@ function Player({ original }: { original: React.ReactNode; }) {
 
             <label><input type="checkbox" checked={monitor} onChange={e => { setMonitor(e.target.checked); if (engine.current) engine.current.monitor.gain.value = e.target.checked ? 1 : 0; }} /> {hyperTranslate("Play locally too")}</label>
 
-            <label><input type="checkbox" onChange={e => { if (engine.current) engine.current.audio.loop = e.target.checked; }} /> {hyperTranslate("Repeat")}</label>
+            <label><input type="checkbox" checked={repeat} disabled={remaining > 0 || busy} onChange={e => { setRepeat(e.target.checked); if (engine.current) engine.current.audio.loop = e.target.checked; }} /> {hyperTranslate("Repeat")}</label>
 
         </div>
 

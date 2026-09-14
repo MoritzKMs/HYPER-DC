@@ -7,7 +7,7 @@
 export const LIBRARY_BASE = "https://raw.githubusercontent.com/MoritzKMs/HYPER-DC/main/music/";
 export const MAX_TRACK_BYTES = 25 * 1024 * 1024;
 
-export interface LibraryTrack { title: string; file: string; bytes: number; }
+export interface LibraryTrack { title: string; file: string; bytes: number; sha?: string; }
 export const LIBRARY_INDEX = "https://api.github.com/repos/MoritzKMs/HYPER-DC/contents/music?ref=main";
 
 export function validMusicFile(file: string) {
@@ -18,7 +18,7 @@ export function validateLibrary(data: unknown): LibraryTrack[] {
     if (!Array.isArray(data) || data.length > 1000) throw new Error("Invalid music directory");
     return data.filter(item => item?.type === "file" && typeof item.name === "string" && validMusicFile(item.name)
         && Number.isInteger(item.size) && item.size > 0 && item.size <= MAX_TRACK_BYTES)
-        .map(item => ({ title: item.name.replace(/\.mp3$/i, ""), file: item.name, bytes: item.size }))
+        .map(item => ({ title: item.name.replace(/\.mp3$/i, ""), file: item.name, bytes: item.size, ...(/^[a-f0-9]{40}$/.test(item.sha) ? { sha: item.sha } : {}) }))
         .sort((a, b) => a.title.localeCompare(b.title, "tr"));
 }
 

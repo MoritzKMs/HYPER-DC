@@ -10,11 +10,12 @@ import { React } from "@webpack/common";
 import { LibraryTrack } from "./library";
 import { downloadTrack, loadLibrary } from "./libraryClient";
 
-export function MusicLibrary({ busy, setBusy, setStatus, onLoad }: {
+export function MusicLibrary({ busy, setBusy, setStatus, onLoad, onQueue }: {
     busy: boolean;
     setBusy(value: boolean): void;
     setStatus(value: string): void;
     onLoad(file: File, title: string): void;
+    onQueue(tracks: LibraryTrack[]): void;
 }) {
     const [tracks, setTracks] = React.useState<LibraryTrack[]>([]);
     const [selected, setSelected] = React.useState("");
@@ -53,8 +54,10 @@ export function MusicLibrary({ busy, setBusy, setStatus, onLoad }: {
     return <div className="hyper-deck-effects">
         <strong>{hyperTranslate("GitHub music library")}</strong>
         <small>{hyperTranslate("New MP3s appear automatically when the menu opens and every 5 minutes.")}</small>
+        <small>Parçalar ihtiyaç oldukça indirilir. İndirilenler 128 MB yerel önbellekte tutulur; aynı dosya tekrar indirilmez.</small>
         <button disabled={busy || loading} onClick={() => void refresh(true)}>{hyperTranslate(loading ? "Loading music library…" : "Refresh library")}</button>
         {tracks.length > 0 && <>
+            <button disabled={busy} onClick={() => onQueue(tracks)}>Tüm arşivi sıraya koy · {tracks.length} parça</button>
             <select aria-label={hyperTranslate("Choose library track")} disabled={busy} value={selected} onChange={e => setSelected(e.target.value)}>
                 {tracks.map(track => <option key={track.file} value={track.file}>{track.title}</option>)}
             </select>
