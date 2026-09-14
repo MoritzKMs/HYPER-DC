@@ -46,7 +46,7 @@ internal sealed class InstallerForm : Form
         using var logoStream = Assembly.GetExecutingAssembly().GetManifestResourceStream("HyperDCInstaller.assets.hyperdc.png");
         if (logoStream != null) header.Controls.Add(new PictureBox { Image = new Bitmap(logoStream), SizeMode = PictureBoxSizeMode.Zoom, Bounds = new Rectangle(24, 19, 52, 52) });
         AddLabel(header, "HyperDC Kurulumu", 92, 19, 560, 32, 18, ForeColor, FontStyle.Bold);
-        AddLabel(header, "Sürüm 0.4.1 · Windows x64", 94, 55, 520, 22, 9, Color.DimGray);
+        AddLabel(header, "Sürüm 0.5.0 · Windows x64", 94, 55, 520, 22, 9, Color.DimGray);
         AddLabel(this, "Discord kurulumunu seçin", 24, 114, 620, 28, 12, ForeColor, FontStyle.Bold);
         AddLabel(this, "Devam etmeden önce Discord’u sistem tepsisinden de kapatın.", 24, 146, 644, 26, 10, Color.DimGray);
         targets.BackColor = Color.White; targets.ForeColor = ForeColor;

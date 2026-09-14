@@ -1,7 +1,7 @@
 import base64, hashlib, json
 from pathlib import Path
 
-version = "0.4.1"
+version = "0.5.0"
 files = {}
 for p in Path("dist").iterdir():
     if not p.is_file() or p.name.endswith(".map"):

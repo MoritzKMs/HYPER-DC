@@ -9,7 +9,7 @@ namespace HyperDCInstaller;
 internal static class InstallEngine
 {
     public const string Marker = "HYPER_DC_INSTALLER_V1";
-    public const string Version = "0.4.1";
+    public const string Version = "0.5.0";
     public static readonly string DataRoot = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "HyperDC");
     public static string ResourcePath(string app) => Path.Combine(Path.GetFullPath(app), "resources");
     public static void CheckPath(string path)
