@@ -1,0 +1,9 @@
+.hyper-extra-panel { position: fixed; right: 16px; top: 70px; bottom: 90px; width: min(380px, 85vw); z-index: 1001; padding: 16px; background: var(--background-primary); color: var(--text-normal); border: 1px solid var(--background-modifier-accent); border-radius: 12px; box-shadow: 0 8px 28px #0008; display: flex; flex-direction: column; gap: 12px; }
+.hyper-extra-panel article { border-bottom: 1px solid var(--background-modifier-accent); padding: 10px 0; overflow-wrap: anywhere; }
+.hyper-extra-messages { overflow: auto; flex: 1; }
+.hyper-extra-panel p { white-space: pre-wrap; margin: 6px 0; }
+.hyper-extra-zoom { overflow: hidden; height: 340px; background: #080808; touch-action: none; cursor: crosshair; }
+.hyper-extra-zoom video { width: 100%; height: 100%; object-fit: contain; pointer-events: none; }
+.hyper-extra-ocr canvas { width: 100%; cursor: crosshair; touch-action: none; }
+.hyper-extra-ocr textarea { width: 100%; min-height: 140px; }
+.hyper-extra-warning { color: #ff713e; }

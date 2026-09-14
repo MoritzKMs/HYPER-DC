@@ -1,0 +1,6 @@
+.hyper-image-prep canvas,.hyper-image-prep img{display:block;width:100%;height:auto;margin:16px 0;background:repeating-conic-gradient(#444 0% 25%,#333 0% 50%) 0/16px 16px}
+.hyper-image-prep canvas{touch-action:none;cursor:crosshair}
+.hyper-image-prep input[type=number]{display:block;width:90px;padding:6px;background:var(--background-secondary);color:var(--text-normal);border:1px solid var(--background-modifier-accent)}
+.hyper-image-prep a{color:var(--text-link);padding:8px}
+
+.hyper-image-prep video { display: block; width: 100%; max-height: 320px; margin: 12px 0; }

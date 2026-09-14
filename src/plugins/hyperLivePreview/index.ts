@@ -7,7 +7,7 @@
 import { hyperTranslate } from "@utils/hyperLanguage";
 import definePlugin from "@utils/types";
 
-import { previewGetter } from "./patch";
+import { floatingPreviewGetter, previewGetter } from "./patch";
 
 export default definePlugin({
     name: "HyperLivePreview",
@@ -20,6 +20,12 @@ export default definePlugin({
         replacement: {
             match: previewGetter,
             replace: "get pauseSelfStreamPreviewWhenUnfocused(){return false}"
+        }
+    }, {
+        find: "get streamerPaused(){",
+        replacement: {
+            match: floatingPreviewGetter,
+            replace: "get streamerPaused(){return false}"
         }
     }]
 });
