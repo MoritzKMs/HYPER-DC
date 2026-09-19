@@ -30,3 +30,7 @@ export interface MentionEntry {
 export function addMention(entries: MentionEntry[], entry: MentionEntry): MentionEntry[] {
     return entries.some(e => e.id === entry.id) ? entries : [entry, ...entries].slice(0, 200);
 }
+
+export function isAcknowledged(messageId: string, ackId: string | null | undefined) {
+    return /^\d+$/.test(messageId) && typeof ackId === "string" && /^\d+$/.test(ackId) && BigInt(messageId) <= BigInt(ackId);
+}

@@ -6,9 +6,9 @@
 
 import * as DataStore from "@api/DataStore";
 import { hyperTranslate } from "@utils/hyperLanguage";
-import { ChannelStore, GuildStore, Modal, NavigationRouter, openModal, React, UserStore, useStateFromStores } from "@webpack/common";
+import { ChannelStore, GuildStore, Modal, NavigationRouter, openModal, React, ReadStateStore, UserStore, useStateFromStores } from "@webpack/common";
 
-import { addMention, isDirectMention, MentionEntry, MentionMessage } from "./mentions";
+import { addMention, isAcknowledged, isDirectMention, MentionEntry, MentionMessage } from "./mentions";
 
 let entries: MentionEntry[] = [];
 let owner: string | undefined;
@@ -41,8 +41,26 @@ async function load(id: string) {
     failure = "";
     emit();
 }
-export function startInbox(getEnabled: () => boolean) { active = true; enabled = getEnabled; }
-export function stopInbox() { active = false; owner = undefined; entries = []; emit(); }
+let syncing = false;
+function syncReadState() {
+    if (!active || syncing) return;
+    syncing = true;
+    queueMicrotask(() => {
+        syncing = false;
+        const id = UserStore.getCurrentUser()?.id;
+        if (!active || !id) return;
+        void enqueue(async () => {
+            await load(id);
+            if (!active || owner !== id || UserStore.getCurrentUser()?.id !== id) return;
+            const next = entries.map(e => !e.read && isAcknowledged(e.id, ReadStateStore.ackMessageId(e.channelId)) ? { ...e, read: true } : e);
+            if (next.every((e, i) => e === entries[i])) return;
+            entries = next; emit();
+            await DataStore.set(key(id), next);
+        });
+    });
+}
+export function startInbox(getEnabled: () => boolean) { active = true; enabled = getEnabled; ReadStateStore.addChangeListener(syncReadState); UserStore.addChangeListener(syncReadState); syncReadState(); }
+export function stopInbox() { ReadStateStore.removeChangeListener(syncReadState); UserStore.removeChangeListener(syncReadState); active = false; owner = undefined; entries = []; emit(); }
 export function receiveMention({ message, optimistic }: { message: MentionMessage; optimistic?: boolean; }) {
     const id = UserStore.getCurrentUser()?.id;
     if (!active || !enabled() || !id || !isDirectMention(message, id, optimistic)) return;
@@ -57,7 +75,7 @@ export function receiveMention({ message, optimistic }: { message: MentionMessag
         if (!active || !enabled() || UserStore.getCurrentUser()?.id !== id) return;
         await load(id);
         if (!active || owner !== id || UserStore.getCurrentUser()?.id !== id) return;
-        const next = addMention(entries, entry);
+        const next = addMention(entries, { ...entry, read: isAcknowledged(entry.id, ReadStateStore.ackMessageId(entry.channelId)) });
         if (next === entries) return;
         await DataStore.set(key(id), next);
         if (active && owner === id && UserStore.getCurrentUser()?.id === id) { entries = next.map(e => readIds.get(id)?.has(e.id) ? { ...e, read: true } : e); emit(); }
