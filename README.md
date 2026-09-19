@@ -136,3 +136,10 @@ HYPER DC, Discord veya Vencord’un resmî ürünü değildir. Discord istemci m
 ## HyperDC katkıcıları
 
 - [YagmurMelek0316](https://github.com/YagmurMelek0316)
+
+
+## Kendi JavaScript eklentini kullan
+
+HyperLocalPlugins ile `.plugin.js` dosyanı eklenti klasörüne koyup derleme yapmadan çalıştırabilirsin. Eklentiler kendi panellerinde buton ve form oluşturabilir, verdiğin metni işleyebilir ve ayrıca izin verirsen kendi ayarlarını saklayabilir. Kod incelemesi ve elle etkinleştirme gerekir; Discord hesabına, mesajlara ve ağa erişim verilmez. Hazır Vencord eklentileri bu API ile uyumlu değildir.
+
+[Kullanım, API ve güvenlik sınırları](examples/local-plugins/KULLANIM.md) · [Form ve ayar örneği](examples/local-plugins/metin-atolyesi.plugin.js) · [Basit örnek](examples/local-plugins/kelime-sayaci.plugin.js)

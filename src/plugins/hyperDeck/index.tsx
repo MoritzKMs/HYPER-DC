@@ -349,7 +349,7 @@ function Player({ original }: { original: React.ReactNode; }) {
         </label>
 
         <strong className="hyper-deck-title">{file || hyperTranslate("No track selected yet")}</strong>
-        <small>HYPER Deck · 0.5.1</small>
+        <small>HYPER Deck · 0.5.2</small>
         <canvas ref={canvas} width={640} height={140} role="img" aria-label={hyperTranslate("Music frequency visualizer")} />
 
         <div className="hyper-deck-row">
