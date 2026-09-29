@@ -9,7 +9,9 @@ import { hyperTranslate as t } from "@utils/hyperLanguage";
 import { ToolIcon, usePersonalItems } from "@utils/hyperTools";
 import { PersonalItem } from "@utils/hyperTools/core";
 import definePlugin from "@utils/types";
-import { ChannelStore, closeModal, Modal, NavigationRouter, openModal, React } from "@webpack/common";
+import { ChannelStore, createRoot, NavigationRouter, React } from "@webpack/common";
+
+import { HyperModal } from "./modal";
 
 const Icon = () => <ToolIcon kind="bookmark" />;
 
@@ -55,9 +57,27 @@ function Shelf({ target, close }: { target?: PersonalItem; close: () => void; })
     </div>;
 }
 
+let closeShelf: (() => void) | undefined;
+
 function openShelf(target?: PersonalItem) {
-    closeModal("hyper-shelf");
-    openModal(props => <Modal {...props} title="HyperShelf"><Shelf target={target} close={props.onClose} /></Modal>, { modalKey: "hyper-shelf" });
+    closeShelf?.();
+    const host = document.createElement("div");
+    host.id = "hyper-shelf-window";
+    document.body.appendChild(host);
+    const root = createRoot(host);
+    let closed = false;
+    const close = () => {
+        if (closed) return;
+        closed = true;
+        root.unmount();
+        host.remove();
+        if (closeShelf === close) closeShelf = undefined;
+    };
+    closeShelf = close;
+    root.render(<div style={{ position: "fixed", inset: 0, zIndex: 10000, display: "flex", alignItems: "center", justifyContent: "center", background: "#0009" }}
+        onMouseDown={event => { if (event.target === event.currentTarget) close(); }}>
+        <HyperModal title="HyperShelf" onClose={close}><Shelf target={target} close={close} /></HyperModal>
+    </div>);
 }
 
 export default definePlugin({
@@ -77,5 +97,5 @@ export default definePlugin({
     },
     settingsAboutComponent: () => <div className="hyper-tools"><p>{t("Use the bookmark button on a message to save its link, then open your shelf beside the message box.")}</p><button onClick={() => openShelf()}>{t("Message shelf")}</button></div>,
     toolboxActions: { [t("Message shelf")]: () => openShelf() },
-    stop() { closeModal("hyper-shelf"); }
+    stop() { closeShelf?.(); }
 });
